@@ -1,0 +1,31 @@
+{
+    "workbench.iconTheme": "vscode-great-icons",
+    "backgroundCover.autoStatus": true,
+    "backgroundCover.opacity": 0.4,
+    "backgroundCover.imagePath": "/Users/furuyan0906/Pictures/pixiv1.jpg",
+    "terminal.external.osxExec": "iTterm2.app",
+    "workbench.colorTheme": "Winter is Coming (Dark Blue - No Italics)",
+    "workbench.colorCustomizations": {
+        "[Winter is Coming (Dark Black)]" :{
+            "editor.background": "#000000",
+            "panel.background": "#000000",
+            "sideBar.background": "#000000",
+        },
+        "[Winter is Coming (Dark Blue - No Italics)]" :{
+            "editor.background": "#000000",
+            "panel.background": "#000000",
+            "sideBar.background": "#000000",
+            "editor.lineHighlightBackground": "#222222",
+            "activityBar.background": "#111111"
+        },
+    },
+    "terminal.integrated.fontSize": 20,
+    "editor.fontSize": 20,
+    "editor.lineHeight": 24,
+    "editor.fontFamily": "Ricty",
+    "C_Cpp.default.cStandard": "c99",
+    "C_Cpp.default.cppStandard": "c++17",
+    "C_Cpp.default.intelliSenseMode": "gcc-x64",
+    "C_Cpp.dimInactiveRegions": false,
+    "C_Cpp.updateChannel": "Insiders",
+}
