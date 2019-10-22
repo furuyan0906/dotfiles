@@ -1,0 +1,35 @@
+# ----- [dein] -----
+
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+
+# ----- [Powerline] -----
+
+[[plugins]]
+repo = 'vim-airline/vim-airline'
+
+
+# ----- [Filter] -----
+
+[[plugins]]
+repo = 'Shougo/unite.vim'
+
+# [[plugins]]
+# repo = 'Shougo/vimfilter.vim'
+
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+
+[[plugins]]
+repo = 'jistr/vim-nerdtree-tabs'
+
+
+# ----- [tags] -----
+[[plugins]]
+repo = 'vim-scripts/gtags.vim'
+
+
+# ----- [replace] -----
+[[plugins]]
+repo = 'thinca/vim-qfreplace'
