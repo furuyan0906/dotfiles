@@ -1,17 +1,18 @@
 # ----- [dein] -----
-
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
 
 # ----- [Powerline] -----
-
 [[plugins]]
 repo = 'vim-airline/vim-airline'
 
 
-# ----- [Filter] -----
+# ----- [Terminal] -----
+[[plugins]]
+repo = 'kassio/neoterm'
 
+# ----- [Filter] -----
 [[plugins]]
 repo = 'Shougo/unite.vim'
 
@@ -30,6 +31,20 @@ repo = 'jistr/vim-nerdtree-tabs'
 repo = 'vim-scripts/gtags.vim'
 
 
-# ----- [replace] -----
+# ----- [edit] -----
 [[plugins]]
 repo = 'thinca/vim-qfreplace'
+
+[[plugins]]
+repo = 'Shougo/neocomplete.vim'
+
+
+# ----- [colorscheme] -----
+[[plugins]]
+repo = 'noahfrederick/vim-hemisu'
+
+[[plugins]]
+repo = 'fcpg/vim-orbital'
+
+[[plugins]]
+repo = 'reedes/vim-colors-pencil'

@@ -5,7 +5,7 @@ endif
 
 
 " ----- [Settings (indent)] -----
-filetype plugin indent on
+filetype plugin off
 "syntax enable
 
 
@@ -38,8 +38,13 @@ if has('vim_starting') && dein#check_install()
 	call dein#install()
 endif
 
+" ----- [プラグインを有効にする] -----
+filetype plugin on
 
 " ----- [Settings (plugins)] -----
+
+" ----- [[colorscheme]] -----
+" colorscheme orbital
 
 " ----- [[NERDTree.vimの設定]] -----
 " 隠しファイルを表示する
