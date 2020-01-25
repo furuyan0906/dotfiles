@@ -14,6 +14,7 @@ XDG_CONFIG_HOME=$HOME/.config
 
 # ----- [[ssh]] -----
 alias piConnect='ssh pi@192.168.11.12'
+alist nanoConnect='ssh nano@192.168.11.9'
 
 # ----- [[VIM (brewed)]] -----
 export PATH="/usr/local/opt/ruby/bin:$PATH"
