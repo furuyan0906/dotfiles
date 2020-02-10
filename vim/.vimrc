@@ -71,6 +71,7 @@ set fenc=utf-8
 set nobackup
 set noswapfile
 set laststatus=2
+set encoding=utf-8
 
 " ----- [Settings (file)] -----
 set backspace=2		" more powerful backspacing
