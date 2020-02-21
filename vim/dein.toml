@@ -30,6 +30,11 @@ repo = 'jistr/vim-nerdtree-tabs'
 [[plugins]]
 repo = 'vim-scripts/gtags.vim'
 
+[[plugins]]
+repo = 'jsfaint/gen_tags.vim'
+hook_add = '''
+    let g:gen_tags#gtags_auto_gen = 1
+'''
 
 # ----- [edit] -----
 [[plugins]]
@@ -48,3 +53,6 @@ repo = 'fcpg/vim-orbital'
 
 [[plugins]]
 repo = 'reedes/vim-colors-pencil'
+
+[[plugins]]
+repo = 'kamykn/dark-theme.vim'
