@@ -90,6 +90,7 @@ set scrolloff=4 " スクロールの余裕を確保する
 
 " ----- [Settings (view)] -----
 syntax on	" シンタックスをオフに設定
+colorscheme darktheme
 set number	" 行数を表示する
 set ruler	" ルーラーを表示する
 set title	" タイトルを表示する
@@ -97,10 +98,9 @@ set cursorline	" 現在の行をハイライト
 hi clear Cursorline	" 行番号のみハイライト
 set wrap	" ソースコードの折り返しを有効にする
 autocmd ColorScheme highlight Comment ctermfig=22 guifg=#008800
-"colorscheme solarized
 set background=dark
-let g:solarized_termcolor=256
-let g:solarized_termtrans=1
+" let g:solarized_termcolor=256
+" let g:solarized_termtrans=1
 
 
 " ----- [Settings (edit)] -----
