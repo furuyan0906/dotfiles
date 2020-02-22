@@ -44,7 +44,8 @@ filetype plugin on
 " ----- [Settings (plugins)] -----
 
 " ----- [[colorscheme]] -----
-" colorscheme orbital
+syntax on	" シンタックスをオフに設定
+colorscheme darktheme
 
 " ----- [[NERDTree.vimの設定]] -----
 " 隠しファイルを表示する
@@ -89,8 +90,6 @@ set scrolloff=4 " スクロールの余裕を確保する
 
 
 " ----- [Settings (view)] -----
-syntax on	" シンタックスをオフに設定
-colorscheme darktheme
 set number	" 行数を表示する
 set ruler	" ルーラーを表示する
 set title	" タイトルを表示する
