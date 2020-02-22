@@ -21,7 +21,7 @@ if !isdirectory(s:dein_repo_dir)
 endif
 
 " set runtimepath+=s:dein_repo_dir
-set runtimepath+=/Users/furuyan0906/.cache/dein/repos/github.com/Shougo/dein.vim
+set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
 " ----- [[プラグイン読み込み&キャッシュ作成]] -----
 let s:toml_file = fnamemodify(expand('<sfile>'), ':h') .'/dein.toml'
