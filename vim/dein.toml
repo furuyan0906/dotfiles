@@ -7,6 +7,9 @@ repo = 'Shougo/dein.vim'
 [[plugins]]
 repo = 'vim-airline/vim-airline'
 
+[[plugins]]
+repo = 'vim-airline/vim-airline-themes'
+
 
 # ----- [Terminal] -----
 [[plugins]]
@@ -15,6 +18,9 @@ repo = 'kassio/neoterm'
 # ----- [Filter] -----
 [[plugins]]
 repo = 'Shougo/unite.vim'
+
+[[plugins]]
+repo = 'Shougo/denite.nvim'
 
 # [[plugins]]
 # repo = 'Shougo/vimfilter.vim'

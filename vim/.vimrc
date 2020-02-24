@@ -56,6 +56,17 @@ let g:nerdtree_tabs_open_on_console_startup=0
 " 他のバッファをすべて閉じた時にNERDTreeが開いていたらNERDTreeも一緒に閉じる。
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
+" ----- [[vim-airline.vim]] -------------------------
+set t_Co=256
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline_theme='lucius'
+let g:airline_powerline_fonts = 1
+
+" ----- [[colorscheme]] -----
+syntax on	" シンタックスをオフに設定
+colorscheme darktheme
+set background=dark
 
 
 " ----- [Settings (backup)] -----
