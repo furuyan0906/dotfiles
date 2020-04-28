@@ -112,6 +112,23 @@ set wrap	" ソースコードの折り返しを有効にする
 " autocmd ColorScheme highlight Comment ctermfig=22 guifg=#008800
 
 
+" ----- [Settings (view)] -----
+" sj : 分割画面を下に移動
+" sk : 分割画面を上に移動
+" sl : 分割画面を右に移動
+" sh : 分割画面を左に移動
+" ss : 画面を水平分割
+" sv : 画面を垂直分割
+" sq : 画面終了
+nnoremap sj <C-w>j
+nnoremap sk <C-w>k
+nnoremap sl <C-w>l
+nnoremap sh <C-w>h
+nnoremap ss :<C-u>sp<CR><C-w>j
+nnoremap sv :<C-u>vs<CR><C-w>l
+nnoremap sq :q<Enter><ESC>
+
+
 " ----- [Settings (edit)] -----
 set backspace=indent,eol,start	" backspaceを有効に
 set spell	" スペルチェックを行う

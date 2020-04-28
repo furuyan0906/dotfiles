@@ -4,6 +4,10 @@
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
+# ----- [Denite] -----
+[[plugins]]
+repo = 'Shougo/denite.nvim'
+
 
 # ----- [Powerline] -----
 #
@@ -51,6 +55,26 @@ repo = 'jsfaint/gen_tags.vim'
 hook_add = '''
     let g:gen_tags#gtags_auto_gen = 1
 '''
+# ----- [Grep] -----
+[[plugins]]
+repo = 'junegunn/fzf'
+hook_post_update = './install --all'
+
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+depends = 'fzf'
+# init.vimに以下を記述する
+# hook_add = '''
+#     command! -bang -nargs=* Rg
+#     \ call fzf#vim#grep(
+#     \ 'rg --column --line-number --hidden --ignore-case --no-heading --color=always '.shellescape(<q-args>), 1,
+#     \ <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
+#     \ : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
+#     \ <bang>0)
+#     nnoremap <C-g> :Rg<Space>
+#     nnoremap <C-p> :GFiles<CR>
+#     nnoremap <C-h> :History<CR>
+# '''
 
 # ----- [Git] -----
 [[plugins]]
@@ -79,3 +103,9 @@ repo = 'reedes/vim-colors-pencil'
 
 [[plugins]]
 repo = 'kamykn/dark-theme.vim'
+
+
+# ----- [window] -----
+[[plugins]]
+repo = 'simeji/winresizer'
+
