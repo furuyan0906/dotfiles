@@ -65,6 +65,11 @@ let g:airline_powerline_fonts = 1
 nmap <C-p> <Plug>AirlineSelectPrevTab
 nmap <C-n> <Plug>AirlineSelectNextTab
 
+" ----- [[previm]] -----
+let g:vim_markdown_folding_disabled = 1
+let g:previm_enable_realtime = 1
+let g:previm_open_cmd = 'open -a Google\ Chrome'
+
 " ----- [[colorscheme]] -----
 syntax on	" シンタックスをオフに設定
 colorscheme darktheme

@@ -47,8 +47,21 @@ repo = 'jistr/vim-nerdtree-tabs'
 
 
 # ----- [tags] -----
+#[[plugins]]
+#repo = 'vim-scripts/gtags.vim'
+
 [[plugins]]
-repo = 'vim-scripts/gtags.vim'
+repo = 'lighttiger2505/gtags.vim'
+hook_add = '''
+    " Options
+    let g:Gtags_Auto_Map = 0
+    let g:Gtags_OpenQuickfixWindow = 1
+    " Keymap
+    " Show definetion of function cousor word on quickfix
+    nmap <silent> K :<C-u>exe("Gtags ".expand('<cword>'))<CR>
+    " Show reference of cousor word on quickfix
+    nmap <silent> R :<C-u>exe("Gtags -r ".expand('<cword>'))<CR>
+'''
 
 [[plugins]]
 repo = 'jsfaint/gen_tags.vim'
@@ -90,6 +103,8 @@ repo = 'thinca/vim-qfreplace'
 [[plugins]]
 repo = 'Shougo/neocomplete.vim'
 
+[[plugins]]
+repo = 'previm/previm'
 
 # ----- [colorscheme] -----
 [[plugins]]
