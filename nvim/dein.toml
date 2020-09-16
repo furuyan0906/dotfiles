@@ -1,17 +1,91 @@
 # call dein#recache_runtimepath() when removing a plugin
 
-# ----- [dein] -----
+# ------------------------------------------------------------------------------------------------------------------------
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
-# ----- [Denite] -----
+# ------------------------------------------------------------------------------------------------------------------------
 [[plugins]]
 repo = 'Shougo/denite.nvim'
 
+# ------------------------------------------------------------------------------------------------------------------------
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+depends = 'context_filetype.vim'
+on_i = 1
+hook_source = '''
+    call deoplete#enable()
+    " No display of the number of competion list
+    set shortmess+=c
 
-# ----- [Powerline] -----
-#
-# vim-airline を使用する場合は, 以下の方法で Ricty for Powerline をインストールする
+    " <TAB>: completion.
+    inoremap <silent><expr> <TAB>
+          \ pumvisible() ? "\<C-n>" :
+          \ <SID>check_back_space() ? "\<TAB>" :
+          \ deoplete#manual_complete()
+    function! s:check_back_space() abort
+      let col = col('.') - 1
+      return !col || getline('.')[col - 1]  =~ '\s'
+    endfunction
+
+    " <S-TAB>: completion back.
+    inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<C-h>"
+    " <C-e>: popup cancel
+    inoremap <expr><C-e>       deoplete#cancel_popup()
+
+    call deoplete#custom#source('_', 'matchers', ['matcher_head'])
+    call deoplete#custom#source('_', 'converters', [
+          \ 'converter_remove_paren',
+          \ 'converter_remove_overlap',
+          \ 'matcher_length',
+          \ 'converter_truncate_abbr',
+          \ 'converter_truncate_menu',
+          \ 'converter_auto_delimiter',
+          \ ])
+    call deoplete#custom#option('keyword_patterns', {
+          \ '_': '[a-zA-Z_]\k*\(?',
+          \ 'tex': '[^\w|\s][a-zA-Z_]\w*',
+          \ })
+    call deoplete#custom#option('camel_case', v:true)
+'''
+
+# ------------------------------------------------------------------------------------------------------------------------
+[[plugins]]
+repo = 'Shougo/context_filetype.vim'
+
+# ------------------------------------------------------------------------------------------------------------------------
+[[plugins]]
+repo = 'Shougo/neoinclude.vim'
+on_ft = ['c', 'cpp']
+depends = ['deoplete.nvim']
+
+# ------------------------------------------------------------------------------------------------------------------------
+[[plugins]]
+repo = 'kamykn/dark-theme.vim'
+
+# ------------------------------------------------------------------------------------------------------------------------
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+hook_add = '''
+    let NERDTreeShowHidden = 1
+	autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+'''
+
+# ------------------------------------------------------------------------------------------------------------------------
+[[plugins]]
+repo = 'jistr/vim-nerdtree-tabs'
+hook_add = '''
+    map <C-e> <plug>NERDTreeTabsToggle<CR>
+    let g:nerdtree_tabs_open_on_console_startup=1
+    function! s:MoveCursorAtStart()
+        call feedkeys("\<C-l>")
+    endfunction
+    autocmd VimEnter * NERDTree | call s:MoveCursorAtStart()
+'''
+depends = ['nerdtree']
+
+# ------------------------------------------------------------------------------------------------------------------------
+# @note  install Ricty for Powerline before using vim-airline
 #
 # brew tap sanemat/font
 # brew install ricty --with-powerline
@@ -20,107 +94,85 @@ repo = 'Shougo/denite.nvim'
 #
 [[plugins]]
 repo = 'vim-airline/vim-airline'
-hock_add = '''
-let g:airline_powerline_fonts = 1
+hook_add = '''
+    let g:airline#extensions#tabline#enabled = 1
+	let g:airline#extensions#tabline#buffer_idx_mode = 1
+	let g:airline#extensions#tabline#buffer_idx_format = {
+	\ '0': '0 ',
+	\ '1': '1 ',
+	\ '2': '2 ',
+	\ '3': '3 ',
+	\ '4': '4 ',
+	\ '5': '5 ',
+	\ '6': '6 ',
+	\ '7': '7 ',
+	\ '8': '8 ',
+	\ '9': '9 '
+	\}
+	let g:airline_theme='lucius'
+	let g:airline_powerline_fonts = 1
 '''
 
+# ------------------------------------------------------------------------------------------------------------------------
 [[plugins]]
 repo = 'vim-airline/vim-airline-themes'
 
+# ------------------------------------------------------------------------------------------------------------------------
+[[plugins]]
+repo = 'majutsushi/tagbar'
 
-# ----- [Terminal] -----
+# ------------------------------------------------------------------------------------------------------------------------
 [[plugins]]
 repo = 'kassio/neoterm'
-
-# ----- [Filter] -----
-# [[plugins]]
-# repo = 'Shougo/unite.vim'
-
-# [[plugins]]
-# repo = 'Shougo/vimfilter.vim'
-
-[[plugins]]
-repo = 'scrooloose/nerdtree'
-
-[[plugins]]
-repo = 'jistr/vim-nerdtree-tabs'
-
-
-# ----- [tags] -----
-#[[plugins]]
-#repo = 'vim-scripts/gtags.vim'
-
-[[plugins]]
-repo = 'lighttiger2505/gtags.vim'
 hook_add = '''
-    " Options
-    let g:Gtags_Auto_Map = 0
-    let g:Gtags_OpenQuickfixWindow = 1
-    " Keymap
-    " Show definetion of function cousor word on quickfix
-    nmap <silent> K :<C-u>exe("Gtags ".expand('<cword>'))<CR>
-    " Show reference of cousor word on quickfix
-    nmap <silent> R :<C-u>exe("Gtags -r ".expand('<cword>'))<CR>
+	let g:neoterm_autoinsert = 1
+	let g:neoterm_autoscroll = 1
+	tnoremap <silent> <ESC> <C-\><C-n><C-w>
+	vnoremap <silent> <C-e> V:TREPLSendSelection<cr>'>j$
 '''
 
+# ------------------------------------------------------------------------------------------------------------------------
+#[[plugins]]
+#repo = 'lyuts/vim-rtags'
+#on_ft = ['c', 'cpp']
+#hook_add = '''
+#    let g:rtagsUseDefaultMappings = 0
+#    let g:rtagsAutoLaunchRdm = 1
+#'''
+#hook_source = '''
+#    noremap <leader>ri :call rtags#SymbolInfo()<CR>
+#    noremap <Leader>rj :call rtags#JumpTo(g:SAME_WINDOW)<CR>
+#    noremap <Leader>rJ :call rtags#JumpTo(g:SAME_WINDOW, { '--declaration-only' : '' })<CR>
+#    noremap <Leader>rS :call rtags#JumpTo(g:H_SPLIT)<CR>
+#    noremap <Leader>rV :call rtags#JumpTo(g:V_SPLIT)<CR>
+#    noremap <Leader>rT :call rtags#JumpTo(g:NEW_TAB)<CR>
+#    noremap <Leader>rp :call rtags#JumpToParent()<CR>
+#    noremap <Leader>rf :call rtags#FindRefs()<CR>
+#    noremap <Leader>rF :call rtags#FindRefsCallTree()<CR>
+#    noremap <Leader>rn :call rtags#FindRefsByName(input("Pattern? ", "", "customlist,rtags#CompleteSymbols"))<CR>
+#    noremap <Leader>rs :call rtags#FindSymbols(input("Pattern? ", "", "customlist,rtags#CompleteSymbols"))<CR>
+#    noremap <Leader>rr :call rtags#ReindexFile()<CR>
+#    noremap <Leader>rl :call rtags#ProjectList()<CR>
+#    noremap <Leader>rw :call rtags#RenameSymbolUnderCursor()<CR>
+#    noremap <Leader>rv :call rtags#FindVirtuals()<CR>
+#    noremap <Leader>rb :call rtags#JumpBack()<CR>
+#    noremap <Leader>rC :call rtags#FindSuperClasses()<CR>
+#    noremap <Leader>rc :call rtags#FindSubClasses()<CR>
+#    noremap <Leader>rd :call rtags#Diagnostics()<CR>
+#'''
+
+# ------------------------------------------------------------------------------------------------------------------------
+[[plugins]]
+repo = 'simeji/winresizer'
+
+# ------------------------------------------------------------------------------------------------------------------------
+[[plugins]]
+repo = 'vim-scripts/gtags.vim'
+
+# ------------------------------------------------------------------------------------------------------------------------
 [[plugins]]
 repo = 'jsfaint/gen_tags.vim'
 hook_add = '''
     let g:gen_tags#gtags_auto_gen = 1
 '''
-# ----- [Grep] -----
-[[plugins]]
-repo = 'junegunn/fzf'
-hook_post_update = './install --all'
-
-[[plugins]]
-repo = 'junegunn/fzf.vim'
-depends = 'fzf'
-# init.vimに以下を記述する
-# hook_add = '''
-#     command! -bang -nargs=* Rg
-#     \ call fzf#vim#grep(
-#     \ 'rg --column --line-number --hidden --ignore-case --no-heading --color=always '.shellescape(<q-args>), 1,
-#     \ <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
-#     \ : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
-#     \ <bang>0)
-#     nnoremap <C-g> :Rg<Space>
-#     nnoremap <C-p> :GFiles<CR>
-#     nnoremap <C-h> :History<CR>
-# '''
-
-# ----- [Git] -----
-[[plugins]]
-repo = 'tpope/vim-fugitive'
-
-[[plugins]]
-repo = 'airblade/vim-gitgutter'
-
-# ----- [edit] -----
-[[plugins]]
-repo = 'thinca/vim-qfreplace'
-
-[[plugins]]
-repo = 'Shougo/neocomplete.vim'
-
-[[plugins]]
-repo = 'previm/previm'
-
-# ----- [colorscheme] -----
-[[plugins]]
-repo = 'noahfrederick/vim-hemisu'
-
-[[plugins]]
-repo = 'fcpg/vim-orbital'
-
-[[plugins]]
-repo = 'reedes/vim-colors-pencil'
-
-[[plugins]]
-repo = 'kamykn/dark-theme.vim'
-
-
-# ----- [window] -----
-[[plugins]]
-repo = 'simeji/winresizer'
-
+#

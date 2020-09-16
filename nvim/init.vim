@@ -1,16 +1,12 @@
-" ----- [Settings (vim)] -----
+" No compatible with Vi
 if &compatible
   set nocompatible    " Be iMproved
 endif
 
+" plugin disable for install
+filetype plugin indent off
 
-" ----- [Settings (indent)] -----
-filetype plugin off
-
-
-" ----- [Settings (dein.vim)] -----
-
-" ----- [[dein.vimの自動インストール]] -----
+" auto install of dein.vim
 let s:cache_home = empty($XDG_CACHE_HOME) ? expand('~/.cache') : $XDG_CACHE_HOME
 let s:dein_dir = s:cache_home . '/dein'
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
@@ -22,7 +18,7 @@ endif
 " set runtimepath+=s:dein_repo_dir
 set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
-" ----- [[プラグイン読み込み&キャッシュ作成]] -----
+" read plugins & cache
 let s:toml_file = fnamemodify(expand('<sfile>'), ':h') .'/dein.toml'
 
 if dein#load_state(s:dein_dir)
@@ -32,140 +28,28 @@ if dein#load_state(s:dein_dir)
 	call dein#save_state()
 endif
 
-" ----- [[不足プラグインの自動インストール]] -----
+" install additional plugins
 if has('vim_starting') && dein#check_install()
 	call dein#install()
 endif
 
 
-" -----[[PATH設定]] ------------------------------
-let g:python3_host_prog = '/usr/local/bin//python3'
+" set PATH of Python3
+let g:python3_host_prog = expand('/usr/local/bin/python3')
+"let g:python_host_prog = $PYENV_ROOT.'/versions/neovim2/bin/python'
+"let g:python3_host_prog = $PYENV_ROOT.'/versions/neovim3/bin/python'
 
 
-" ----- [プラグインを有効にする] -----
-filetype plugin on
+" plugin enable
+filetype plugin indent on
+syntax on
 
-" ----- [Settings (plugins)] -----
+" read config files
+runtime! ./options.vim
+runtime! ./keymaps.vim
+runtime! ./functions.vim
 
-" ----- [[NERDTree.vim]] -----
-" 隠しファイルを表示する
-let NERDTreeShowHidden = 1
-nnoremap <silent><C-e> :NERDTreeFocusToggle<CR>
-" デフォルトでツリーを表示させない
-let g:nerdtree_tabs_open_on_console_startup=0
-" 他のバッファをすべて閉じた時にNERDTreeが開いていたらNERDTreeも一緒に閉じる。
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-" ----- [[vim-airline.vim]] -------------------------
-set t_Co=256
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#buffer_idx_mode = 1
-let g:airline_theme='lucius'
-let g:airline_powerline_fonts = 1
-nmap <C-p> <Plug>AirlineSelectPrevTab
-nmap <C-n> <Plug>AirlineSelectNextTab
-
-" ----- [[previm]] -----
-let g:vim_markdown_folding_disabled = 1
-let g:previm_enable_realtime = 1
-let g:previm_open_cmd = 'open -a Google\ Chrome'
-
-" ----- [[colorscheme]] -----
-syntax on	" シンタックスをオフに設定
-colorscheme darktheme
-set background=dark
-
-
-" ----- [Settings (backup)] -----
-" Don't write backup file if vim is being called by "crontab -e"
-au BufWrite /private/tmp/crontab.* set nowritebackup
-" Don't write backup file if vim is being called by "chpass"
-au BufWrite /private/etc/pw.* set nowritebackup
-
-
-" ----- [Settings (utility)] -----
-set modelines=0		" CVE-2007-2438
-set fenc=utf-8
-set nobackup
-set noswapfile
-set laststatus=2
-set encoding=utf-8
-
-
-" ----- [Settings (file)] -----
-set backspace=2		" more powerful backspacing
-
-
-" ----- [Settings (tag jumps)] -----
-set fileformats=unix,dos,mac
-set fileencodings=utf-8,sjis
-set tags=./GRTAGS;./tags;$HOME
-
-
-" ----- [Settings (standard I/O)] -----
-set mouse=a " マウス操作を有効にする
-set scrolloff=4 " スクロールの余裕を確保する
-
-
-" ----- [Settings (view)] -----
-set number	" 行数を表示する
-set ruler	" ルーラーを表示する
-set title	" タイトルを表示する
-set cursorline	" 現在の行をハイライト
-hi clear Cursorline	" 行番号のみハイライト
-set wrap	" ソースコードの折り返しを有効にする
-" autocmd ColorScheme highlight Comment ctermfig=22 guifg=#008800
-
-
-" ----- [Settings (view)] -----
-" sj : 分割画面を下に移動
-" sk : 分割画面を上に移動
-" sl : 分割画面を右に移動
-" sh : 分割画面を左に移動
-" ss : 画面を水平分割
-" sv : 画面を垂直分割
-" sq : 画面終了
-nnoremap sj <C-w>j
-nnoremap sk <C-w>k
-nnoremap sl <C-w>l
-nnoremap sh <C-w>h
-nnoremap ss :<C-u>sp<CR><C-w>j
-nnoremap sv :<C-u>vs<CR><C-w>l
-nnoremap sq :q<Enter><ESC>
-
-
-" ----- [Settings (edit)] -----
-set backspace=indent,eol,start	" backspaceを有効に
-set spell	" スペルチェックを行う
-set spelllang=en,cjk	" スペルチェックから日本語を除外する
-set autoindent	" 改行時の行のインデントを保持する
-set smartindent	" 改行前の行に合わせてインデントを行う
-set showmatch
-set tabstop=4
-set shiftwidth=4
-set matchtime=2
-
-
-" ----- [Settings (insert)] -----
-"autocmd BufNewFile *.c 0r $HOME/.vim/template/introduction.txt
-"autocmd BufNewFile *.cpp 0r $HOME/.vim/template/introduction.txt
-"autocmd BufNewFile *.h 0r $HOME/.vim/template/introduction.txt
-
-
-" ----- [Settings (grep)] -----
-set ignorecase " 検索文字列が小文字の場合は大文字小文字の区別をなくす
-set smartcase " 検索文字列に大文字が含まれる場合には区別する
-set incsearch " 検索文字列入力時に順次対象文字列にヒットさせる
-
-
-let g:global_value = "/tmp/.tmp.txt"
-
-
-vmap <C-L> :w! /tmp/.tmp.txt<CR>
-nmap <C-L> :cal Mylispval()<CR>
-
-function Mylispval()
-	execute "r !gcl -f < " .g:global_value
-endfunction
-
+if has('vim_starting')
+	call NeovimUserStart()
+endif
 
