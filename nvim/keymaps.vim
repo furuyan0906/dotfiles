@@ -23,3 +23,6 @@ nnoremap <C-h> :-tabmove<CR><ESC>
 
 nnoremap <Esc><Esc> :nohlsearch<CR><ESC>
 
+nnoremap <C-g>f :Gtags -f %<CR>
+nnoremap <C-j> :GtagsCursor <CR>
+
