@@ -3,6 +3,6 @@ command! -nargs=* Termv vsplit | terminal <args>
 
 " start action
 function! NeovimUserStart()
-	Term
+	"Term
 endfunction
 

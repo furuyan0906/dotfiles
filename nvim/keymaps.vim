@@ -13,7 +13,7 @@ nnoremap ss :<C-u>sp<CR><C-w>j
 nnoremap sv :<C-u>vs<CR><C-w>l
 nnoremap sq :q<Enter><ESC>
 
-nnoremap <C-f> :tabc<CR><ESC>
+nnoremap <C-c> :tabc<CR><ESC>
 
 nmap <C-p> <Plug>AirlineSelectPrevTab
 nmap <C-n> <Plug>AirlineSelectNextTab
