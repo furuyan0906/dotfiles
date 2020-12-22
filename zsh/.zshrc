@@ -26,3 +26,7 @@ alias jnano='ssh nano@192.168.11.9'
 alias vim='nvim'
 
 alias brew='PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin brew'
+
+alias armgcc='arm-none-eabi-gcc'
+alias armg++='arm-none-eabi-g++'
+
