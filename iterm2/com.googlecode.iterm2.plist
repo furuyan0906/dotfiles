@@ -2596,7 +2596,7 @@
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
-			<integer>0</integer>
+			<integer>15</integer>
 			<key>Working Directory</key>
 			<string>/Users/furuyan0906/work</string>
 		</dict>
