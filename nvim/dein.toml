@@ -76,11 +76,12 @@ hook_add = '''
 repo = 'jistr/vim-nerdtree-tabs'
 hook_add = '''
     map <C-e> <plug>NERDTreeTabsToggle<CR>
-    let g:nerdtree_tabs_open_on_console_startup=1
+    let g:nerdtree_tabs_open_on_console_startup=0
     function! s:MoveCursorAtStart()
         call feedkeys("\<C-l>")
     endfunction
-    autocmd VimEnter * NERDTree | call s:MoveCursorAtStart()
+	autocmd StdinReadPre * let s:std_in=1
+	autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
 '''
 depends = ['nerdtree']
 
