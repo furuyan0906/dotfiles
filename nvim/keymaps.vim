@@ -26,3 +26,5 @@ nnoremap <Esc><Esc> :nohlsearch<CR><ESC>
 nnoremap <C-g>f :Gtags -f %<CR>
 nnoremap <C-j> :GtagsCursor <CR>
 
+nnoremap <silent><Leader><C-]> <C-w><C-]><C-w>T
+
