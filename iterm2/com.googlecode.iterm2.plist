@@ -452,7 +452,7 @@
 		</dict>
 	</dict>
 	<key>Default Arrangement Name</key>
-	<string>yanfuruWindowScheme-01</string>
+	<string>yanfuruWindowScheme-02</string>
 	<key>Default Bookmark Guid</key>
 	<string>EE23CEA2-4085-42BE-9C1A-5C6CFADECA2D</string>
 	<key>DimBackgroundWindows</key>
@@ -1209,6 +1209,10 @@
 	<key>NeverWarnAboutShortLivedSessions_ED6A2328-611B-467D-9176-12E01D3B4072</key>
 	<true/>
 	<key>NeverWarnAboutShortLivedSessions_ED6A2328-611B-467D-9176-12E01D3B4072_selection</key>
+	<integer>0</integer>
+	<key>NeverWarnAboutShortLivedSessions_EE23CEA2-4085-42BE-9C1A-5C6CFADECA2D</key>
+	<true/>
+	<key>NeverWarnAboutShortLivedSessions_EE23CEA2-4085-42BE-9C1A-5C6CFADECA2D_selection</key>
 	<integer>0</integer>
 	<key>New Bookmarks</key>
 	<array>
@@ -2640,8 +2644,6 @@
 			<string>kNextWindowPointerAction</string>
 		</dict>
 	</dict>
-	<key>PreventEscapeSequenceFromClearingHistory</key>
-	<false/>
 	<key>Print In Black And White</key>
 	<true/>
 	<key>PromptOnClose</key>

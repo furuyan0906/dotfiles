@@ -49,3 +49,6 @@ set ambiwidth=double
 au BufWrite /private/tmp/crontab.* set nowritebackup
 au BufWrite /private/etc/pw.* set nowritebackup
 
+" fzf
+" set rtp+=/usr/local/opt/fzf
+
