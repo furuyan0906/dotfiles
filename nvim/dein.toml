@@ -170,10 +170,3 @@ repo = 'simeji/winresizer'
 [[plugins]]
 repo = 'vim-scripts/gtags.vim'
 
-# ------------------------------------------------------------------------------------------------------------------------
-[[plugins]]
-repo = 'jsfaint/gen_tags.vim'
-hook_add = '''
-    let g:gen_tags#gtags_auto_gen = 1
-'''
-#

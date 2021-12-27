@@ -35,9 +35,7 @@ endif
 
 
 " set PATH of Python3
-let g:python3_host_prog = expand('/usr/local/bin/python3')
-"let g:python_host_prog = $PYENV_ROOT.'/versions/neovim2/bin/python'
-"let g:python3_host_prog = $PYENV_ROOT.'/versions/neovim3/bin/python'
+let g:python3_host_prog = system('echo -n $(which python3)')
 
 
 " plugin enable
