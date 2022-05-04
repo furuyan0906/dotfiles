@@ -5,7 +5,7 @@ DOTFILES_TOP_DIR=$(cd ..; pwd)
 
 # For library installation
 mkdir -p ~/Library
-mkdir -p ~/instaler
+mkdir -p ~/installer
 
 GOOGLE_TEST_INSTALL_VERSION="v1.11.0"
 OPENCV_INSTALL_VERSION="4.5.5"
@@ -13,10 +13,12 @@ OPENCV_INSTALL_VERSION="4.5.5"
 sudo apt update
 
 sudo apt install -y \
+	lsb-release \
 	software-properties-common \
 	apt-transport-https \
 	ca-certificates \
-	curl
+	curl \
+	cmake
 
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - 
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
@@ -52,7 +54,6 @@ sudo apt install -y \
 	v4l-utils \
 	imagemagick \
 	x11-apps \
-	make install
 	python3-dev \
 	python3-pip \
 	python3-pybind11 \
@@ -67,10 +68,10 @@ sudo apt install -y \
 	texlive-latex-extra \
 	texlive-fonts-recommended \
 	texlive-fonts-extra \
-	texlve-lang-japanese \
+	texlive-lang-japanese \
 	texlive-lang-cjk \
 	xdvik-ja \
-	evincei \
+	evince \
 	docker-ce 
 
 
@@ -147,7 +148,7 @@ git checkout -b $GOOGLE_TEST_INSTALL_VERSION refs/tags/$GOOGLE_TEST_INSTALL_VERS
 mkdir -p build && cd build
 cmake -DCMAKE_INSTALL_PREFIX=~/Library ..
 make -j$(nproc)
-make install
+sudo make install
 
 
 echo "*************************************************"
@@ -169,5 +170,5 @@ cmake -D CMAKE_BUILD_TYPE=Release \
 	-D OPENCV_FOR_THREADS_NUM=4 \
 	..
 make -j$(nproc)
-make install
+sudo make install
 
