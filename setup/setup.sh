@@ -74,7 +74,16 @@ sudo apt install -y \
 	xdvik-ja \
 	evince \
 	docker-ce \
-	lua5.3
+	lua5.3 \
+	libx11-dev \
+	xorg-dev \
+	libglu1-mesa \
+	libglu1-mesa-dev \
+	libgl1-mesa-glx \
+	libgl1-mesa-dev \
+	libglfw3 \
+	libglfw3-dev \
+	libglew-dev
 
 
 echo "*************************************************"
