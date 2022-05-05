@@ -183,3 +183,10 @@ cmake -D CMAKE_BUILD_TYPE=Release \
 make -j$(nproc)
 sudo make install
 
+
+echo "*************************************************"
+echo "*  Install Rust                                 *"
+echo "*************************************************"
+
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
