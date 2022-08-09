@@ -1,192 +1,316 @@
-#!/usr/bin/sh
+#!/usr/bin/bash
+
 
 User=`whoami`
-DOTFILES_TOP_DIR=$(cd ..; pwd)
-
-# For library installation
-mkdir -p ~/Library
-mkdir -p ~/installer
+DOTFILES_TOP_DIR=$(cd $(dirname $0)/..; pwd)
 
 GOOGLE_TEST_INSTALL_VERSION="v1.11.0"
-OPENCV_INSTALL_VERSION="4.5.5"
-
-sudo apt update
-
-sudo apt install -y \
-	lsb-release \
-	software-properties-common \
-	apt-transport-https \
-	ca-certificates \
-	curl \
-	cmake
-
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - 
-sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
-sudo add-apt-repository ppa:neovim-ppa/stable
-
-sudo apt update
-sudo apt upgrade -y
+OPENCV_INSTALL_VERSION="4.6.0"
 
 
-echo "*************************************************"
-echo "*  Install packages                             *"
-echo "*************************************************"
+function init_setup_script () {
+	# For library installation
+	mkdir -p ~/Library
+	mkdir -p ~/installer
+}
 
-apt-cache policy docker-ce
+function install_basic_packages () {
+	echo "*************************************************"
+	echo "*  Install basic packages                       *"
+	echo "*************************************************"
+	
+	sudo apt update
+	
+	sudo apt install -y \
+		lsb-release \
+		software-properties-common \
+		apt-transport-https \
+		ca-certificates \
+		curl \
+		cmake
+}
 
-sudo apt install -y \
-	git \
-	zip \
-	unzip \
-	build-essential \
-	zsh \
-	neovim \
-	gcc \
-	cmake \
-	flex \
-	bison \
-	libssl-dev \
-	libelf-dev \
-	libncurses-dev \
-	autoconf \
-	libudev-dev \
-	libtool \
-	openssh-server \
-	v4l-utils \
-	imagemagick \
-	x11-apps \
-	python3-dev \
-	python3-pip \
-	python3-pybind11 \
-	iputils-ping \
-	net-tools \
-	dwarves \
-	libopenblas-base \
-	libopenblas-dev \
-	libeigen3-dev \
-	libatlas3-base \
-	libatlas-base-dev \
-	texlive-latex-extra \
-	texlive-fonts-recommended \
-	texlive-fonts-extra \
-	texlive-lang-japanese \
-	texlive-lang-cjk \
-	xdvik-ja \
-	evince \
-	docker-ce \
-	lua5.3 \
-	libx11-dev \
-	xorg-dev \
-	libglu1-mesa \
-	libglu1-mesa-dev \
-	libgl1-mesa-glx \
-	libgl1-mesa-dev \
-	libglfw3 \
-	libglfw3-dev \
-	libglew-dev
+function add_apt_repositories () {
+	echo "*************************************************"
+	echo "*  Add apt repositories                         *"
+	echo "*************************************************"
+	
+	curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - 
+	sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+
+	# for Neovim
+	sudo add-apt-repository ppa:neovim-ppa/stable	
+	
+	# for Cuda
+	wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-wsl-ubuntu.pin
+	sudo mv cuda-wsl-ubuntu.pin /etc/apt/preferences.d/cuda-repository-pin-600
+	sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/3bf863cc.pub
+	sudo add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/ /"
+
+	sudo apt update
+}
+
+function install_packages () {
+	echo "*************************************************"
+	echo "*  Install packages                             *"
+	echo "*************************************************"
+
+	sudo apt update
+	sudo apt upgrade -y
+
+	apt-cache policy docker-ce
+	
+	sudo apt install -y \
+		git \
+		zip \
+		unzip \
+		build-essential \
+		zsh \
+		neovim \
+		gcc \
+		tree \
+		cmake \
+		flex \
+		bison \
+		libssl-dev \
+		libelf-dev \
+		libncurses-dev \
+		autoconf \
+		libudev-dev \
+		libtool \
+		openssh-server \
+		v4l-utils \
+		imagemagick \
+		x11-apps \
+		python3-dev \
+		python3-pip \
+		python3-venv \
+		python3-pybind11 \
+		iputils-ping \
+		net-tools \
+		dwarves \
+		libopenblas-base \
+		libopenblas-dev \
+		libeigen3-dev \
+		libatlas3-base \
+		libatlas-base-dev \
+		texlive-latex-extra \
+		texlive-fonts-recommended \
+		texlive-fonts-extra \
+		texlive-lang-japanese \
+		texlive-lang-cjk \
+		texlive-science \
+		gv \
+		xdvik-ja \
+		evince \
+		docker-ce \
+		lua5.3 \
+		libx11-dev \
+		xorg-dev \
+		libglu1-mesa \
+		libglu1-mesa-dev \
+		libgl1-mesa-glx \
+		libgl1-mesa-dev \
+		libglfw3 \
+		libglfw3-dev \
+		libglew-dev \
+		cuda \
+		cuda-drivers \
+		clinfo
+}
+
+function install_ctags () {
+	echo "*************************************************"
+	echo "*  Install universal ctags                      *"
+	echo "*************************************************"
+	
+	if [ -e ~/installer/ctags ]; then
+		sudo rm -r ~/installer/ctags
+	fi
+	
+	cd ~/installer
+	git clone https://github.com/universal-ctags/ctags.git
+	cd ctags
+	./autogen.sh
+	./configure
+	make
+	sudo make install
+}
+
+function install_google_test () {
+	echo "*************************************************"
+	echo "*  Install Google Test                          *"
+	echo "*************************************************"
+	
+	if [ -e ~/installer/googletest ]; then
+		sudo rm -r ~/installer/googletest
+	fi
+	
+	cd ~/installer
+	git clone https://github.com/google/googletest.git
+	cd googletest
+	git checkout -b $GOOGLE_TEST_INSTALL_VERSION refs/tags/$GOOGLE_TEST_INSTALL_VERSION
+	mkdir -p build && cd build
+	cmake -DCMAKE_INSTALL_PREFIX=~/Library ..
+	make -j$(nproc)
+	sudo make install
+}
+
+function install_opencv () {
+	echo "*************************************************"
+	echo "*  Install OpenCV                               *"
+	echo "*************************************************"
+
+	if [ -e ~/installer/opencv ]; then
+		sudo rm -r ~/installer/opencv
+	fi
+	
+	if [ -e ~/installer/opencv_contrib ]; then
+		sudo rm -r ~/installer/opencv_contrib
+	fi
+	
+	cd ~/installer
+	git clone https://github.com/opencv/opencv.git
+	git clone https://github.com/opencv/opencv_contrib.git
+	cd opencv
+	git checkout -b $OPENCV_INSTALL_VERSION refs/tags/$OPENCV_INSTALL_VERSION
+	cd opencv_contrib
+	git checkout -b $OPENCV_INSTALL_VERSION refs/tags/$OPENCV_INSTALL_VERSION
+	cd opencv
+	mkdir -p build && cd build
+	cmake -D CMAKE_BUILD_TYPE=Release \
+		-D CMAKE_INSTALL_PREFIX=~/Library \
+		-D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules \
+		-D OPENCV_FOR_THREADS_NUM=4 \
+		..
+	make -j $(nproc)
+	sudo make install
+}
+
+function install_rust () {
+	echo "*************************************************"
+	echo "*  Install Rust                                 *"
+	echo "*************************************************"
+	
+	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+}
+
+function setup_symbolic_links () {
+	echo "*************************************************"
+	echo "*  Setup Symbolic links                         *"
+	echo "*************************************************"
+	
+	#sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 1
+	#sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 2
+	#
+	#sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 1
+	#sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 2
+	#
+	#sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 1
+	#sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 2
+}
+
+function setup_neovim () {
+	echo "*************************************************"
+	echo "*  Setup NeoVim                                 *"
+	echo "*************************************************"
+	
+	mkdir -p ~/.cache/dein
+	cd ~/.cache/dein
+	curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
+	sh ./installer.sh ~/.dein/dein
+	mkdir -p ~/.config
+	ln -sf $DOTFILES_TOP_DIR/nvim ~/.config/nvim
+	pip3 install --upgrade pynvim msgpack
+}
+
+function setup_zsh () {
+	echo "*************************************************"
+	echo "*  Setup Zsh                                    *"
+	echo "*************************************************"
+	
+	echo "...skip..."
+}
+
+function setup_ssh () {
+	echo "*************************************************"
+	echo "*  Setup ssh connection                         *"
+	echo "*************************************************"
+	
+	sudo systemctl enable ssh
+	sudo systemctl restart ssh
+}
+
+function setup_docker () {
+	echo "*************************************************"
+	echo "*  Setup Docker                                 *"
+	echo "*************************************************"
+	
+	sudo systemctl status docker
+}
+
+function setup_cuda () {
+	echo "*************************************************"
+	echo "*  Setup CUDA                                   *"
+	echo "*************************************************"
+	
+	echo "export PATH=$PATH:/usr/local/cuda/bin" >> ~/.bashrc
+	echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64" >> ~/.bashrc
+}
 
 
-echo "*************************************************"
-echo "*  Setup Symbolic links                         *"
-echo "*************************************************"
-
-#sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 1
-#sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 2
-#
-#sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 1
-#sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 2
-#
-#sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 1
-#sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 2
-
-
-echo "*************************************************"
-echo "*  Setup NeoVim                                 *"
-echo "*************************************************"
-
-mkdir -p ~/.cache/dein
-cd ~/.cache/dein
-curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
-sh ./installer.sh ~/.dein/dein
-mkdir -p ~/.config
-ln -sf $DOTFILES_TOP_DIR/nvim ~/.config/nvim
-pip3 install --upgrade pynvim msgpack
-
-
-echo "*************************************************"
-echo "*  Setup Zsh                                    *"
-echo "*************************************************"
-
-echo "...skip..."
-
-
-echo "*************************************************"
-echo "*  Setup ssh connection                         *"
-echo "*************************************************"
-
-sudo systemctl enable ssh
-sudo systemctl restart ssh
-
-
-echo "*************************************************"
-echo "*  Install Docker                               *"
-echo "*************************************************"
-
-sudo systemctl status docker
-
-
-echo "*************************************************"
-echo "*  Install universal ctags                      *"
-echo "*************************************************"
-
-cd ~/installer
-git clone https://github.com/universal-ctags/ctags.git
-cd ctags
-./autogen.sh
-./configure
-make
-sudo make install
-
-
-echo "*************************************************"
-echo "*  Install Google Test                          *"
-echo "*************************************************"
-
-cd ~/installer
-git clone https://github.com/google/googletest.git
-cd googletest
-git checkout -b $GOOGLE_TEST_INSTALL_VERSION refs/tags/$GOOGLE_TEST_INSTALL_VERSION
-mkdir -p build && cd build
-cmake -DCMAKE_INSTALL_PREFIX=~/Library ..
-make -j$(nproc)
-sudo make install
-
-
-echo "*************************************************"
-echo "*  Install OpenCV                               *"
-echo "*************************************************"
-
-cd ~/installer
-git clone https://github.com/opencv/opencv.git
-git clone https://github.com/opencv/opencv_contrib.git
-cd opencv
-git checkout -b $OPENCV_INSTALL_VERSION refs/tags/$OPENCV_INSTALL_VERSION
-cd opencv_contrib
-git checkout -b $OPENCV_INSTALL_VERSION refs/tags/$OPENCV_INSTALL_VERSION
-cd opencv
-mkdir -p build && cd build
-cmake -D CMAKE_BUILD_TYPE=Release \
-	-D CMAKE_INSTALL_PREFIX=~/Library \
-	-D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules \
-	-D OPENCV_FOR_THREADS_NUM=4 \
-	..
-make -j$(nproc)
-sudo make install
-
-
-echo "*************************************************"
-echo "*  Install Rust                                 *"
-echo "*************************************************"
-
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+if [ $# -eq 0 ]; then
+	init_setup_script
+	install_basic_packages
+	add_apt_repositories
+	install_packages
+	install_ctags
+	install_google_test
+	install_opencv
+	install_rust
+	setup_symbolic_links
+	setup_neovim
+	setup_zsh
+	setup_ssh
+	setup_docker
+	setup_cuda
+elif [ $# -eq 2 ]; then
+	if [ $1 == "install" ]; then
+		if [ $2 == "package" ]; then
+			install_packages
+		fi
+		if [ $2 == "ctags" ]; then
+			install_ctags
+		fi
+		if [ $2 == "gtest" ]; then
+			install_google_test
+		fi
+		if [ $2 == "opencv" ]; then
+			install_opencv
+		fi
+		if [ $2 == "rust" ]; then
+			install_rust
+		fi
+	elif [ $1 == "setup" ]; then
+		if [ $2 == "neovim" ]; then
+			setup_neovim
+		fi
+		if [ $2 == "zsh" ]; then
+			setup_zsh
+		fi
+		if [ $2 == "ssh" ]; then
+			setup_ssh
+		fi
+		if [ $2 == "docker" ]; then
+			setup_docker
+		fi
+		if [ $2 == "cuda" ]; then
+			setup_cuda
+		fi
+	else
+		echo "unsupported usage"
+	fi
+else
+	echo "unsupported usage"
+fi
 
