@@ -12,6 +12,9 @@ function init_setup_script () {
 	# For library installation
 	mkdir -p ~/Library
 	mkdir -p ~/installer
+
+	echo "export LD_LIBRARY_PATH=~/Library/lib:$LD_LIBRARY_PATH" >> ~/.bashrc
+	export LD_LIBRARY_PATH=~/Library/lib:$LD_LIBRARY_PATH
 }
 
 function install_basic_packages () {
