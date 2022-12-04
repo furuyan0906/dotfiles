@@ -1,0 +1,12 @@
+--exclude=.git
+
+--languages=C,C++,Python
+
+--recurse=yes
+
+--sort=yes
+
+--tag-relative=yes
+
+--extras=+{reference}
+
