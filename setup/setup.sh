@@ -6,6 +6,7 @@ DOTFILES_TOP_DIR=$(cd $(dirname $0)/..; pwd)
 
 GOOGLE_TEST_INSTALL_VERSION="v1.11.0"
 OPENCV_INSTALL_VERSION="4.6.0"
+FMT_INSTALL_VERSION="9.1.0"
 
 
 function init_setup_script () {
@@ -117,9 +118,18 @@ function install_packages () {
 		libglfw3 \
 		libglfw3-dev \
 		libglew-dev \
+        libglu1-mesa-dev \
+        mesa-common-dev \
+        freeglut3-dev \
 		cuda \
 		cuda-drivers \
-		clinfo
+		clinfo \
+        libgtk2.0-dev \
+        libavcodec-dev \
+        libavformat-dev \
+        libavutil-dev \
+        libswscale-dev \
+        libavresample-dev
 }
 
 function install_ctags () {
@@ -138,6 +148,8 @@ function install_ctags () {
 	./configure
 	make
 	sudo make install
+
+	ln -sf $DOTFILES_TOP_DIR/ctags ~/.ctags.d
 }
 
 function install_google_test () {
@@ -157,6 +169,28 @@ function install_google_test () {
 	cmake -DCMAKE_INSTALL_PREFIX=~/Library ..
 	make -j$(nproc)
 	sudo make install
+}
+
+function install_fmt () {
+	echo "*************************************************"
+	echo "*  Install fmt                                  *"
+	echo "*************************************************"
+
+	if [ -e ~/installer/fmt ]; then
+		sudo rm -r ~/installer/fmt
+	fi
+
+	cd ~/installer
+	git clone https://github.com/fmtlib/fmt.git
+    cd fmt
+    git checkout -b $FMT_INSTALL_VERSION refs/tags/$FMT_INSTALL_VERSION
+    mkdir -p build && cd build
+    cmake -D CMAKE_BUILD_TYPE=Release \
+		-D CMAKE_INSTALL_PREFIX=~/Library \
+        -D BUILD_SHARED_LIBS=TRUE \
+        ..
+    make -j $(nproc)
+    sudo make install
 }
 
 function install_opencv () {
@@ -224,7 +258,8 @@ function setup_neovim () {
 	sh ./installer.sh ~/.dein/dein
 	mkdir -p ~/.config
 	ln -sf $DOTFILES_TOP_DIR/nvim ~/.config/nvim
-	pip3 install --upgrade pynvim msgpack
+	pip3 install --upgrade pynvim
+	pip3 install --upgrade msgpack
 }
 
 function setup_zsh () {
@@ -269,6 +304,7 @@ if [ $# -eq 0 ]; then
 	install_packages
 	install_ctags
 	install_google_test
+    install_fmt
 	install_opencv
 	install_rust
 	setup_symbolic_links
@@ -288,6 +324,9 @@ elif [ $# -eq 2 ]; then
 		if [ $2 == "gtest" ]; then
 			install_google_test
 		fi
+        if [ $2 == "fmt" ]; then
+            install_fmt
+        fi
 		if [ $2 == "opencv" ]; then
 			install_opencv
 		fi
