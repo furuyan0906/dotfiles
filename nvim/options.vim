@@ -15,7 +15,7 @@ set hidden
 " grep
 set fileformats=unix,dos,mac
 set fileencodings=utf-8,sjis
-set tags=./GRTAGS;./tags;$HOME
+set tags=./tags,tags
 set ignorecase
 set smartcase
 set incsearch
@@ -33,14 +33,16 @@ set cursorline
 set wrap
 
 " edit
+set clipboard+=unnamedplus
 set backspace=indent,eol,start
 set backspace=2
 set spell
 set spelllang=en,cjk
+set showmatch
 set autoindent
 set smartindent
-set showmatch
 set tabstop=4
+set expandtab
 set shiftwidth=4
 set matchtime=2
 set ambiwidth=double
