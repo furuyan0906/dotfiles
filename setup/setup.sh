@@ -119,18 +119,18 @@ function install_packages () {
 		libglfw3 \
 		libglfw3-dev \
 		libglew-dev \
-        libglu1-mesa-dev \
-        mesa-common-dev \
-        freeglut3-dev \
+		libglu1-mesa-dev \
+		mesa-common-dev \
+		freeglut3-dev \
 		cuda \
 		cuda-drivers \
 		clinfo \
-        libgtk2.0-dev \
-        libavcodec-dev \
-        libavformat-dev \
-        libavutil-dev \
-        libswscale-dev \
-        libavresample-dev
+		libgtk2.0-dev \
+		libavcodec-dev \
+		libavformat-dev \
+		libavutil-dev \
+		libswscale-dev \
+		libavresample-dev
 }
 
 function install_ctags () {
@@ -183,15 +183,15 @@ function install_fmt () {
 
 	cd ~/installer
 	git clone https://github.com/fmtlib/fmt.git
-    cd fmt
-    git checkout -b $FMT_INSTALL_VERSION refs/tags/$FMT_INSTALL_VERSION
-    mkdir -p build && cd build
-    cmake -D CMAKE_BUILD_TYPE=Release \
+	cd fmt
+	git checkout -b $FMT_INSTALL_VERSION refs/tags/$FMT_INSTALL_VERSION
+	mkdir -p build && cd build
+	cmake -D CMAKE_BUILD_TYPE=Release \
 		-D CMAKE_INSTALL_PREFIX=~/Library \
-        -D BUILD_SHARED_LIBS=TRUE \
-        ..
-    make -j $(nproc)
-    sudo make install
+		-D BUILD_SHARED_LIBS=TRUE \
+		..
+	make -j $(nproc)
+	sudo make install
 }
 
 function install_opencv () {
@@ -243,11 +243,11 @@ function install_lz4 () {
 	fi
 
 	cd ~/installer
-    git clone https://github.com/lz4/lz4.git
-    cd lz4
-    git checkout -b $LZ4_INSTALL_VERSION refs/tags/$LZ4_INSTALL_VERSION
-    make -j $(nproc)
-    sudo make install DESTDIR=~ PREFIX=/Library
+	git clone https://github.com/lz4/lz4.git
+	cd lz4
+	git checkout -b $LZ4_INSTALL_VERSION refs/tags/$LZ4_INSTALL_VERSION
+	make -j $(nproc)
+	sudo make install DESTDIR=~ PREFIX=/Library
 }
 
 function setup_symbolic_links () {
@@ -322,7 +322,7 @@ if [ $# -eq 0 ]; then
 	install_packages
 	install_ctags
 	install_google_test
-    install_fmt
+	install_fmt
 	install_opencv
 	install_rust
 	setup_symbolic_links
@@ -342,9 +342,9 @@ elif [ $# -eq 2 ]; then
 		if [ $2 == "gtest" ]; then
 			install_google_test
 		fi
-        if [ $2 == "fmt" ]; then
-            install_fmt
-        fi
+		if [ $2 == "fmt" ]; then
+		    install_fmt
+		fi
 		if [ $2 == "opencv" ]; then
 			install_opencv
 		fi
