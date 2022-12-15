@@ -7,6 +7,7 @@ DOTFILES_TOP_DIR=$(cd $(dirname $0)/..; pwd)
 GOOGLE_TEST_INSTALL_VERSION="v1.11.0"
 OPENCV_INSTALL_VERSION="4.6.0"
 FMT_INSTALL_VERSION="9.1.0"
+LZ4_INSTALL_VERSION="v1.9.4"
 
 
 function init_setup_script () {
@@ -232,6 +233,23 @@ function install_rust () {
 	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 }
 
+function install_lz4 () {
+	echo "*************************************************"
+	echo "*  Install lz4                                  *"
+	echo "*************************************************"
+
+	if [ -e ~/installer/lz4 ]; then
+		sudo rm -r ~/installer/lz4
+	fi
+
+	cd ~/installer
+    git clone https://github.com/lz4/lz4.git
+    cd lz4
+    git checkout -b $LZ4_INSTALL_VERSION refs/tags/$LZ4_INSTALL_VERSION
+    make -j $(nproc)
+    sudo make install DESTDIR=~ PREFIX=/Library
+}
+
 function setup_symbolic_links () {
 	echo "*************************************************"
 	echo "*  Setup Symbolic links                         *"
@@ -329,6 +347,9 @@ elif [ $# -eq 2 ]; then
         fi
 		if [ $2 == "opencv" ]; then
 			install_opencv
+		fi
+		if [ $2 == "lz4" ]; then
+			install_lz4
 		fi
 		if [ $2 == "rust" ]; then
 			install_rust
