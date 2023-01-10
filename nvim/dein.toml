@@ -33,9 +33,6 @@ repo = 'nvim-lua/popup.nvim'
 [[plugins]]
 repo = 'nvim-lua/plenary.nvim'
 
-[[plugins]]
-repo = 'ManifTanjim/nui.nvim'
-
 # ----- Icon -------------------------------------------------------------------------------------------------------------
 [[plugins]]
 repo = 'kyazdani42/nvim-web-devicons'
