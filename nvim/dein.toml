@@ -41,6 +41,9 @@ repo = 'kyazdani42/nvim-web-devicons'
 [[plugins]]
 repo = 'kamykn/dark-theme.vim'
 
+[[plugins]]
+repo = 'EdenEast/nightfox.nvim'
+
 # ------------------------------------------------------------------------------------------------------------------------
 [[plugins]]
 repo = 'scrooloose/nerdtree'
