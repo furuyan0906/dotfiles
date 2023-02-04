@@ -47,10 +47,3 @@ set shiftwidth=4
 set matchtime=2
 set ambiwidth=double
 
-" backup
-au BufWrite /private/tmp/crontab.* set nowritebackup
-au BufWrite /private/etc/pw.* set nowritebackup
-
-" fzf
-" set rtp+=/usr/local/opt/fzf
-
