@@ -19,7 +19,7 @@ endif
 set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
 " read plugins & cache
-let s:toml_file = fnamemodify(expand('<sfile>'), ':h') .'/dein.toml'
+let s:toml_file = fnamemodify(expand('<sfile>'), ':h') .'/vim_script/dein.toml'
 
 if dein#load_state(s:dein_dir)
 	call dein#begin(s:dein_dir)
@@ -43,9 +43,9 @@ filetype plugin indent on
 syntax on
 
 " read config files
-runtime! ./options.vim
-runtime! ./keymaps.vim
-runtime! ./functions.vim
+runtime! ./vim_script/option.vim
+runtime! ./vim_script/keymap.vim
+runtime! ./vim_script/function.vim
 
 if has('vim_starting')
 	call NeovimUserStart()
