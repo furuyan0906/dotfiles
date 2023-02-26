@@ -130,7 +130,9 @@ function install_packages () {
 		libavformat-dev \
 		libavutil-dev \
 		libswscale-dev \
-		libavresample-dev
+		libavresample-dev \
+		powerline \
+		fonts-powerline
 }
 
 function install_ctags () {
@@ -285,7 +287,18 @@ function setup_zsh () {
 	echo "*  Setup Zsh                                    *"
 	echo "*************************************************"
 	
-	echo "...skip..."
+	ln -sf $DOTFILES_TOP_DIR/zsh/.zprofile ~/.zprofile
+	ln -sf $DOTFILES_TOP_DIR/zsh/.zshenv ~/.zshenv
+	ln -sf $DOTFILES_TOP_DIR/zsh/.zshrc ~/.zshrc
+}
+
+function setup_bash () {
+	echo "*************************************************"
+	echo "*  Setup Bash                                   *"
+	echo "*************************************************"
+
+    ln -sf $DOTFILES_TOP_DIR/bashrc/.bash_profile ~/.bash_profile
+	ln -sf $DOTFILES_TOP_DIR/bashrc/.bashrc ~/.bashrc
 }
 
 function setup_ssh () {
@@ -314,6 +327,22 @@ function setup_cuda () {
 	echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64" >> ~/.bashrc
 }
 
+function switch2zsh () {
+	echo "*************************************************"
+	echo "*  Switch to zsh                                *"
+	echo "*************************************************"
+    setup_zsh
+	sudo chsh -s $(which zsh) $(whoami)
+}
+
+function switch2bash () {
+	echo "*************************************************"
+	echo "*  Switch to bash                               *"
+	echo "*************************************************"
+    setup_bash
+	sudo chsh -s $(which bash) $(whoami)
+}
+
 
 if [ $# -eq 0 ]; then
 	init_setup_script
@@ -331,6 +360,7 @@ if [ $# -eq 0 ]; then
 	setup_ssh
 	setup_docker
 	setup_cuda
+	switch2zsh
 elif [ $# -eq 2 ]; then
 	if [ $1 == "install" ]; then
 		if [ $2 == "package" ]; then
@@ -361,6 +391,9 @@ elif [ $# -eq 2 ]; then
 		if [ $2 == "zsh" ]; then
 			setup_zsh
 		fi
+		if [ $2 == "bash" ]; then
+			setup_bash
+		fi
 		if [ $2 == "ssh" ]; then
 			setup_ssh
 		fi
@@ -369,6 +402,13 @@ elif [ $# -eq 2 ]; then
 		fi
 		if [ $2 == "cuda" ]; then
 			setup_cuda
+		fi
+	elif [ $1 == "switchto" ]; then
+		if [ $2 == "zsh" ]; then
+		    switch2zsh
+		fi
+		if [ $2 == "bash" ]; then
+		    switch2bash
 		fi
 	else
 		echo "unsupported usage"

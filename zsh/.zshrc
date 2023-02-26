@@ -1,37 +1,83 @@
-# language
-#export LANG=ja_JP,UTF-8
+# -----------------------------------------------------------------------------------------------------------------------------------
+# Language
 
-# prompt in Terminal
-PS1='%F{033}%[%033[36m%][%D %T]%[%033[0m%]%f %F{050}%d%f
+# 日本語設定
+export LANG="ja_JA.UTF-8"
+export LESSCHARSET=utf-8
+
+
+# -----------------------------------------------------------------------------------------------------------------------------------
+# History
+
+HISTFILE=$HOME/.zsh_history  # 履歴を保存するファイル
+HISTSIZE=1000                # メモリ上に保存する履歴のサイズ
+HISTFILESIZE=2000            # 上述のファイルに保存する履歴のサイズ
+
+# 実行時に履歴をファイルに保存する
+setopt inc_append_history
+
+# 履歴を他のシェルとリアルタイム共有する
+# setopt share_history
+
+
+# -----------------------------------------------------------------------------------------------------------------------------------
+# Complementation
+
+# 補完を有効にする
+autoload -Uz compinit && compinit
+
+# 補完候補をそのまま探す
+# 小文字を大文字に変えて探す. 大文字を小文字に変えて探す.
+zstyle ':completion:*' matcher-list '' 'm:{[:lower:]}={[:upper:]}' '+m:{[:upper:]}={[:lower:]}'
+
+# 補完方法毎にグループ化する.
+zstyle ':completion:*' format '%B%F{blue}%d%f%b'
+zstyle ':completion:*' group-name ''
+
+# 補完侯補をメニューから選択する.
+# select=2: 補完候補を一覧から選択する, 補完候補が2つ以上なければすぐに補完する.
+zstyle ':completion:*:default' menu select=2
+
+
+# -----------------------------------------------------------------------------------------------------------------------------------
+# Misc
+
+# プロンプトの設定
+# ユーザ名@ホスト名:カレントディレクトリ [yy-mm-dd hh:mm:ss]
+export PS1='%F{050}%n@%M:%~%f %F{033}[%W %*]%f
 $ '
 
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
+# ディレクトリ名を入力したら自動でディレクトリを変更する
+# setopt auto_cd
 
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+# ctrl-s, ctrl-qを禁止する
+setopt no_flow_control
 
 
-## env varialbes
+# -----------------------------------------------------------------------------------------------------------------------------------
 
-# vim & neovim
-export XDG_CACHE_HOME=$HOME/.cache
+export PATH=$PATH:/usr/local/cuda/bin
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/Library/lib:/usr/local/cuda/lib64
+
 export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CACHE_HOME=$HOME/.cache
 
-# path
-#export PATH="$HOME/.fzf/bin"
+export SCREENDIR=$HOME/.screen
 
-# fzf
-#export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
-#export FZF_DEFAULT_OPTS='--height 30% --border'
-# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0.0
+export DISPLAY=$(ipconfig.exe | grep "IPv4" | head -1 | awk '{print $NF}' | awk 'sub(/\r$/,"")'):0.0
+# export DISPLAY=$(hostname -I | awk '{print $1}'):0.0
 
+export LIBGL_ALWAYS_INDIRECT=0
 
-## alias
+export CARGO_ENV_TOP=$HOME
+source $CARGO_ENV_TOP/.cargo/env
 
-alias armgcc='arm-none-eabi-gcc'
-alias armg++='arm-none-eabi-g++'
+alias chrome='/mnt/c/Program\ Files/Google/Chrome/Application/chrome.exe'
+alias tag='ctags -R --languages=C,C++,Python'
+
+if [ -f $ZDOTDIR/.zshrc.local ]; then
+    source $ZDOTDIR/.zshrc.local
+fi
 
