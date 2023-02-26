@@ -53,6 +53,11 @@ $ '
 # ctrl-s, ctrl-qを禁止する
 setopt no_flow_control
 
+# Bash同様のaliasを定義する
+alias ll='ls -alF --color=auto'
+alias la='ls -A --color=auto'
+alias l='ls -CF --color=auto'
+
 
 # -----------------------------------------------------------------------------------------------------------------------------------
 
