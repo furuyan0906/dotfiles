@@ -2,8 +2,8 @@
 # Language
 
 # 日本語設定
-export LANG="ja_JA.UTF-8"
-export LESSCHARSET=utf-8
+# export LANG="ja_JA.UTF-8"
+# export LESSCHARSET=utf-8
 
 
 # -----------------------------------------------------------------------------------------------------------------------------------
@@ -44,8 +44,10 @@ zstyle ':completion:*:default' menu select=2
 
 # プロンプトの設定
 # ユーザ名@ホスト名:カレントディレクトリ [yy-mm-dd hh:mm:ss]
-export PS1='%F{050}%n@%M:%~%f %F{033}[%W %*]%f
-$ '
+#export PS1='%F{050}%n@%M:%~%f %F{033}[%W %*]%f
+#$ '
+export PS1='%F{033}%n@%M:%~%f
+%F{050}>>%f '
 
 # ディレクトリ名を入力したら自動でディレクトリを変更する
 # setopt auto_cd
