@@ -343,6 +343,11 @@ function switch2bash () {
 	sudo chsh -s $(which bash) $(whoami)
 }
 
+function set_terminal_multiplexer () {
+	ln -sf $DOTFILES_TOP_DIR/tmux/.tmux.conf ~/.tmux.conf
+	ln -sf $DOTFILES_TOP_DIR/screen/.screenrc ~/.screenrc
+}
+
 
 if [ $# -eq 0 ]; then
 	init_setup_script
@@ -361,6 +366,7 @@ if [ $# -eq 0 ]; then
 	setup_docker
 	setup_cuda
 	switch2zsh
+	set_terminal_multiplexer
 elif [ $# -eq 2 ]; then
 	if [ $1 == "install" ]; then
 		if [ $2 == "package" ]; then
@@ -402,6 +408,9 @@ elif [ $# -eq 2 ]; then
 		fi
 		if [ $2 == "cuda" ]; then
 			setup_cuda
+		fi
+		if [ $2 == "terminal_multiplexer" ]; then
+		    set_terminal_multiplexer
 		fi
 	elif [ $1 == "switchto" ]; then
 		if [ $2 == "zsh" ]; then
