@@ -20,9 +20,9 @@ function init_setup_script () {
 }
 
 function install_basic_packages () {
-	echo "*************************************************"
-	echo "*  Install basic packages                       *"
-	echo "*************************************************"
+	echo "* -------------------------------------------------------------"
+	echo "*  Install basic packages"
+	echo "*"
 	
 	sudo apt update
 	
@@ -36,9 +36,9 @@ function install_basic_packages () {
 }
 
 function add_apt_repositories () {
-	echo "*************************************************"
-	echo "*  Add apt repositories                         *"
-	echo "*************************************************"
+	echo "* -------------------------------------------------------------"
+	echo "*  Add apt repositories"
+	echo "*"
 	
 	curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - 
 	sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
@@ -56,9 +56,9 @@ function add_apt_repositories () {
 }
 
 function install_packages () {
-	echo "*************************************************"
-	echo "*  Install packages                             *"
-	echo "*************************************************"
+	echo "* -------------------------------------------------------------"
+	echo "*  Install packages"
+	echo "*"
 
 	sudo apt update
 	sudo apt upgrade -y
@@ -136,9 +136,9 @@ function install_packages () {
 }
 
 function install_ctags () {
-	echo "*************************************************"
-	echo "*  Install universal ctags                      *"
-	echo "*************************************************"
+	echo "* -------------------------------------------------------------"
+	echo "*  Install universal ctags"
+	echo "*"
 	
 	if [ -e ~/installer/ctags ]; then
 		sudo rm -r ~/installer/ctags
@@ -156,9 +156,9 @@ function install_ctags () {
 }
 
 function install_google_test () {
-	echo "*************************************************"
-	echo "*  Install Google Test                          *"
-	echo "*************************************************"
+	echo "* -------------------------------------------------------------"
+	echo "*  Install Google Test"
+	echo "*"
 	
 	if [ -e ~/installer/googletest ]; then
 		sudo rm -r ~/installer/googletest
@@ -175,9 +175,9 @@ function install_google_test () {
 }
 
 function install_fmt () {
-	echo "*************************************************"
-	echo "*  Install fmt                                  *"
-	echo "*************************************************"
+	echo "* -------------------------------------------------------------"
+	echo "*  Install fmt"
+	echo "*"
 
 	if [ -e ~/installer/fmt ]; then
 		sudo rm -r ~/installer/fmt
@@ -197,9 +197,9 @@ function install_fmt () {
 }
 
 function install_opencv () {
-	echo "*************************************************"
-	echo "*  Install OpenCV                               *"
-	echo "*************************************************"
+	echo "* -------------------------------------------------------------"
+	echo "*  Install OpenCV"
+	echo "*"
 
 	if [ -e ~/installer/opencv ]; then
 		sudo rm -r ~/installer/opencv
@@ -228,17 +228,17 @@ function install_opencv () {
 }
 
 function install_rust () {
-	echo "*************************************************"
-	echo "*  Install Rust                                 *"
-	echo "*************************************************"
+	echo "* -------------------------------------------------------------"
+	echo "*  Install Rust"
+	echo "*"
 	
 	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 }
 
 function install_lz4 () {
-	echo "*************************************************"
-	echo "*  Install lz4                                  *"
-	echo "*************************************************"
+	echo "* -------------------------------------------------------------"
+	echo "*  Install lz4"
+	echo "*"
 
 	if [ -e ~/installer/lz4 ]; then
 		sudo rm -r ~/installer/lz4
@@ -253,9 +253,9 @@ function install_lz4 () {
 }
 
 function setup_symbolic_links () {
-	echo "*************************************************"
-	echo "*  Setup Symbolic links                         *"
-	echo "*************************************************"
+	echo "* -------------------------------------------------------------"
+	echo "*  Setup Symbolic links"
+	echo "*"
 	
 	#sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 1
 	#sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 2
@@ -268,9 +268,9 @@ function setup_symbolic_links () {
 }
 
 function setup_neovim () {
-	echo "*************************************************"
-	echo "*  Setup NeoVim                                 *"
-	echo "*************************************************"
+	echo "* -------------------------------------------------------------"
+	echo "*  Setup NeoVim"
+	echo "*"
 	
 	mkdir -p ~/.cache/dein
 	cd ~/.cache/dein
@@ -283,9 +283,9 @@ function setup_neovim () {
 }
 
 function setup_zsh () {
-	echo "*************************************************"
-	echo "*  Setup Zsh                                    *"
-	echo "*************************************************"
+	echo "* -------------------------------------------------------------"
+	echo "*  Setup Zsh"
+	echo "*"
 	
 	ln -sf $DOTFILES_TOP_DIR/zsh/.zprofile ~/.zprofile
 	ln -sf $DOTFILES_TOP_DIR/zsh/.zshenv ~/.zshenv
@@ -293,52 +293,52 @@ function setup_zsh () {
 }
 
 function setup_bash () {
-	echo "*************************************************"
-	echo "*  Setup Bash                                   *"
-	echo "*************************************************"
+	echo "* -------------------------------------------------------------"
+	echo "*  Setup Bash"
+	echo "*"
 
     ln -sf $DOTFILES_TOP_DIR/bashrc/.bash_profile ~/.bash_profile
 	ln -sf $DOTFILES_TOP_DIR/bashrc/.bashrc ~/.bashrc
 }
 
 function setup_ssh () {
-	echo "*************************************************"
-	echo "*  Setup ssh connection                         *"
-	echo "*************************************************"
+	echo "* -------------------------------------------------------------"
+	echo "*  Setup ssh connection"
+	echo "*"
 	
 	sudo systemctl enable ssh
 	sudo systemctl restart ssh
 }
 
 function setup_docker () {
-	echo "*************************************************"
-	echo "*  Setup Docker                                 *"
-	echo "*************************************************"
+	echo "* -------------------------------------------------------------"
+	echo "*  Setup Docker"
+	echo "*"
 	
 	sudo systemctl status docker
 }
 
 function setup_cuda () {
-	echo "*************************************************"
-	echo "*  Setup CUDA                                   *"
-	echo "*************************************************"
+	echo "* -------------------------------------------------------------"
+	echo "*  Setup CUDA"
+	echo "*"
 	
 	echo "export PATH=$PATH:/usr/local/cuda/bin" >> ~/.bashrc
 	echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64" >> ~/.bashrc
 }
 
 function switch2zsh () {
-	echo "*************************************************"
-	echo "*  Switch to zsh                                *"
-	echo "*************************************************"
+	echo "* -------------------------------------------------------------"
+	echo "*  Switch to zsh"
+	echo "*"
     setup_zsh
 	sudo chsh -s $(which zsh) $(whoami)
 }
 
 function switch2bash () {
-	echo "*************************************************"
-	echo "*  Switch to bash                               *"
-	echo "*************************************************"
+	echo "* -------------------------------------------------------------"
+	echo "*  Switch to bash"
+	echo "*"
     setup_bash
 	sudo chsh -s $(which bash) $(whoami)
 }
