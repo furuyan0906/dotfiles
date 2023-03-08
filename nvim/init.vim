@@ -1,53 +1,65 @@
-" No compatible with Vi
-if &compatible
-  set nocompatible    " Be iMproved
-endif
+" init.vim
 
-" plugin disable for install
-filetype plugin indent off
 
-" auto install of dein.vim
+" global settings {
 let s:cache_home = empty($XDG_CACHE_HOME) ? expand('~/.cache') : $XDG_CACHE_HOME
+let g:python3_host_prog = system('echo -n $(which python3)')
+" }
+
+
+" ------------------------------------------------------------------------------------------------------------------------
+
+" dein.vim settings {
 let s:dein_dir = s:cache_home . '/dein'
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+" }
 
-if !isdirectory(s:dein_repo_dir)
-	call system('git clone https://github.com/Shougo/dein.vim ' . shellescape(s:dein_repo_dir))
+" dein installation check {
+if &runtimepath !~# '/dein.vim'
+    if !isdirectory(s:dein_repo_dir)
+    	execute '!git clone https://github.com/Shougo/dein.vim ' s:dein_repo_dir
+    endif
+    execute 'set runtimepath^=' . s:dein_repo_dir
 endif
+" }
 
-" set runtimepath+=s:dein_repo_dir
-set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
-
-" read plugins & cache
-let s:toml_file = fnamemodify(expand('<sfile>'), ':h') .'/vim_script/dein.toml'
-
+" begin settings {
 if dein#load_state(s:dein_dir)
 	call dein#begin(s:dein_dir)
-	call dein#load_toml(s:toml_file)
+
+    " .toml file
+    let s:rc_dir = expand('~/.config/nvim')
+    let s:toml = s:rc_dir . '/vim_script/dein.toml'
+
+    " read toml and cache
+	call dein#load_toml(s:toml, {'lazy': 0})
+
+    " end settings
 	call dein#end()
 	call dein#save_state()
 endif
+" }
 
-" install additional plugins
-if has('vim_starting') && dein#check_install()
+" plugin installation check {
+if dein#check_install()
 	call dein#install()
 endif
+" }
+
+" plugin uninstallation check {
+let s:uninstall_plugins = dein#check_clean()
+if len(s:uninstall_plugins) > 0
+    call map(s:uninstall_plugins, "delete(v:val, 'rf')")
+    call dein#recache_runtimepath()
+endif
+" }
 
 
-" set PATH of Python3
-let g:python3_host_prog = system('echo -n $(which python3)')
+" ------------------------------------------------------------------------------------------------------------------------
 
-
-" plugin enable
-filetype plugin indent on
-syntax on
-
-" read config files
+" read vim settings {
 runtime! ./vim_script/option.vim
 runtime! ./vim_script/keymap.vim
 runtime! ./vim_script/function.vim
-
-if has('vim_starting')
-	call NeovimUserStart()
-endif
+" }
 

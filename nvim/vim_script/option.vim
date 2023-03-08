@@ -1,3 +1,7 @@
+" plugin & indent enable
+filetype plugin indent on
+syntax on
+
 " colorscheme
 colorscheme darktheme
 set background=dark

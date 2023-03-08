@@ -1,50 +1,44 @@
-# call dein#recache_runtimepath() when removing a plugin
+# ------------------------------------------------------------------------------------------------------------------------
+# Plugin Manager
 
-
-# ----- Plugin Manager ----------
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
-# ----- Asynchronous ----------
+
+# ------------------------------------------------------------------------------------------------------------------------
+# Asynchronous
+
 [[plugins]]
 repo = 'Shougo/vimproc.vim'
 
-# ----- Auto completion ----------
-[[plugins]]
-repo = 'Shougo/ddc.vim'
-
-[[plugins]]
-repo = 'Shougo/pum.vim'
-
-# ----- Dynamic filetype judgement ----------
-[[plugins]]
-repo = 'Shougo/context_filetype.vim'
 
 # ------------------------------------------------------------------------------------------------------------------------
-[[plugins]]
-repo = 'Shougo/neoinclude.vim'
-on_ft = ['c', 'cpp']
-depends = ['deoplete.nvim']
+# Lua
 
-# ----- Lua libraries for plugins ----------------------------------------------------------------------------------------
 [[plugins]]
 repo = 'nvim-lua/popup.nvim'
+
+
+# ------------------------------------------------------------------------------------------------------------------------
+# Auto completion
+
+#[[plugins]]
+#repo = 'neoclide/coc.nvim'
+
+
+# ------------------------------------------------------------------------------------------------------------------------
+# Fuzzy finder
+
+[[plugins]]
+repo = 'nvim-telescope/telescope.nvim'
 
 [[plugins]]
 repo = 'nvim-lua/plenary.nvim'
 
-# ----- Icon -------------------------------------------------------------------------------------------------------------
-[[plugins]]
-repo = 'kyazdani42/nvim-web-devicons'
-
-# ----- Color scheme -----------------------------------------------------------------------------------------------------
-[[plugins]]
-repo = 'kamykn/dark-theme.vim'
-
-[[plugins]]
-repo = 'EdenEast/nightfox.nvim'
 
 # ------------------------------------------------------------------------------------------------------------------------
+# Finder
+
 [[plugins]]
 repo = 'scrooloose/nerdtree'
 hook_add = '''
@@ -52,7 +46,6 @@ hook_add = '''
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 '''
 
-# ------------------------------------------------------------------------------------------------------------------------
 [[plugins]]
 repo = 'jistr/vim-nerdtree-tabs'
 hook_add = '''
@@ -66,14 +59,34 @@ hook_add = '''
 '''
 depends = ['nerdtree']
 
+
 # ------------------------------------------------------------------------------------------------------------------------
-# @note  install Ricty for Powerline before using vim-airline
-#
-# brew tap sanemat/font
-# brew install ricty --with-powerline
-# cp -f /usr/local/opt/ricty/share/fonts/Ricty*.ttf ~/Library/Fonts/
-# fc-cache -vf
-#
+# Dynamic filetype judgement
+
+#[[plugins]]
+#repo = 'Shougo/context_filetype.vim'
+
+
+# ------------------------------------------------------------------------------------------------------------------------
+# Color scheme 
+
+[[plugins]]
+repo = 'kamykn/dark-theme.vim'
+
+[[plugins]]
+repo = 'EdenEast/nightfox.nvim'
+
+
+# ------------------------------------------------------------------------------------------------------------------------
+# Icon
+
+[[plugins]]
+repo = 'kyazdani42/nvim-web-devicons'
+
+
+# ------------------------------------------------------------------------------------------------------------------------
+# Airline
+
 [[plugins]]
 repo = 'vim-airline/vim-airline'
 hook_add = '''
@@ -95,15 +108,22 @@ hook_add = '''
     let g:airline_powerline_fonts = 1
 '''
 
-# ------------------------------------------------------------------------------------------------------------------------
 [[plugins]]
 repo = 'vim-airline/vim-airline-themes'
 
-# ------------------------------------------------------------------------------------------------------------------------
 [[plugins]]
 repo = 'majutsushi/tagbar'
 
+
 # ------------------------------------------------------------------------------------------------------------------------
+# Window resizer
+[[plugins]]
+repo = 'simeji/winresizer'
+
+
+# ------------------------------------------------------------------------------------------------------------------------
+# Termianl
+
 [[plugins]]
 repo = 'kassio/neoterm'
 hook_add = '''
@@ -113,11 +133,10 @@ hook_add = '''
     vnoremap <silent> <C-e> V:TREPLSendSelection<cr>'>j$
 '''
 
-# ------------------------------------------------------------------------------------------------------------------------
-[[plugins]]
-repo = 'simeji/winresizer'
 
 # ------------------------------------------------------------------------------------------------------------------------
-[[plugins]]
-repo = 'vim-scripts/gtags.vim'
+# Preview
+
+#[[plugins]]
+#repo = 'preview/preview.vim'
 
