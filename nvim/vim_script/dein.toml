@@ -13,27 +13,41 @@ repo = 'Shougo/vimproc.vim'
 
 
 # ------------------------------------------------------------------------------------------------------------------------
-# Lua
-
-[[plugins]]
-repo = 'nvim-lua/popup.nvim'
-
-
-# ------------------------------------------------------------------------------------------------------------------------
 # Auto completion
 
-#[[plugins]]
-#repo = 'neoclide/coc.nvim'
+[[plugins]]
+repo = 'neovim/nvim-lspconfig'
+
+[[plugins]]
+repo = 'williamboman/mason-lspconfig.nvim'
+
+[[plugins]]
+repo = 'williamboman/mason.nvim'
+depends = ['mason-lspconfig']
+
+[[plugins]]
+repo = 'hrsh7th/cmp-nvim-lsp'
+
+[[plugins]]
+repo = 'hrsh7th/vim-vsnip'
+
+[[plugins]]
+repo = 'hrsh7th/nvim-cmp'
+depends = ['cmp-nvim-lsp', 'vim-vsnip']
 
 
 # ------------------------------------------------------------------------------------------------------------------------
 # Fuzzy finder
 
 [[plugins]]
-repo = 'nvim-telescope/telescope.nvim'
+repo = 'nvim-lua/plenary.nvim'
 
 [[plugins]]
-repo = 'nvim-lua/plenary.nvim'
+repo = 'nvim-treesitter/nvim-treesitter'
+
+[[plugins]]
+repo = 'nvim-telescope/telescope.nvim'
+depends = ['plenary', 'nvim-treesitter']
 
 
 # ------------------------------------------------------------------------------------------------------------------------
