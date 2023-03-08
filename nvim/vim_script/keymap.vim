@@ -38,6 +38,6 @@ nnoremap <C-h> :-tabmove<CR><ESC>
 " grep時のハイライトを消す
 nnoremap <Esc><Esc> :nohlsearch<CR><ESC>
 
-" FizzyFinder(Telescope)を起動する
+" FizzyFinder(Telescope)を起動する (Ctrl-Cで終了する)
 nmap <C-f> :Telescope<CR>
 
