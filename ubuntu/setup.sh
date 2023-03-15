@@ -8,6 +8,7 @@ GOOGLE_TEST_INSTALL_VERSION="v1.11.0"
 OPENCV_INSTALL_VERSION="4.6.0"
 FMT_INSTALL_VERSION="9.1.0"
 LZ4_INSTALL_VERSION="v1.9.4"
+LUAROCKS_INSTALL_VERSION="3.9.2"
 
 
 function init_setup_script () {
@@ -51,6 +52,7 @@ function add_apt_repositories () {
 	sudo mv cuda-wsl-ubuntu.pin /etc/apt/preferences.d/cuda-repository-pin-600
 	sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/3bf863cc.pub
 	sudo add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/ /"
+	sudo add-apt-repository ppa:longsleep/golang-backports
 
 	sudo apt update
 }
@@ -70,6 +72,7 @@ function install_packages () {
 		zip \
 		unzip \
 		build-essential \
+		nodejs \
 		zsh \
 		neovim \
 		gcc \
@@ -109,6 +112,8 @@ function install_packages () {
 		xdvik-ja \
 		evince \
 		docker-ce \
+		golang-go \
+		liblua5.3-dev \
 		lua5.3 \
 		libx11-dev \
 		xorg-dev \
@@ -132,7 +137,9 @@ function install_packages () {
 		libswscale-dev \
 		libavresample-dev \
 		powerline \
-		fonts-powerline
+		fonts-powerline \
+		ripgrep \
+		fd-find
 }
 
 function install_ctags () {
@@ -252,6 +259,41 @@ function install_lz4 () {
 	sudo make install DESTDIR=~ PREFIX=/Library
 }
 
+function install_luarocks () {
+	echo "* -------------------------------------------------------------"
+	echo "*  Install luarocks"
+	echo "*"
+
+	if [ -e ~/installer/luarocks-${LUAROCKS_INSTALL_VERSION}.tar.gz ]; then
+		sudo rm -r ~/installer/luarocks-${LUAROCKS_INSTALL_VERSION}
+		sudo rm -rvf luarocks-${LUAROCKS_INSTALL_VERSION}.tar.gz
+	fi
+
+	cd ~/installer
+
+	wget https://luarocks.org/releases/luarocks-${LUAROCKS_INSTALL_VERSION}.tar.gz
+	tar -xzvpf luarocks-${LUAROCKS_INSTALL_VERSION}.tar.gz
+	cd luarocks-${LUAROCKS_INSTALL_VERSION}
+	./configure
+	sudo make install
+	sudo luarocks install luasocket
+}
+
+function install_powershell () {
+	echo "* -------------------------------------------------------------"
+	echo "*  Install powershell"
+	echo "*"
+
+	cd ~/installer
+
+	wget -q "https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb"
+	sudo dpkg -i packages-microsoft-prod.deb
+	sudo apt update
+	sudo apt install -y powershell
+
+	rm -vf packages-microsoft-prod.deb
+}
+
 function setup_symbolic_links () {
 	echo "* -------------------------------------------------------------"
 	echo "*  Setup Symbolic links"
@@ -280,6 +322,7 @@ function setup_neovim () {
 	ln -sf $DOTFILES_TOP_DIR/nvim ~/.config/nvim
 	pip3 install --upgrade pynvim
 	pip3 install --upgrade msgpack
+	cargo install tree-sitter-cli
 }
 
 function setup_zsh () {
@@ -389,6 +432,12 @@ elif [ $# -eq 2 ]; then
 		fi
 		if [ $2 == "rust" ]; then
 			install_rust
+		fi
+		if [ $2 == "luarocks" ]; then
+			install_luarocks
+		fi
+		if [ $2 == "powershell" ]; then
+			install_powershell
 		fi
 	elif [ $1 == "setup" ]; then
 		if [ $2 == "neovim" ]; then
