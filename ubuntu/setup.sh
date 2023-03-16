@@ -404,6 +404,8 @@ if [ $# -eq 0 ]; then
 	install_rust
 	setup_symbolic_links
 	setup_neovim
+	install_luarocks
+	install_powershell
 	setup_zsh
 	setup_ssh
 	setup_docker
