@@ -1,0 +1,9 @@
+[user]
+	email = yanfuru96ongaku@gmail.com
+	name = furuyan0906
+[core]
+	editor = vim
+[safe]
+	directory = *
+#[url "git@github.com:"]
+#    insteadOf = https://github.com/
