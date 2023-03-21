@@ -79,7 +79,7 @@ source $CARGO_ENV_TOP/.cargo/env
 export SCREENDIR=$HOME/.screen
 
 # needed only Widnows Subsystem for Linux
-if [ "$(uname -r)" == *microsoft* ]; then
+if [[ "$(uname -r)" == *WSL* ]]; then
     # export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0.0
     export DISPLAY=$(ipconfig.exe | grep "IPv4" | head -1 | awk '{print $NF}' | awk 'sub(/\r$/,"")'):0.0
     # export DISPLAY=$(hostname -I | awk '{print $1}'):0.0
