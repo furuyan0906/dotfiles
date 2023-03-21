@@ -68,26 +68,26 @@ alias l='ls -CF --color=auto'
 
 # -----------------------------------------------------------------------------------------------------------------------------------
 
-export PATH=$PATH:/usr/local/cuda/bin
-
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/Library/lib:/usr/local/cuda/lib64
-
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
-
-export SCREENDIR=$HOME/.screen
-
-# export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0.0
-export DISPLAY=$(ipconfig.exe | grep "IPv4" | head -1 | awk '{print $NF}' | awk 'sub(/\r$/,"")'):0.0
-# export DISPLAY=$(hostname -I | awk '{print $1}'):0.0
 
 export LIBGL_ALWAYS_INDIRECT=0
 
 export CARGO_ENV_TOP=$HOME
 source $CARGO_ENV_TOP/.cargo/env
 
-alias chrome='/mnt/c/Program\ Files/Google/Chrome/Application/chrome.exe'
-alias tag='ctags -R --languages=C,C++,Python'
+export SCREENDIR=$HOME/.screen
+
+# needed only Widnows Subsystem for Linux
+if [ "$(uname -r)" == *microsoft* ]; then
+    # export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0.0
+    export DISPLAY=$(ipconfig.exe | grep "IPv4" | head -1 | awk '{print $NF}' | awk 'sub(/\r$/,"")'):0.0
+    # export DISPLAY=$(hostname -I | awk '{print $1}'):0.0
+
+    alias chrome='/mnt/c/Program\ Files/Google/Chrome/Application/chrome.exe'
+    alias tag='ctags -R --languages=C,C++,Python'
+fi
+
 
 if [ -f $ZDOTDIR/.zshrc.local ]; then
     source $ZDOTDIR/.zshrc.local

@@ -10,14 +10,18 @@ FMT_INSTALL_VERSION="9.1.0"
 LZ4_INSTALL_VERSION="v1.9.4"
 LUAROCKS_INSTALL_VERSION="3.9.2"
 
+LOCAL_DITFILE="~/.zshrc.local"
+
 
 function init_setup_script () {
 	# For library installation
 	mkdir -p ~/Library
 	mkdir -p ~/installer
 
-	echo "export LD_LIBRARY_PATH=~/Library/lib:$LD_LIBRARY_PATH" >> ~/.bashrc
+	echo "export LD_LIBRARY_PATH=~/Library/lib:$LD_LIBRARY_PATH" >> $LOCAL_DITFILE
 	export LD_LIBRARY_PATH=~/Library/lib:$LD_LIBRARY_PATH
+
+	ln -sf $DOTFILES_TOP_DIR/git/.gitconfig ~/.gitconfig
 }
 
 function install_basic_packages () {
@@ -33,7 +37,8 @@ function install_basic_packages () {
 		apt-transport-https \
 		ca-certificates \
 		curl \
-		cmake
+		cmake \
+		
 }
 
 function add_apt_repositories () {
@@ -72,12 +77,11 @@ function install_packages () {
 		zip \
 		unzip \
 		build-essential \
-		nodejs \
 		zsh \
 		neovim \
 		gcc \
+		nodejs \
 		tree \
-		cmake \
 		flex \
 		bison \
 		libssl-dev \
@@ -139,7 +143,8 @@ function install_packages () {
 		powerline \
 		fonts-powerline \
 		ripgrep \
-		fd-find
+		fd-find \
+		
 }
 
 function install_ctags () {
@@ -366,8 +371,8 @@ function setup_cuda () {
 	echo "*  Setup CUDA"
 	echo "*"
 	
-	echo "export PATH=$PATH:/usr/local/cuda/bin" >> ~/.bashrc
-	echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64" >> ~/.bashrc
+	echo "export PATH=$PATH:/usr/local/cuda/bin" >> $LOCAL_DITFILE
+	echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64" >> $LOCAL_DITFILE
 }
 
 function switch2zsh () {
@@ -397,15 +402,14 @@ if [ $# -eq 0 ]; then
 	install_basic_packages
 	add_apt_repositories
 	install_packages
+	setup_symbolic_links
 	install_ctags
 	install_google_test
 	install_fmt
-	install_opencv
 	install_rust
-	setup_symbolic_links
-	setup_neovim
 	install_luarocks
 	install_powershell
+	setup_neovim
 	setup_zsh
 	setup_ssh
 	setup_docker
