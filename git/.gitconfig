@@ -3,6 +3,7 @@
 	name = furuyan0906
 [core]
 	editor = vim
+	filemode = true
 [safe]
 	directory = *
 #[url "git@github.com:"]
