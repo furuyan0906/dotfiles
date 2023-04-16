@@ -1,3 +1,5 @@
+#!/usr/bin/zsh
+
 # -----------------------------------------------------------------------------------------------------------------------------------
 # Language
 
@@ -77,17 +79,6 @@ export CARGO_ENV_TOP=$HOME
 source $CARGO_ENV_TOP/.cargo/env
 
 export SCREENDIR=$HOME/.screen
-
-# needed only Widnows Subsystem for Linux
-if [[ "$(uname -r)" == *WSL* ]]; then
-    # export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0.0
-    export DISPLAY=$(ipconfig.exe | grep "IPv4" | head -1 | awk '{print $NF}' | awk 'sub(/\r$/,"")'):0.0
-    # export DISPLAY=$(hostname -I | awk '{print $1}'):0.0
-
-    alias chrome='/mnt/c/Program\ Files/Google/Chrome/Application/chrome.exe'
-    alias tag='ctags -R --languages=C,C++,Python'
-fi
-
 
 if [ -f $ZDOTDIR/.zshrc.local ]; then
     source $ZDOTDIR/.zshrc.local
