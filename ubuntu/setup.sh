@@ -370,6 +370,8 @@ function setup_cuda () {
 	echo "* -------------------------------------------------------------"
 	echo "*  Setup CUDA"
 	echo "*"
+
+    sudo apt install cuda
 	
 	echo "export PATH=$PATH:/usr/local/cuda/bin" >> $LOCAL_DITFILE
 	echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64" >> $LOCAL_DITFILE
