@@ -4,6 +4,7 @@
 User=`whoami`
 DOTFILES_TOP_DIR=$(cd $(dirname $0)/..; pwd)
 
+NEOVIM_INSTALL_VERSION="v0.9.0"
 GOOGLE_TEST_INSTALL_VERSION="v1.11.0"
 OPENCV_INSTALL_VERSION="4.7.0"
 FMT_INSTALL_VERSION="9.1.0"
@@ -49,9 +50,6 @@ function add_apt_repositories () {
 	curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - 
 	sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
 
-	# for Neovim
-	sudo add-apt-repository ppa:neovim-ppa/stable	
-	
 	# for Cuda
 	wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-wsl-ubuntu.pin
 	sudo mv cuda-wsl-ubuntu.pin /etc/apt/preferences.d/cuda-repository-pin-600
@@ -78,7 +76,6 @@ function install_packages () {
 		unzip \
 		build-essential \
 		zsh \
-		neovim \
 		gcc \
 		nodejs \
 		tree \
@@ -318,6 +315,17 @@ function setup_neovim () {
 	echo "* -------------------------------------------------------------"
 	echo "*  Setup NeoVim"
 	echo "*"
+
+	if [ -e ~/installer/neovim ]; then
+		sudo rm -r ~/installer/neovim
+	fi
+
+	cd ~/installer
+	git clone https://github.com/neovim/neovim.git
+	cd ~/installer/neovim
+	git checkout -b $NEOVIM_INSTALL_VERSION refs/tags/$NEOVIM_INSTALL_VERSION
+	make CMAKE_BUILD_TYPE=RelWithDebInfo -j$(nproc)
+	sudo make install
 	
 	mkdir -p ~/.cache/dein
 	cd ~/.cache/dein
