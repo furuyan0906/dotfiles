@@ -223,9 +223,9 @@ function install_opencv () {
 	git clone https://github.com/opencv/opencv_contrib.git
 	cd opencv
 	git checkout -b $OPENCV_INSTALL_VERSION refs/tags/$OPENCV_INSTALL_VERSION
-	cd opencv_contrib
+	cd ../opencv_contrib
 	git checkout -b $OPENCV_INSTALL_VERSION refs/tags/$OPENCV_INSTALL_VERSION
-	cd opencv
+	cd ../opencv
 	mkdir -p build && cd build
 	cmake -D CMAKE_BUILD_TYPE=Release \
 		-D CMAKE_INSTALL_PREFIX=~/Library \
