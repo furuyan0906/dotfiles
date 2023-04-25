@@ -14,7 +14,7 @@ LUAROCKS_INSTALL_VERSION="3.9.2"
 LOCAL_DITFILE="~/.zshrc.local"
 
 
-function init_setup_script () {
+init_setup_script () {
 	# For library installation
 	mkdir -p ~/Library
 	mkdir -p ~/installer
@@ -25,7 +25,7 @@ function init_setup_script () {
 	ln -sf $DOTFILES_TOP_DIR/git/.gitconfig ~/.gitconfig
 }
 
-function install_basic_packages () {
+install_basic_packages () {
 	echo "* -------------------------------------------------------------"
 	echo "*  Install basic packages"
 	echo "*"
@@ -42,7 +42,7 @@ function install_basic_packages () {
 		
 }
 
-function add_apt_repositories () {
+add_apt_repositories () {
 	echo "* -------------------------------------------------------------"
 	echo "*  Add apt repositories"
 	echo "*"
@@ -60,7 +60,7 @@ function add_apt_repositories () {
 	sudo apt update
 }
 
-function install_packages () {
+install_packages () {
 	echo "* -------------------------------------------------------------"
 	echo "*  Install packages"
 	echo "*"
@@ -144,12 +144,13 @@ function install_packages () {
 		
 }
 
-function install_ctags () {
+install_ctags () {
 	echo "* -------------------------------------------------------------"
 	echo "*  Install universal ctags"
 	echo "*"
 	
-	if [ -e ~/installer/ctags ]; then
+	if [ -e ~/installer/ctags ];
+	then
 		sudo rm -r ~/installer/ctags
 	fi
 	
@@ -164,12 +165,13 @@ function install_ctags () {
 	ln -sf $DOTFILES_TOP_DIR/ctags ~/.ctags.d
 }
 
-function install_google_test () {
+install_google_test () {
 	echo "* -------------------------------------------------------------"
 	echo "*  Install Google Test"
 	echo "*"
 	
-	if [ -e ~/installer/googletest ]; then
+	if [ -e ~/installer/googletest ];
+	then
 		sudo rm -r ~/installer/googletest
 	fi
 	
@@ -183,12 +185,13 @@ function install_google_test () {
 	sudo make install
 }
 
-function install_fmt () {
+install_fmt () {
 	echo "* -------------------------------------------------------------"
 	echo "*  Install fmt"
 	echo "*"
 
-	if [ -e ~/installer/fmt ]; then
+	if [ -e ~/installer/fmt ];
+	then
 		sudo rm -r ~/installer/fmt
 	fi
 
@@ -205,16 +208,18 @@ function install_fmt () {
 	sudo make install
 }
 
-function install_opencv () {
+install_opencv () {
 	echo "* -------------------------------------------------------------"
 	echo "*  Install OpenCV"
 	echo "*"
 
-	if [ -e ~/installer/opencv ]; then
+	if [ -e ~/installer/opencv ];
+	then
 		sudo rm -r ~/installer/opencv
 	fi
 	
-	if [ -e ~/installer/opencv_contrib ]; then
+	if [ -e ~/installer/opencv_contrib ];
+	then
 		sudo rm -r ~/installer/opencv_contrib
 	fi
 	
@@ -236,7 +241,7 @@ function install_opencv () {
 	sudo make install
 }
 
-function install_rust () {
+install_rust () {
 	echo "* -------------------------------------------------------------"
 	echo "*  Install Rust"
 	echo "*"
@@ -244,12 +249,13 @@ function install_rust () {
 	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 }
 
-function install_lz4 () {
+install_lz4 () {
 	echo "* -------------------------------------------------------------"
 	echo "*  Install lz4"
 	echo "*"
 
-	if [ -e ~/installer/lz4 ]; then
+	if [ -e ~/installer/lz4 ];
+	then
 		sudo rm -r ~/installer/lz4
 	fi
 
@@ -261,12 +267,13 @@ function install_lz4 () {
 	sudo make install DESTDIR=~ PREFIX=/Library
 }
 
-function install_luarocks () {
+install_luarocks () {
 	echo "* -------------------------------------------------------------"
 	echo "*  Install luarocks"
 	echo "*"
 
-	if [ -e ~/installer/luarocks-${LUAROCKS_INSTALL_VERSION}.tar.gz ]; then
+	if [ -e ~/installer/luarocks-${LUAROCKS_INSTALL_VERSION}.tar.gz ];
+	then
 		sudo rm -r ~/installer/luarocks-${LUAROCKS_INSTALL_VERSION}
 		sudo rm -rvf luarocks-${LUAROCKS_INSTALL_VERSION}.tar.gz
 	fi
@@ -281,7 +288,7 @@ function install_luarocks () {
 	sudo luarocks install luasocket
 }
 
-function install_powershell () {
+install_powershell () {
 	echo "* -------------------------------------------------------------"
 	echo "*  Install powershell"
 	echo "*"
@@ -296,7 +303,7 @@ function install_powershell () {
 	rm -vf packages-microsoft-prod.deb
 }
 
-function setup_symbolic_links () {
+setup_symbolic_links () {
 	echo "* -------------------------------------------------------------"
 	echo "*  Setup Symbolic links"
 	echo "*"
@@ -311,12 +318,13 @@ function setup_symbolic_links () {
 	#sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 2
 }
 
-function setup_neovim () {
+setup_neovim () {
 	echo "* -------------------------------------------------------------"
 	echo "*  Setup NeoVim"
 	echo "*"
 
-	if [ -e ~/installer/neovim ]; then
+	if [ -e ~/installer/neovim ];
+	then
 		sudo rm -r ~/installer/neovim
 	fi
 
@@ -338,7 +346,7 @@ function setup_neovim () {
 	cargo install tree-sitter-cli
 }
 
-function setup_zsh () {
+setup_zsh () {
 	echo "* -------------------------------------------------------------"
 	echo "*  Setup Zsh"
 	echo "*"
@@ -348,16 +356,16 @@ function setup_zsh () {
 	ln -sf $DOTFILES_TOP_DIR/zsh/.zshrc ~/.zshrc
 }
 
-function setup_bash () {
+setup_bash () {
 	echo "* -------------------------------------------------------------"
 	echo "*  Setup Bash"
 	echo "*"
 
-    ln -sf $DOTFILES_TOP_DIR/bashrc/.bash_profile ~/.bash_profile
+	ln -sf $DOTFILES_TOP_DIR/bashrc/.bash_profile ~/.bash_profile
 	ln -sf $DOTFILES_TOP_DIR/bashrc/.bashrc ~/.bashrc
 }
 
-function setup_ssh () {
+setup_ssh () {
 	echo "* -------------------------------------------------------------"
 	echo "*  Setup ssh connection"
 	echo "*"
@@ -366,7 +374,7 @@ function setup_ssh () {
 	sudo systemctl restart ssh
 }
 
-function setup_docker () {
+setup_docker () {
 	echo "* -------------------------------------------------------------"
 	echo "*  Setup Docker"
 	echo "*"
@@ -374,40 +382,41 @@ function setup_docker () {
 	sudo systemctl status docker
 }
 
-function setup_cuda () {
+setup_cuda () {
 	echo "* -------------------------------------------------------------"
 	echo "*  Setup CUDA"
 	echo "*"
 
-    sudo apt install cuda
+	sudo apt install cuda
 	
 	echo "export PATH=$PATH:/usr/local/cuda/bin" >> $LOCAL_DITFILE
 	echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64" >> $LOCAL_DITFILE
 }
 
-function switch2zsh () {
+switch2zsh () {
 	echo "* -------------------------------------------------------------"
 	echo "*  Switch to zsh"
 	echo "*"
-    setup_zsh
+	setup_zsh
 	sudo chsh -s $(which zsh) $(whoami)
 }
 
-function switch2bash () {
+switch2bash () {
 	echo "* -------------------------------------------------------------"
 	echo "*  Switch to bash"
 	echo "*"
-    setup_bash
+	setup_bash
 	sudo chsh -s $(which bash) $(whoami)
 }
 
-function set_terminal_multiplexer () {
+set_terminal_multiplexer () {
 	ln -sf $DOTFILES_TOP_DIR/tmux/.tmux.conf ~/.tmux.conf
 	ln -sf $DOTFILES_TOP_DIR/screen/.screenrc ~/.screenrc
 }
 
 
-if [ $# -eq 0 ]; then
+if [ $# -eq 0 ];
+then
 	init_setup_script
 	install_basic_packages
 	add_apt_repositories
@@ -426,63 +435,85 @@ if [ $# -eq 0 ]; then
 	setup_cuda
 	switch2zsh
 	set_terminal_multiplexer
-elif [ $# -eq 2 ]; then
-	if [ $1 == "install" ]; then
-		if [ $2 == "package" ]; then
+elif [ $# -eq 2 ];
+then
+	if [ $1 = "install" ];
+	then
+		if [ $2 = "package" ];
+		then
 			install_packages
 		fi
-		if [ $2 == "ctags" ]; then
+		if [ $2 = "ctags" ];
+		then
 			install_ctags
 		fi
-		if [ $2 == "gtest" ]; then
+		if [ $2 = "gtest" ];
+		then
 			install_google_test
 		fi
-		if [ $2 == "fmt" ]; then
-		    install_fmt
+		if [ $2 = "fmt" ];
+		then
+			install_fmt
 		fi
-		if [ $2 == "opencv" ]; then
+		if [ $2 = "opencv" ];
+		then
 			install_opencv
 		fi
-		if [ $2 == "lz4" ]; then
+		if [ $2 = "lz4" ];
+		then
 			install_lz4
 		fi
-		if [ $2 == "rust" ]; then
+		if [ $2 = "rust" ];
+		then
 			install_rust
 		fi
-		if [ $2 == "luarocks" ]; then
+		if [ $2 = "luarocks" ];
+		then
 			install_luarocks
 		fi
-		if [ $2 == "powershell" ]; then
+		if [ $2 = "powershell" ];
+		then
 			install_powershell
 		fi
-	elif [ $1 == "setup" ]; then
-		if [ $2 == "neovim" ]; then
+	elif [ $1 = "setup" ];
+	then
+		if [ $2 = "neovim" ];
+		then
 			setup_neovim
 		fi
-		if [ $2 == "zsh" ]; then
+		if [ $2 = "zsh" ];
+		then
 			setup_zsh
 		fi
-		if [ $2 == "bash" ]; then
+		if [ $2 = "bash" ];
+		then
 			setup_bash
 		fi
-		if [ $2 == "ssh" ]; then
+		if [ $2 = "ssh" ];
+		then
 			setup_ssh
 		fi
-		if [ $2 == "docker" ]; then
+		if [ $2 = "docker" ];
+		then
 			setup_docker
 		fi
-		if [ $2 == "cuda" ]; then
+		if [ $2 = "cuda" ];
+		then
 			setup_cuda
 		fi
-		if [ $2 == "terminal_multiplexer" ]; then
-		    set_terminal_multiplexer
+		if [ $2 = "terminal_multiplexer" ];
+		then
+			set_terminal_multiplexer
 		fi
-	elif [ $1 == "switchto" ]; then
-		if [ $2 == "zsh" ]; then
-		    switch2zsh
+	elif [ $1 = "switchto" ];
+	then
+		if [ $2 = "zsh" ];
+		then
+			switch2zsh
 		fi
-		if [ $2 == "bash" ]; then
-		    switch2bash
+		if [ $2 = "bash" ];
+		then
+			switch2bash
 		fi
 	else
 		echo "unsupported usage"
