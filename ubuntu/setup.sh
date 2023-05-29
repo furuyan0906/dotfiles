@@ -303,6 +303,16 @@ install_powershell () {
     rm -vf packages-microsoft-prod.deb
 }
 
+install_deno () {
+    echo "* -------------------------------------------------------------"
+    echo "*  Install Deno"
+    echo "*"
+
+    cd ~/installer
+
+    curl -fsSL https://deno.land/x/install/install.sh | sh
+}
+
 setup_symbolic_links () {
     echo "* -------------------------------------------------------------"
     echo "*  Setup Symbolic links"
@@ -428,6 +438,7 @@ then
     install_rust
     install_luarocks
     install_powershell
+    install_deno
     setup_neovim
     setup_zsh
     setup_ssh
@@ -474,6 +485,10 @@ then
         if [ $2 = "powershell" ];
         then
             install_powershell
+        fi
+        if [ $2 = "deno" ];
+        then
+            install_deno
         fi
     elif [ $1 = "setup" ];
     then
