@@ -151,6 +151,11 @@ hook_add = '''
 # ------------------------------------------------------------------------------------------------------------------------
 # Preview
 
-#[[plugins]]
-#repo = 'preview/preview.vim'
+[[plugins]]
+repo = 'vim-denops/denops.vim'
+
+[[plugins]]
+repo = 'kat0h/bufpreview.vim'
+build = 'deno task prepare'
+depends = ['denops']
 
