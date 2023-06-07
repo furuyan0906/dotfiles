@@ -24,8 +24,8 @@ nnoremap <silent><Leader><C-]> <C-w><C-]><C-w>T
 " タブ操作
 
 " 前後のタブに移動
-nmap <C-p> <Plug>AirlineSelectPrevTab
-nmap <C-n> <Plug>AirlineSelectNextTab
+nmap <C-p> gT
+nmap <C-n> gt
 
 " 前後のタブと順番を変える
 nnoremap <C-l> :+tabmove<CR><ESC>
