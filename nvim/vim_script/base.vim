@@ -3,7 +3,6 @@ filetype plugin indent on
 syntax on
 
 " colorscheme
-colorscheme darktheme
 set background=dark
 set t_Co=256
 
