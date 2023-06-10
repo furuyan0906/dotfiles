@@ -1,5 +1,8 @@
 " init.vim
 
+runtime! ./vim_script/base.vim
+runtime! ./vim_script/keymaps.vim
+
 
 " global settings {
 let s:cache_home = empty($XDG_CACHE_HOME) ? expand('~/.cache') : $XDG_CACHE_HOME
@@ -58,8 +61,6 @@ endif
 " ------------------------------------------------------------------------------------------------------------------------
 
 " read vim settings {
-runtime! ./vim_script/option.vim
-runtime! ./vim_script/keymap.vim
-runtime! ./vim_script/function.vim
+runtime! ./vim_script/functions.vim
 " }
 

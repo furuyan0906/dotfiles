@@ -93,6 +93,9 @@ depends = ['nerdtree']
 
 [[plugins]]
 repo = 'kamykn/dark-theme.vim'
+hook_add = '''
+colorscheme darktheme
+'''
 
 [[plugins]]
 repo = 'EdenEast/nightfox.nvim'
