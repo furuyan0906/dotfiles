@@ -1,7 +1,9 @@
 " init.vim
 
+" read base settings {
 runtime! ./vim_script/base.vim
 runtime! ./vim_script/keymaps.vim
+" }
 
 
 " global settings {
@@ -60,7 +62,7 @@ endif
 
 " ------------------------------------------------------------------------------------------------------------------------
 
-" read vim settings {
+" read function settings {
 runtime! ./vim_script/functions.vim
 " }
 
