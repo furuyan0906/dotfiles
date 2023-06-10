@@ -48,6 +48,13 @@ repo = 'nvim-treesitter/nvim-treesitter'
 [[plugins]]
 repo = 'nvim-telescope/telescope.nvim'
 depends = ['plenary', 'nvim-treesitter']
+hook_add = '''
+" FizzyFinder(Telescope)を起動する (Ctrl-Cで終了する)
+nnoremap <C-f> :Telescope find_files<CR>
+
+" FizzyFinder(Telescope)でlive_grepを起動する (Ctrl-Cで終了する)
+nnoremap <C-g> :Telescope live_grep<CR>
+'''
 
 
 # ------------------------------------------------------------------------------------------------------------------------
@@ -95,7 +102,7 @@ repo = 'EdenEast/nightfox.nvim'
 # Icon
 
 [[plugins]]
-repo = 'kyazdani42/nvim-web-devicons'
+repo = 'nvim-tree/nvim-web-devicons'
 
 
 # ------------------------------------------------------------------------------------------------------------------------
