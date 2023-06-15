@@ -16,7 +16,7 @@ return {
             require('config.nvim-web-devicons')
         end
     },
-    --- Auto completion ---
+    --- LS ---
     {
         'neovim/nvim-lspconfig',
         event =
@@ -26,6 +26,9 @@ return {
     },
     {
         'williamboman/mason-lspconfig.nvim',
+        config = function()
+            require('config/mason-lspconfig')
+        end,
     },
     {
         'williamboman/mason.nvim',
@@ -37,6 +40,7 @@ return {
             require('config/mason')
         end,
     },
+    --- Auto completion ---
     {
         'hrsh7th/nvim-cmp',
         event = 'InsertEnter, CmdlineEnter',
@@ -54,12 +58,13 @@ return {
         event = 'InsertEnter',
     },
     {
-        'hrsh7th/vim-vsnip',
-        event = 'InsertEnter',
-    },
-    {
         'hrsh7th/cmp-cmdline',
         event = 'ModeChanged',
+    },
+    --- Code Snippet ---
+    {
+        'hrsh7th/vim-vsnip',
+        event = 'InsertEnter',
     },
     --- Fuzzy Finder ---
     {
@@ -70,14 +75,6 @@ return {
         config = function()
             require('config/nvim-treesitter')
         end,
-        after =
-        {
-            'nvim-web-devicons'
-        },
-        requires =
-        {
-            'nvim-tree/nvim-web-devicons'
-        },
     },
     {
         'nvim-telescope/telescope.nvim',
@@ -107,11 +104,12 @@ return {
         'nvim-tree/nvim-tree.lua',
         dependencies =
         {
-            'nvim-tree/nvim-web-devicons',
+            -- Nerd Fontsのインストールが必要
+            'nvim-tree/nvim-web-devicons'
         },
         config = function()
             require('config/nvim-tree')
-        end
+        end,
     },
     -- {
     --     'scrooloose/nerdtree',
