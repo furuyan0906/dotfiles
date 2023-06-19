@@ -26,16 +26,18 @@ return {
     },
     {
         'williamboman/mason-lspconfig.nvim',
+        dependencies =
+        {
+            'williamboman/mason-lspconfig.nvim',
+            'neovim/nvim-lspconfig'
+        },
         config = function()
             require('config/mason-lspconfig')
         end,
     },
     {
         'williamboman/mason.nvim',
-        dependencies =
-        {
-            'williamboman/mason-lspconfig.nvim'
-        },
+        build = ':MasonUpdate',
         config = function()
             require('config/mason')
         end,

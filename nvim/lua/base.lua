@@ -42,6 +42,7 @@ vim.opt.incsearch   = true
 vim.opt.hlsearch    = true
 vim.opt.scrolloff   = 4
 vim.opt.backspace   = 'indent', 'eol', 'start', '2'
+vim.opt.backspace   = '2'
 vim.opt.spell       = true
 vim.opt.spelllang   = 'en', 'cjk'
 vim.opt.showmatch   = true
