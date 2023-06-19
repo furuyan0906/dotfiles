@@ -31,8 +31,8 @@ vim.keymap.set('n', '<C-p>', 'gT')
 vim.keymap.set('n', '<C-n>', 'gt')
 
 -- 前後のタブと順番を変える
-vim.keymap.set('n', '<C-l>', ':+tabmove<CR><ESC>')
-vim.keymap.set('n', '<C-h>', ':-tabmove<CR><ESC>')
+vim.keymap.set('n', '<C-l>', '<cmd>+tabmove<CR><ESC>')
+vim.keymap.set('n', '<C-h>', '<cmd>-tabmove<CR><ESC>')
 
 
 
@@ -40,7 +40,7 @@ vim.keymap.set('n', '<C-h>', ':-tabmove<CR><ESC>')
 -- 検索
 
 -- grep時のハイライトを消す
-vim.keymap.set('n', '<Esc><Esc>', ':nohlsearch<CR><ESC>')
+vim.keymap.set('n', '<Esc><Esc>', '<cmd>nohlsearch<CR><ESC>')
 
 -------------------------------------------------------------------------------------------
 -- ターミナル
@@ -50,5 +50,5 @@ vim.keymap.set('t', '<ESC>', '<C-\\><C-n>')
 -------------------------------------------------------------------------------------------
 -- ビルドイン LSP
 
--- vim.keymap.set()
+-- vim.keymap.set('n', )
 

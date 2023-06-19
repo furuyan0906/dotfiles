@@ -16,7 +16,10 @@ return {
             require('config.nvim-web-devicons')
         end
     },
-    --- LS ---
+    {
+        'onsails/lspkind.nvim'
+    },
+    --- LSP ---
     {
         'neovim/nvim-lspconfig',
         event =
@@ -66,6 +69,10 @@ return {
     --- Code Snippet ---
     {
         'hrsh7th/vim-vsnip',
+        event = 'InsertEnter',
+    },
+    {
+        'hrsh7th/cmp-vsnip',
         event = 'InsertEnter',
     },
     --- Fuzzy Finder ---
