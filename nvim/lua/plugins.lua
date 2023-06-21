@@ -160,7 +160,9 @@ return {
         build = {
             'deno task prepare'
         },
-        cmd = 'PreviewMarkdown',
+        ft = {
+            'markdown',
+        },
     },
 }
 
