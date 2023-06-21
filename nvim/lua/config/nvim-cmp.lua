@@ -7,7 +7,7 @@ local lspkind = require('lspkind')
 cmp.setup({
     snippet = {
         expand = function(args)
-            vim.fn['vsnip#anonymous'](argg.body)
+            vim.fn['vsnip#anonymous'](args.body)
         end,
     },
     window = {
@@ -19,12 +19,12 @@ cmp.setup({
         }),
     },
     mapping = cmp.mapping.preset.insert({
-        ['<C-p>'] = cmp.mapping.select_prev_item(),
-        ['<C-n>'] = cmp.mapping.select_next_item(),
-        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<Tab>'] = cmp.mapping.select_prev_item(),
+        ['<S-Tab>'] = cmp.mapping.select_next_item(),
+        ['<S-{>'] = cmp.mapping.scroll_docs(-4),
+        ['<S-}>'] = cmp.mapping.scroll_docs(4),
         ['<C-Space>'] = cmp.mapping.complete(),
-        ['<C-e>'] = cmp.mapping.abort(),
+        ['<leader>q'] = cmp.mapping.abort(),
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
     }),
     formatting = {
@@ -36,11 +36,12 @@ cmp.setup({
     },
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
-        { name = 'vsnip' },
         { name = 'nvim_lsp_signature_help' },
-        { name = 'calc' },
-        { name = 'buffer', keyword_length = 2 },
         { name = 'path' },
+        { name = 'buffer', keyword_length = 2 },
+        { name = 'vsnip' },
+        { name = 'calc' },
+        { name = 'cmdline' },
     }),
     -- experimental = {
     --     ghost_text = false,
@@ -62,5 +63,5 @@ cmp.setup.cmdline(':', {
     })
 })
 
-vim.cmd('let g:vsnip_filetypes = {}')
+vim.api.nvim_set_var('vsnip_filetypes', {})
 
