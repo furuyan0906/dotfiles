@@ -5,15 +5,17 @@ return {
     --- Color theme ---
     {
         'kamykn/dark-theme.vim',
+        lazy = true,
     },
     {
         'EdenEast/nightfox.nvim',
+        lazy = true,
     },
     --- Icon ---
     {
         'nvim-tree/nvim-web-devicons',
         config = function()
-            require('config.nvim-web-devicons')
+            require('config/nvim-web-devicons')
         end
     },
     {
@@ -22,15 +24,13 @@ return {
     --- LSP ---
     {
         'neovim/nvim-lspconfig',
-        event =
-        {
-            'BufRead'
+        event = {
+            'BufRead',
         },
     },
     {
         'williamboman/mason-lspconfig.nvim',
-        dependencies =
-        {
+        dependencies = {
             'williamboman/mason-lspconfig.nvim',
             'neovim/nvim-lspconfig'
         },
@@ -40,7 +40,7 @@ return {
     },
     {
         'williamboman/mason.nvim',
-        build = ':MasonUpdate',
+        build = '<cmd>MasonUpdate',
         config = function()
             require('config/mason')
         end,
@@ -48,32 +48,47 @@ return {
     --- Auto completion ---
     {
         'hrsh7th/nvim-cmp',
-        event = 'InsertEnter, CmdlineEnter',
+        event = {
+            'InsertEnter',
+            'CmdlineEnter',
+        },
     },
     {
         'hrsh7th/cmp-nvim-lsp',
-        event = 'InsertEnter',
+        event = {
+            'InsertEnter',
+        },
     },
     {
         'hrsh7th/cmp-buffer',
-        event = 'InsertEnter',
+        event = {
+            'InsertEnter',
+        },
     },
     {
         'hrsh7th/cmp-path',
-        event = 'InsertEnter',
+        event = {
+            'InsertEnter',
+        },
     },
     {
         'hrsh7th/cmp-cmdline',
-        event = 'ModeChanged',
+        event = {
+            'ModeChanged',
+        },
     },
     --- Code Snippet ---
     {
         'hrsh7th/vim-vsnip',
-        event = 'InsertEnter',
+        event = {
+            'InsertEnter',
+        },
     },
     {
         'hrsh7th/cmp-vsnip',
-        event = 'InsertEnter',
+        event = {
+            'InsertEnter',
+        },
     },
     --- Fuzzy Finder ---
     {
@@ -88,10 +103,13 @@ return {
     {
         'nvim-telescope/telescope.nvim',
         tag = '0.1.1',
-        dependencies =
-        {
+        dependencies = {
             'nvim-lua/plenary.nvim',
             'nvim-treesitter/nvim-treesitter'
+        },
+        event = {
+            'BufRead',
+            'TabNew',
         },
         config = function()
             require('config/telescope')
@@ -99,77 +117,50 @@ return {
     },
     {
         'nvim-telescope/telescope-file-browser.nvim',
-        dependencies =
-        {
+        dependencies = {
             'nvim-telescope/telescope.nvim',
             'nvim-lua/plenary.nvim',
         },
-        config = function()
-            require('config/telescope-file-browser')
-        end,
+        event = {
+            'BufRead',
+        },
     },
     --- Finder ---
     {
         'nvim-tree/nvim-tree.lua',
-        dependencies =
-        {
-            -- Nerd Fontsのインストールが必要
+        dependencies = {
             'nvim-tree/nvim-web-devicons'
         },
         config = function()
             require('config/nvim-tree')
         end,
     },
-    -- {
-    --     'scrooloose/nerdtree',
-    --     config = function()
-    --         require('config/nerdtree')
-    --     end
-    -- },
-    -- {
-    --     'jistr/vim-nerdtree-tabs',
-    --     config = function()
-    --         require('config/vim-nerdtree-tabs')
-    --     end
-    -- },
     --- Airline ---
     {
-        'vim-airline/vim-airline',
+        'nvim-lualine/lualine.nvim',
+        dependencies = {
+            'nvim-tree/nvim-web-devicons',
+        },
         config = function()
-            require('config/vim-airline')
-        end
+            require('config/lualine')
+        end,
     },
-    {
-        'vim-airline/vim-airline-themes',
-    },
-    {
-        'majutsushi/tagbar',
-    },
-    --- Window resizer ---
-    {
-        'simeji/winresizer',
-    },
-    --- Terminal ---
-    -- {
-    --     'kassio/neoterm',
-    --     config = function()
-    --         require('config/neoterm')
-    --     end
-    -- },
     --- Preview ---
     {
         'vim-denops/denops.vim',
+        event = {
+            'BufRead',
+        },
     },
     {
         'kat0h/bufpreview.vim',
-        dependencies =
-        {
+        dependencies = {
             'vim-denops/denops.vim'
         },
-        build =
-        {
+        build = {
             'deno task prepare'
-        }
+        },
+        cmd = 'PreviewMarkdown',
     },
 }
 

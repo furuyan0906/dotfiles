@@ -18,3 +18,6 @@ vim.opt.rtp:prepend(lazypath)
 plugins = require('plugins')
 require('lazy').setup(plugins)
 
+vim.keymap.set('n', '<leader>l', '<cmd>Lazy<CR>')
+vim.keymap.set('n', '<leader>p', '<cmd>Lazy profile<CR>')
+

@@ -1,9 +1,18 @@
 ---------------------------------------------------------------------------------------------------------------------------
 -- nvim-treesitter/nvim-treesitter の設定
 
-auto_install = true
-highlight = 
-{
-    enable = true,
-}
+require('nvim-treesitter.configs').setup({
+    -- Automatically install missing parsers whne entering buffer --
+    auto_install = true,
+
+    -- List of parsers to ignore installing --
+    ignore_install = { },
+
+    highlight = {
+        enable = true,
+
+        -- List of language that will be disabled
+        disable = { },
+    },
+})
 

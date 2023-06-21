@@ -1,8 +1,7 @@
 ----------------------------------------------------------------------------------------------------------------------------
--- nvim-tree/nvim-web-devicons の設定
+-- nvim-lualine/lualine.nvim の設定
 
-require('nvim-web-devicons').setup({
-    color_icons = true;
-    default = true;
+require('lualine').setup({
+    options = { theme = 'auto' },
 })
 
