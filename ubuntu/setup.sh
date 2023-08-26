@@ -57,6 +57,9 @@ add_apt_repositories () {
     sudo add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/ /"
     sudo add-apt-repository ppa:longsleep/golang-backports
 
+    # for LLVM
+    wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
+
     sudo apt update
 }
 
@@ -77,6 +80,11 @@ install_packages () {
         build-essential \
         zsh \
         gcc \
+        gcc-arm-none-eabi \
+        clang \
+        llvm \
+        lld \
+        lldb \
         nodejs \
         tree \
         flex \
@@ -84,11 +92,18 @@ install_packages () {
         libssl-dev \
         libelf-dev \
         libncurses-dev \
+        libncurses5-dev \
+        libncursesw5-dev \
         autoconf \
         libudev-dev \
         libtool \
         openssh-server \
+        libv4l-dev \
         v4l-utils \
+        libjpeg-dev \
+        libpng-dev \
+        libtiff-dev \
+        ffmpeg \
         imagemagick \
         x11-apps \
         python3-dev \
@@ -133,6 +148,10 @@ install_packages () {
         clinfo \
         libgtk2.0-dev \
         libavcodec-dev \
+        libavcodec-extra \
+        libavfilter-dev \
+        libavfilter-extra \
+        libavdevice-dev \
         libavformat-dev \
         libavutil-dev \
         libswscale-dev \
@@ -141,6 +160,9 @@ install_packages () {
         fonts-powerline \
         ripgrep \
         fd-find \
+        xvfb \
+        cpu-checker \
+        qemu-kvm \
 
 }
 
@@ -311,6 +333,24 @@ install_deno () {
     cd ~/installer
 
     curl -fsSL https://deno.land/x/install/install.sh | sh
+}
+
+install_glslViewer () {
+    echo "* -------------------------------------------------------------"
+    echo "*  Install glslViewer"
+    echo "*"
+
+    cd ~/installer
+
+    git clone https://github.com/patriciogonzalezvivo/glslViewer.git
+    cd glslViewer
+    git submodule init
+    git submodule update
+
+    mkdir -p build && cd build
+    cmake ..
+    make
+    sudo make install
 }
 
 setup_symbolic_links () {
@@ -489,6 +529,10 @@ then
         if [ $2 = "deno" ];
         then
             install_deno
+        fi
+        if [ $2 = "glslViewer" ];
+        then
+            install_glslViewer
         fi
     elif [ $1 = "setup" ];
     then
