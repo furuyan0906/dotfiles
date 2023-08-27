@@ -81,10 +81,10 @@ install_packages () {
         zsh \
         gcc \
         gcc-arm-none-eabi \
-        clang \
-        llvm \
-        lld \
-        lldb \
+        clang-15 \
+        llvm-15 \
+        lld-15 \
+        lldb-15 \
         nodejs \
         tree \
         flex \
@@ -163,6 +163,8 @@ install_packages () {
         xvfb \
         cpu-checker \
         qemu-kvm \
+        dotnet-sdk-7.0 \
+        aspnetcore-runtime-7.0 \
 
 }
 
@@ -358,14 +360,10 @@ setup_symbolic_links () {
     echo "*  Setup Symbolic links"
     echo "*"
 
-    #sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 1
-    #sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 2
-    #
-    #sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 1
-    #sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 2
-    #
-    #sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 1
-    #sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 2
+    sudo update-alternatives --install /usr/bin/clang clang $(which clang-15) 1
+    sudo update-alternatives --install /usr/bin/clang++ clang++ $(which clang++-15) 1
+    sudo update-alternatives --install /usr/bin/lldb lldb $(which lldb-15) 1
+    sudo update-alternatives --install /usr/bin/lld lld $(which lld-15) 1
 }
 
 setup_neovim () {
@@ -536,6 +534,10 @@ then
         fi
     elif [ $1 = "setup" ];
     then
+        if [ $2 = "link" ];
+        then
+            setup_symbolic_links
+        fi
         if [ $2 = "neovim" ];
         then
             setup_neovim
