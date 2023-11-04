@@ -14,13 +14,13 @@ require('dapui').setup {
         { id = 'breakpoints', size = 0.1 }
       },
       size = 0.25,
-      position = 'left'
+      position = 'right'
     },
     {
       elements = {
           { id = 'console', size = 1.0 },
       },
-      size = 0.25,
+      size = 0.2,
       position = 'bottom'
     }
   }

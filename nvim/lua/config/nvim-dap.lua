@@ -21,11 +21,11 @@ dap.configurations = {
             type = 'codelldb',
             request = 'launch',
             program = function()
-                return vim.fn.stdpath('Path to executable: ', vim.fn.getcwd() .. '/bin/a.out', 'file')
+                return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/bin/a.out', 'file')
             end,
             cwd = '${workspaceFolder}',
-            stopOnEntry = false
-        }
+            stopOnEntry = false,
+        },
     },
 }
 
