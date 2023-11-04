@@ -85,13 +85,16 @@ return {
         'mfussenegger/nvim-dap',
         config = function()
             require('config/nvim-dap')
-        end
+        end,
     },
     {
         'rcarriga/nvim-dap-ui',
         config = function()
             require('config/nvim-dap-ui')
-        end
+        end,
+        dependencies = {
+            'mfussenegger/nvim-dap'
+        },
     },
     --- Code Snippet ---
     {
@@ -166,6 +169,9 @@ return {
         'vim-denops/denops.vim',
         event = {
             'BufRead',
+        },
+        ft = {
+            'markdown',
         },
     },
     {
