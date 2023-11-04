@@ -27,6 +27,16 @@ return {
         event = {
             'BufRead',
         },
+        config = function()
+            require('config/nvim-lspconfig')
+        end
+    },
+    {
+        'williamboman/mason.nvim',
+        build = '<cmd>MasonUpdate',
+        config = function()
+            require('config/mason')
+        end,
     },
     {
         'williamboman/mason-lspconfig.nvim',
@@ -36,13 +46,6 @@ return {
         },
         config = function()
             require('config/mason-lspconfig')
-        end,
-    },
-    {
-        'williamboman/mason.nvim',
-        build = '<cmd>MasonUpdate',
-        config = function()
-            require('config/mason')
         end,
     },
     --- Auto completion ---
@@ -76,6 +79,19 @@ return {
         event = {
             'ModeChanged',
         },
+    },
+    --- DAP ---
+    {
+        'mfussenegger/nvim-dap',
+        config = function()
+            require('config/nvim-dap')
+        end
+    },
+    {
+        'rcarriga/nvim-dap-ui',
+        config = function()
+            require('config/nvim-dap-ui')
+        end
     },
     --- Code Snippet ---
     {

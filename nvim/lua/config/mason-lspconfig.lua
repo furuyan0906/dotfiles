@@ -1,20 +1,20 @@
 ----------------------------------------------------------------------------------------------------------------------------
 -- williamboman/mason-lspconfig.nvim の設定
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
+-- local capabilities = vim.lsp.protocol.make_client_capabilities()
+local mason_lspconfig = require('mason-lspconfig')
 
-require('mason-lspconfig').setup()
-require('mason-lspconfig').setup_handlers({
+mason_lspconfig.setup()
+mason_lspconfig.setup_handlers({
+    -- masonでインストールした各Language ServerをSetupする
     function (server_name)
-        local lspconfig = require('lspconfig')
-        local cmp_nvim_lsp = require('cmp_nvim_lsp')
-
-        capabilities = cmp_nvim_lsp.default_capabilities()
-
         ---　補完プラグイン('cmp_nvim_lsp')をLSPと連携させる ---
-        lspconfig[server_name].setup {
-            capabilities = capabilities
+        require('lspconfig')[server_name].setup {
+            capabilities = require('cmp_nvim_lsp').default_capabilities()
         }
     end,
+    -- Language Serverを個別に設定することもできる
+    -- rust_analyzer = function()
+    -- end,
 })
 

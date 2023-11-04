@@ -6,4 +6,5 @@ require('user_command')
 
 require('lazy_nvim')
 require('colors')
+require('keymaps_config')
 
