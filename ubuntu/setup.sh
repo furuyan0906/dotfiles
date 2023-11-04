@@ -395,6 +395,13 @@ setup_neovim () {
     pip3 install --upgrade pynvim
     pip3 install --upgrade msgpack
     cargo install tree-sitter-cli
+
+    sudo apt install nodejs npm
+    sudo npm -g install n
+    sudo n stable
+    sudo apt purge nodejs npm
+    sudo apt autoremove
+    sudo npm install -g neovim
 }
 
 setup_zsh () {
