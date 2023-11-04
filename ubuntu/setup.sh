@@ -85,6 +85,8 @@ install_packages () {
         llvm-15 \
         lld-15 \
         lldb-15 \
+        linux-tools-generic \
+        hwdata \
         nodejs \
         tree \
         flex \
@@ -364,6 +366,7 @@ setup_symbolic_links () {
     sudo update-alternatives --install /usr/bin/clang++ clang++ $(which clang++-15) 1
     sudo update-alternatives --install /usr/bin/lldb lldb $(which lldb-15) 1
     sudo update-alternatives --install /usr/bin/lld lld $(which lld-15) 1
+    sudo update-alternatives --install /usr/local/bin/usbip usbip /usr/lib/linux-tools/*-generic 20
 }
 
 setup_neovim () {
