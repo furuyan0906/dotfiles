@@ -57,6 +57,9 @@ add_apt_repositories () {
     sudo add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/ /"
     sudo add-apt-repository ppa:longsleep/golang-backports
 
+    # for LLVM
+    wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
+
     sudo apt update
 }
 
@@ -77,6 +80,13 @@ install_packages () {
         build-essential \
         zsh \
         gcc \
+        gcc-arm-none-eabi \
+        clang-15 \
+        llvm-15 \
+        lld-15 \
+        lldb-15 \
+        linux-tools-generic \
+        hwdata \
         nodejs \
         tree \
         flex \
@@ -84,11 +94,18 @@ install_packages () {
         libssl-dev \
         libelf-dev \
         libncurses-dev \
+        libncurses5-dev \
+        libncursesw5-dev \
         autoconf \
         libudev-dev \
         libtool \
         openssh-server \
+        libv4l-dev \
         v4l-utils \
+        libjpeg-dev \
+        libpng-dev \
+        libtiff-dev \
+        ffmpeg \
         imagemagick \
         x11-apps \
         python3-dev \
@@ -133,6 +150,10 @@ install_packages () {
         clinfo \
         libgtk2.0-dev \
         libavcodec-dev \
+        libavcodec-extra \
+        libavfilter-dev \
+        libavfilter-extra \
+        libavdevice-dev \
         libavformat-dev \
         libavutil-dev \
         libswscale-dev \
@@ -141,6 +162,11 @@ install_packages () {
         fonts-powerline \
         ripgrep \
         fd-find \
+        xvfb \
+        cpu-checker \
+        qemu-kvm \
+        dotnet-sdk-7.0 \
+        aspnetcore-runtime-7.0 \
 
 }
 
@@ -313,19 +339,34 @@ install_deno () {
     curl -fsSL https://deno.land/x/install/install.sh | sh
 }
 
+install_glslViewer () {
+    echo "* -------------------------------------------------------------"
+    echo "*  Install glslViewer"
+    echo "*"
+
+    cd ~/installer
+
+    git clone https://github.com/patriciogonzalezvivo/glslViewer.git
+    cd glslViewer
+    git submodule init
+    git submodule update
+
+    mkdir -p build && cd build
+    cmake ..
+    make
+    sudo make install
+}
+
 setup_symbolic_links () {
     echo "* -------------------------------------------------------------"
     echo "*  Setup Symbolic links"
     echo "*"
 
-    #sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 1
-    #sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 2
-    #
-    #sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 1
-    #sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 2
-    #
-    #sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 1
-    #sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 2
+    sudo update-alternatives --install /usr/bin/clang clang $(which clang-15) 1
+    sudo update-alternatives --install /usr/bin/clang++ clang++ $(which clang++-15) 1
+    sudo update-alternatives --install /usr/bin/lldb lldb $(which lldb-15) 1
+    sudo update-alternatives --install /usr/bin/lld lld $(which lld-15) 1
+    sudo update-alternatives --install /usr/local/bin/usbip usbip /usr/lib/linux-tools/*-generic 20
 }
 
 setup_neovim () {
@@ -490,8 +531,16 @@ then
         then
             install_deno
         fi
+        if [ $2 = "glslViewer" ];
+        then
+            install_glslViewer
+        fi
     elif [ $1 = "setup" ];
     then
+        if [ $2 = "link" ];
+        then
+            setup_symbolic_links
+        fi
         if [ $2 = "neovim" ];
         then
             setup_neovim

@@ -1,0 +1,4 @@
+# インストールしたプラグインを無視する
+lua/plugins/
+lazy-lock.json
+
