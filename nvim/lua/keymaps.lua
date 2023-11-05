@@ -38,7 +38,7 @@ vim.keymap.set('n', '<C-k>', '<cmd>map<CR>')
 -- バッファ操作
 
 -- バッファを表示する
-vim.keymap.set('n', '<C-b><C-l>', '<cmd>ls!<CR>')
+vim.keymap.set('n', '<C-b><C-l>', '<cmd>ls<CR>')
 
 -- 前後のバッファに移動
 vim.keymap.set('n', '<C-p>', '<cmd>bprev<CR>')
@@ -49,7 +49,7 @@ vim.keymap.set('n', '<C-n>', '<cmd>bnext<CR>')
 -- タブ操作
 
 -- 新規タブを開く
-vim.keymap.set('n', '<leader>t', '<cmd>tabnew<CR>')
+vim.keymap.set('n', '<leader><C-t>', '<cmd>tabnew<CR>')
 
 -- 前後のタブに移動
 vim.keymap.set('n', '<leader><C-p>', 'gT')
@@ -69,5 +69,6 @@ vim.keymap.set('n', '<Esc><Esc>', '<cmd>nohlsearch<CR><ESC>')
 -------------------------------------------------------------------------------------------
 -- ターミナル
 
+vim.keymap.set('n', '<leader>t', '<cmd>te<CR>')
 vim.keymap.set('t', '<ESC>', '<C-\\><C-n>')
 
