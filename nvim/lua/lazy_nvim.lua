@@ -15,8 +15,19 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+local opts = {
+    default = {
+        lazy = true,
+    },
+    performance = {
+        cache = {
+            enable = true,
+        },
+    },
+}
+
 plugins = require('plugins')
-require('lazy').setup(plugins)
+require('lazy').setup(plugins, opts)
 
 vim.keymap.set('n', '<leader>l', '<cmd>Lazy<CR>')
 vim.keymap.set('n', '<leader>p', '<cmd>Lazy profile<CR>')

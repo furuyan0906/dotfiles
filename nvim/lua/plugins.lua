@@ -5,21 +5,25 @@ return {
     --- Color theme ---
     {
         'kamykn/dark-theme.vim',
-        lazy = true,
+        event = {
+            'VimEnter',
+        },
     },
     {
         'EdenEast/nightfox.nvim',
-        lazy = true,
+        event = {
+            'VimEnter',
+        },
     },
     --- Icon ---
     {
         'nvim-tree/nvim-web-devicons',
+        event = {
+            'VimEnter',
+        },
         config = function()
             require('config/nvim-web-devicons')
-        end
-    },
-    {
-        'onsails/lspkind.nvim'
+        end,
     },
     --- LSP ---
     {
@@ -42,7 +46,8 @@ return {
         'williamboman/mason-lspconfig.nvim',
         dependencies = {
             'williamboman/mason-lspconfig.nvim',
-            'neovim/nvim-lspconfig'
+            'neovim/nvim-lspconfig',
+            'hrsh7th/cmp-nvim-lsp',
         },
         config = function()
             require('config/mason-lspconfig')
@@ -54,6 +59,10 @@ return {
         event = {
             'InsertEnter',
             'CmdlineEnter',
+        },
+        dependencies = {
+            'onsails/lspkind.nvim',
+            'hrsh7th/cmp-nvim-lsp',
         },
     },
     {
@@ -80,21 +89,34 @@ return {
             'ModeChanged',
         },
     },
+    {
+        'onsails/lspkind.nvim',
+        event = {
+            'InsertEnter',
+            'CmdlineEnter',
+        },
+    },
     --- DAP ---
     {
         'mfussenegger/nvim-dap',
+        event = {
+            'VimEnter',
+        },
         config = function()
             require('config/nvim-dap')
         end,
     },
     {
         'rcarriga/nvim-dap-ui',
-        config = function()
-            require('config/nvim-dap-ui')
-        end,
+        event = {
+            'VimEnter',
+        },
         dependencies = {
             'mfussenegger/nvim-dap'
         },
+        config = function()
+            require('config/nvim-dap-ui')
+        end,
     },
     --- Code Snippet ---
     {
@@ -115,6 +137,10 @@ return {
     },
     {
         'nvim-treesitter/nvim-treesitter',
+        event = {
+            'BufRead',
+            'TabNew',
+        },
         config = function()
             require('config/nvim-treesitter')
         end,
@@ -126,9 +152,14 @@ return {
             'nvim-lua/plenary.nvim',
             'nvim-treesitter/nvim-treesitter'
         },
-        event = {
-            'BufRead',
-            'TabNew',
+        -- event = {
+        --     'BufRead',
+        --     'TabNew',
+        -- },
+        keys = {
+            { 'n', '<C-f>' },
+            { 'n', '<leader>f' },
+            { 'n', '<C-g>' },
         },
         config = function()
             require('config/telescope')
@@ -140,9 +171,14 @@ return {
             'nvim-telescope/telescope.nvim',
             'nvim-lua/plenary.nvim',
         },
-        event = {
-            'BufRead',
+        keys = {
+            { 'n', '<C-f>' },
+            { 'n', '<leader>f' },
+            { 'n', '<C-g>' },
         },
+        --event = {
+        --    'BufRead',
+        --},
     },
     --- Finder ---
     {
@@ -159,6 +195,9 @@ return {
         'nvim-lualine/lualine.nvim',
         dependencies = {
             'nvim-tree/nvim-web-devicons',
+        },
+        event = {
+            "VimEnter",
         },
         config = function()
             require('config/lualine')
