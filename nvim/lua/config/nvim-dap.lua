@@ -15,13 +15,37 @@ dap.adapters = {
 }
 
 dap.configurations = {
-    cpp = {
+    c = {
         {
-            name = 'Launch file',
+            name = 'C Debug',
             type = 'codelldb',
             request = 'launch',
             program = function()
-                return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/bin/a.out', 'file')
+                return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+            end,
+            cwd = '${workspaceFolder}',
+            stopOnEntry = false,
+        },
+    },
+    cpp = {
+        {
+            name = 'C++ Debug',
+            type = 'codelldb',
+            request = 'launch',
+            program = function()
+                return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+            end,
+            cwd = '${workspaceFolder}',
+            stopOnEntry = false,
+        },
+    },
+    rust = {
+        {
+            name = 'Rust Debug',
+            type = 'codelldb',
+            request = 'launch',
+            program = function()
+                return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
             end,
             cwd = '${workspaceFolder}',
             stopOnEntry = false,
