@@ -209,7 +209,7 @@ install_google_test () {
     cd googletest
     git checkout -b $GOOGLE_TEST_INSTALL_VERSION refs/tags/$GOOGLE_TEST_INSTALL_VERSION
     mkdir -p build && cd build
-    cmake -DCMAKE_INSTALL_PREFIX=~/Library ..
+    cmake ..
     make -j$(nproc)
     sudo make install
 }
@@ -233,7 +233,6 @@ install_fmt () {
     git checkout -b $FMT_INSTALL_VERSION refs/tags/$FMT_INSTALL_VERSION
     mkdir -p build && cd build
     cmake -D CMAKE_BUILD_TYPE=Release \
-        -D CMAKE_INSTALL_PREFIX=~/Library \
         -D BUILD_SHARED_LIBS=TRUE \
         ..
     make -j $(nproc)
