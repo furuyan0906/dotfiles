@@ -198,6 +198,9 @@ install_google_test () {
 
     if [ -e ~/installer/googletest ];
     then
+        pushd ~/installer/googletest/build
+        sudo make uninstall
+        popd
         sudo rm -r ~/installer/googletest
     fi
 
@@ -218,6 +221,9 @@ install_fmt () {
 
     if [ -e ~/installer/fmt ];
     then
+        pushd ~/installer/fmt/build
+        sudo make uninstall
+        popd
         sudo rm -r ~/installer/fmt
     fi
 
@@ -241,6 +247,9 @@ install_opencv () {
 
     if [ -e ~/installer/opencv ];
     then
+        pushd ~/installer/opencv/build
+        sudo make uninstall
+        popd
         sudo rm -r ~/installer/opencv
     fi
 
@@ -342,6 +351,14 @@ install_glslViewer () {
     echo "* -------------------------------------------------------------"
     echo "*  Install glslViewer"
     echo "*"
+
+    if [ -e ~/installer/glslViewer ];
+    then
+        pushd ~/installer/glslViewer/build
+        sudo make uninstall
+        popd
+        sudo rm -r ~/installer/glslViewer
+    fi
 
     cd ~/installer
 
