@@ -6,7 +6,7 @@ DOTFILES_TOP_DIR=$(cd $(dirname $0)/..; pwd)
 
 NEOVIM_INSTALL_VERSION="stable"
 GOOGLE_TEST_INSTALL_VERSION="v1.11.0"
-OPENCV_INSTALL_VERSION="4.7.0"
+OPENCV_INSTALL_VERSION="4.8.1"
 FMT_INSTALL_VERSION="9.1.0"
 LZ4_INSTALL_VERSION="v1.9.4"
 LUAROCKS_INSTALL_VERSION="3.9.2"
@@ -259,7 +259,6 @@ install_opencv () {
     cd ../opencv
     mkdir -p build && cd build
     cmake -D CMAKE_BUILD_TYPE=Release \
-        -D CMAKE_INSTALL_PREFIX=~/Library \
         -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules \
         -D OPENCV_FOR_THREADS_NUM=4 \
         ..
