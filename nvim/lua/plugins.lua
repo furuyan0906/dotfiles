@@ -64,6 +64,9 @@ return {
             'onsails/lspkind.nvim',
             'hrsh7th/cmp-nvim-lsp',
         },
+        config = function()
+            require('config/nvim-cmp')
+        end,
     },
     {
         'hrsh7th/cmp-nvim-lsp',
