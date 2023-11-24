@@ -5,11 +5,11 @@ local cmp = require('cmp')
 local lspkind = require('lspkind')
 
 cmp.setup({
-    snippet = {
-        expand = function(args)
-            vim.fn['vsnip#anonymous'](args.body)
-        end,
-    },
+    -- snippet = {
+    --     expand = function(args)
+    --         vim.fn['vsnip#anonymous'](args.body)
+    --     end,
+    -- },
     window = {
         completion = cmp.config.window.bordered({
             border = 'single'
@@ -37,11 +37,8 @@ cmp.setup({
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
         { name = 'nvim_lsp_signature_help' },
-        { name = 'path' },
         { name = 'buffer', keyword_length = 2 },
-        { name = 'vsnip' },
-        { name = 'calc' },
-        { name = 'cmdline' },
+        -- { name = 'vsnip' },
     }),
     -- experimental = {
     --     ghost_text = false,
@@ -51,7 +48,6 @@ cmp.setup({
 cmp.setup.cmdline({'/', '?'}, {
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
-        { name = 'nvim_lsp_signature_help' },
         { name = 'buffer' },
     })
 })
@@ -60,6 +56,7 @@ cmp.setup.cmdline(':', {
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
         { name = 'path' },
+        { name = 'cmdline' },
     })
 })
 
