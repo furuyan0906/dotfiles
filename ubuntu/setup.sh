@@ -269,6 +269,7 @@ install_opencv () {
     cmake -D CMAKE_BUILD_TYPE=Release \
         -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules \
         -D OPENCV_FOR_THREADS_NUM=4 \
+        -D CMAKE_EXPORT_COMPILE_COMMANDS=1 \
         ..
     make -j $(nproc)
     sudo make install
