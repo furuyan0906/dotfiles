@@ -44,6 +44,9 @@ vim.keymap.set('n', '<C-b><C-l>', '<cmd>ls<CR>')
 vim.keymap.set('n', '<C-p>', '<cmd>bprev<CR>')
 vim.keymap.set('n', '<C-n>', '<cmd>bnext<CR>')
 
+-- 現在表示しているバッファを閉じる
+vim.keymap.set('n', '<leader>w', '<cmd>bw!<CR>')
+-- vim.keymap.set('n', '<C-<F4>>', '<cmd>bw!<CR>')
 
 -------------------------------------------------------------------------------------------
 -- タブ操作

@@ -5,6 +5,9 @@ local cmp = require('cmp')
 local lspkind = require('lspkind')
 
 cmp.setup({
+    completion = {
+        autocomplete = false,
+    },
     -- snippet = {
     --     expand = function(args)
     --         vim.fn['vsnip#anonymous'](args.body)
@@ -23,8 +26,8 @@ cmp.setup({
         ['<S-Tab>'] = cmp.mapping.select_prev_item(),
         ['<S-{>'] = cmp.mapping.scroll_docs(-4),
         ['<S-}>'] = cmp.mapping.scroll_docs(4),
-        ['<C-Space>'] = cmp.mapping.complete(),
-        ['<leader>q'] = cmp.mapping.abort(),
+        ['<C-n>'] = cmp.mapping.complete(),
+        ['q'] = cmp.mapping.abort(),
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
     }),
     formatting = {
@@ -36,7 +39,7 @@ cmp.setup({
     },
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
-        { name = 'nvim_lsp_signature_help' },
+        -- { name = 'nvim_lsp_signature_help' },
         { name = 'buffer', keyword_length = 2 },
         -- { name = 'vsnip' },
     }),

@@ -13,9 +13,5 @@ function on_attach(on_attach)
     })
 end
 
-on_attach(function(client, buffer)
-    vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.definition()<CR>', { silent = true, buffer = buffer })
-end)
-
 -- 各Language ServerのSetupはmason-lspconfigで行う
 

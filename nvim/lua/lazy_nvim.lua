@@ -29,6 +29,3 @@ local opts = {
 plugins = require('plugins')
 require('lazy').setup(plugins, opts)
 
-vim.keymap.set('n', '<leader>l', '<cmd>Lazy<CR>')
-vim.keymap.set('n', '<leader>p', '<cmd>Lazy profile<CR>')
-

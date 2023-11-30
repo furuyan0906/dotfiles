@@ -21,10 +21,3 @@ require('telescope').setup({
 })
 require('telescope').load_extension('file_browser')
 
-local telescope_builtin = require('telescope.builtin')
-
--- Ctrl-Cで終了する
-vim.keymap.set('n', '<C-f>', '<cmd>Telescope file_browser<cr>', {noremap = true})
-vim.keymap.set('n', '<leader>f', telescope_builtin.find_files, {})
-vim.keymap.set('n', '<C-g>', telescope_builtin.live_grep, {})
-

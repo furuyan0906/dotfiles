@@ -1,6 +1,13 @@
 ----------------------------------------------------------------------------------------------------------------------------
 -- プラグインごとのキーマップ設定
 
+
+-------------------------------------------------------------------------------------------
+-- Lazy
+
+vim.keymap.set('n', '<leader>l', '<cmd>Lazy<CR>')
+vim.keymap.set('n', '<leader>p', '<cmd>Lazy profile<CR>')
+
 -------------------------------------------------------------------------------------------
 -- telescope
 
@@ -17,7 +24,7 @@ vim.keymap.set('n', '<C-g>', telescope_builtin.live_grep, {})
 
 local api = require('nvim-tree.api')
 
-vim.keymap.set('n', 't', api.node.open.tab, { silent = true, noremap = true, nowait = true })
+-- vim.keymap.set('n', 't', api.node.open.tab, { silent = true, noremap = true, nowait = true })
 vim.keymap.set('n', '<leader>e', '<cmd>NvimTreeToggle<cr>', { silent = true, noremap = true, nowait = true })
 
 
