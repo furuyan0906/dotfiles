@@ -159,11 +159,6 @@ return {
         --     'BufRead',
         --     'TabNew',
         -- },
-        keys = {
-            { 'n', '<C-f>' },
-            { 'n', '<leader>f' },
-            { 'n', '<C-g>' },
-        },
         config = function()
             require('config/telescope')
         end,
@@ -173,11 +168,6 @@ return {
         dependencies = {
             'nvim-telescope/telescope.nvim',
             'nvim-lua/plenary.nvim',
-        },
-        keys = {
-            { 'n', '<C-f>' },
-            { 'n', '<leader>f' },
-            { 'n', '<C-g>' },
         },
         --event = {
         --    'BufRead',
