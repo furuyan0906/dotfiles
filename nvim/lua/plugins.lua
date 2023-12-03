@@ -182,7 +182,7 @@ return {
             require('config/nvim-tree')
         end,
     },
-    --- Airline ---
+    --- View ---
     {
         'nvim-lualine/lualine.nvim',
         dependencies = {
@@ -193,6 +193,18 @@ return {
         },
         config = function()
             require('config/lualine')
+        end,
+    },
+    {
+        'akinsho/bufferline.nvim',
+        dependencies = {
+            'nvim-tree/nvim-web-devicons',
+        },
+        event = {
+            "VimEnter",
+        },
+        config = function()
+            require('bufferline').setup{}
         end,
     },
     --- Preview ---
