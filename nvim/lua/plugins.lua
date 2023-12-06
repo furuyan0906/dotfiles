@@ -204,7 +204,7 @@ return {
             "VimEnter",
         },
         config = function()
-            require('bufferline').setup{}
+            require('config/bufferline')
         end,
     },
     --- Preview ---
