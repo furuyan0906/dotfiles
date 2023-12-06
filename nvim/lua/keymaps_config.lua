@@ -57,3 +57,12 @@ vim.keymap.set('n', '<leader>de', dapui.eval, {})
 
 vim.keymap.set('n', '<leader>m', '<cmd>Mason<CR>')
 
+
+-------------------------------------------------------------------------------------------
+-- Bufferline
+
+vim.keymap.set('n', '<C-n>', '<cmd>BufferLineCycleNext<CR>')
+vim.keymap.set('n', '<C-p>', '<cmd>BufferLineCyclePrev<CR>')
+vim.keymap.set('n', '<C-l>', '<cmd>BufferLineMoveNext<CR>')
+vim.keymap.set('n', '<C-h>', '<cmd>BufferLineMovePrev<CR>')
+

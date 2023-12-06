@@ -31,7 +31,7 @@ vim.keymap.set('n', '<silent><Leader><C-]>', '<C-w><C-]><C-w>T')
 -------------------------------------------------------------------------------------------
 -- キーマップ表示
 
-vim.keymap.set('n', '<C-k>', '<cmd>map<CR>')
+vim.keymap.set('n', '<leader>k', '<cmd>map<CR>')
 
 
 -------------------------------------------------------------------------------------------
@@ -51,15 +51,15 @@ vim.keymap.set('n', '<leader>q', '<cmd>bw!<CR>')
 -- タブ操作
 
 -- 新規タブを開く
-vim.keymap.set('n', '<leader><C-t>', '<cmd>tabnew<CR>')
+-- vim.keymap.set('n', '<leader><C-t>', '<cmd>tabnew<CR>')
 
 -- 前後のタブに移動
-vim.keymap.set('n', '<leader><C-p>', 'gT')
-vim.keymap.set('n', '<leader><C-n>', 'gt')
+-- vim.keymap.set('n', '<leader><C-p>', 'gT')
+-- vim.keymap.set('n', '<leader><C-n>', 'gt')
 
 -- 前後のタブと順番を変える
-vim.keymap.set('n', '<leader><C-l>', '<cmd>+tabmove<CR><ESC>')
-vim.keymap.set('n', '<leader><C-h>', '<cmd>-tabmove<CR><ESC>')
+-- vim.keymap.set('n', '<leader><C-l>', '<cmd>+tabmove<CR><ESC>')
+-- vim.keymap.set('n', '<leader><C-h>', '<cmd>-tabmove<CR><ESC>')
 
 
 -------------------------------------------------------------------------------------------
