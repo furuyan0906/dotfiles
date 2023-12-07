@@ -37,9 +37,9 @@ vim.keymap.set('n', '<F5>', dap.continue, { silent = true })
 vim.keymap.set('n', '<F10>', dap.step_over, { silent = true })
 vim.keymap.set('n', '<F11>', dap.step_into, { silent = true })
 vim.keymap.set('n', '<F12>', dap.step_out, { silent = true })
-vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint, { silent = true })
-vim.keymap.set('n', '<leader>bc', '<cmd>lua require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))<CR>', { silent = true })
-vim.keymap.set('n', '<leader>bl', '<cmd>lua require("dap").set_breakpoint(nil, nil, vim.fn.input(Log point message: "))<CR>', { silent = true })
+vim.keymap.set('n', '<leader>db', dap.toggle_breakpoint, { silent = true })
+vim.keymap.set('n', '<leader>dbc', '<cmd>lua require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))<CR>', { silent = true })
+vim.keymap.set('n', '<leader>dbl', '<cmd>lua require("dap").set_breakpoint(nil, nil, vim.fn.input(Log point message: "))<CR>', { silent = true })
 
 -- nvim-dap-ui
 
