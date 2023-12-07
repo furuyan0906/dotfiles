@@ -207,6 +207,16 @@ return {
             require('config/bufferline')
         end,
     },
+    --- Terminal ---
+    {
+        'akinsho/toggleterm.nvim',
+        event = {
+            'VimEnter'
+        },
+        config = function()
+            require('config/toggleterm')
+        end,
+    },
     --- Preview ---
     {
         'vim-denops/denops.vim',

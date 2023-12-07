@@ -71,6 +71,5 @@ vim.keymap.set('n', '<Esc><Esc>', '<cmd>nohlsearch<CR><ESC>')
 -------------------------------------------------------------------------------------------
 -- ターミナル
 
-vim.keymap.set('n', '<leader>t', '<cmd>te<CR>')
 vim.keymap.set('t', '<ESC>', '<C-\\><C-n>')
 

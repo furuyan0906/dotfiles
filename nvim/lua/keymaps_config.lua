@@ -66,3 +66,8 @@ vim.keymap.set('n', '<C-p>', '<cmd>BufferLineCyclePrev<CR>')
 vim.keymap.set('n', '<C-l>', '<cmd>BufferLineMoveNext<CR>')
 vim.keymap.set('n', '<C-h>', '<cmd>BufferLineMovePrev<CR>')
 
+-------------------------------------------------------------------------------------------
+-- Toggleterm
+
+vim.keymap.set('n', '<leader>t', '<cmd>ToggleTerm<CR>')
+
