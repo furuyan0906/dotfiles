@@ -154,16 +154,18 @@ return {
             'nvim-lua/plenary.nvim',
             'nvim-treesitter/nvim-treesitter'
         },
-        -- event = {
-        --     'BufRead',
-        --     'TabNew',
-        -- },
+        event = {
+            'VimEnter',
+        },
         config = function()
             require('config/telescope')
         end,
     },
     {
         'nvim-telescope/telescope-file-browser.nvim',
+        event = {
+            'VimEnter',
+        },
         dependencies = {
             'nvim-telescope/telescope.nvim',
             'nvim-lua/plenary.nvim',
@@ -229,6 +231,9 @@ return {
     },
     {
         'kat0h/bufpreview.vim',
+        event = {
+            'InsertEnter',
+        },
         dependencies = {
             'vim-denops/denops.vim'
         },
