@@ -70,4 +70,5 @@ vim.keymap.set('n', '<C-h>', '<cmd>BufferLineMovePrev<CR>')
 -- Toggleterm
 
 vim.keymap.set('n', '<leader>t', '<cmd>ToggleTerm<CR>')
+vim.keymap.set('t', '<leader>t', '<cmd>ToggleTerm<CR>')
 
