@@ -8,11 +8,11 @@ cmp.setup({
     completion = {
         autocomplete = false,
     },
-    -- snippet = {
-    --     expand = function(args)
-    --         vim.fn['vsnip#anonymous'](args.body)
-    --     end,
-    -- },
+    snippet = {
+        expand = function(args)
+            vim.fn['vsnip#anonymous'](args.body)
+        end,
+    },
     window = {
         completion = cmp.config.window.bordered({
             border = 'single'
