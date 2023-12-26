@@ -10,6 +10,7 @@ OPENCV_INSTALL_VERSION="4.8.1"
 FMT_INSTALL_VERSION="9.1.0"
 LZ4_INSTALL_VERSION="v1.9.4"
 LUAROCKS_INSTALL_VERSION="3.9.2"
+BEAR_INSTALL_VERSION="3.1.3"
 
 LOCAL_DITFILE="~/.zshrc.local"
 
@@ -373,6 +374,34 @@ install_glslViewer () {
     sudo make install
 }
 
+install_bear () {
+    echo "* -------------------------------------------------------------"
+    echo "*  Install Bear"
+    echo "*"
+
+    if [ -e ~/installer/Bear ];
+    then
+        pushd ~/installer/Bear/build
+        sudo make uninstall
+        popd
+        sudo rm -r ~/installer/Bear
+    fi
+
+    cd ~/installer
+
+    git clone https://github.com/rizsotto/Bear.git
+    cd Bear
+    git checkout -b $BEAR_INSTALL_VERSION refs/tags/$BEAR_INSTALL_VERSION
+
+    mkdir -p build && cd build
+    cmake \
+        -DENABLE_UNIT_TESTS=OFF \
+        -DENABLE_FUNC_TESTS=OFF \
+        ..
+    make all
+    sudo make install
+}
+
 setup_symbolic_links () {
     echo "* -------------------------------------------------------------"
     echo "*  Setup Symbolic links"
@@ -557,6 +586,10 @@ then
         if [ $2 = "glslViewer" ];
         then
             install_glslViewer
+        fi
+        if [ $2 = "bear" ];
+        then
+            install_bear
         fi
     elif [ $1 = "setup" ];
     then
