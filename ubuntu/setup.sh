@@ -496,6 +496,15 @@ setup_cuda () {
     echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64" >> $LOCAL_DITFILE
 }
 
+setup_lsp () {
+    echo "* -------------------------------------------------------------"
+    echo "*  Setup LSP"
+    echo "*"
+
+    mkdir -p ~/.config
+    cp -r $DOTFILES_TOP_DIR/clang ~/.config
+}
+
 switch2zsh () {
     echo "* -------------------------------------------------------------"
     echo "*  Switch to zsh"
@@ -537,6 +546,7 @@ then
     setup_ssh
     setup_docker
     setup_cuda
+    setup_lsp
     switch2zsh
     set_terminal_multiplexer
 elif [ $# -eq 2 ];
@@ -620,6 +630,10 @@ then
         if [ $2 = "cuda" ];
         then
             setup_cuda
+        fi
+        if [ $2 = "lsp" ];
+        then
+            setup_lsp
         fi
         if [ $2 = "terminal_multiplexer" ];
         then
