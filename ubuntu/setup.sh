@@ -502,7 +502,7 @@ setup_lsp () {
     echo "*"
 
     mkdir -p ~/.config
-    cp -r $DOTFILES_TOP_DIR/clang ~/.config
+    cp -r $DOTFILES_TOP_DIR/clangd ~/.config
 }
 
 switch2zsh () {
