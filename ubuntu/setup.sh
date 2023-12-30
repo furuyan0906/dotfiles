@@ -431,10 +431,6 @@ setup_neovim () {
     make CMAKE_BUILD_TYPE=RelWithDebInfo -j$(nproc)
     sudo make install
 
-    mkdir -p ~/.cache/dein
-    cd ~/.cache/dein
-    curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
-    sh ./installer.sh ~/.dein/dein
     mkdir -p ~/.config
     ln -sf $DOTFILES_TOP_DIR/nvim ~/.config/nvim
     pip3 install --upgrade pynvim
