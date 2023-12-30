@@ -168,6 +168,7 @@ install_packages () {
         qemu-kvm \
         dotnet-sdk-7.0 \
         aspnetcore-runtime-7.0 \
+        gettext \
 
 }
 
