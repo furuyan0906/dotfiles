@@ -11,12 +11,17 @@ vim.keymap.set('n', '<leader>p', '<cmd>Lazy profile<CR>')
 -------------------------------------------------------------------------------------------
 -- telescope
 
-local telescope_builtin = require('telescope.builtin')
+local builtin = require('telescope.builtin')
 
 -- Ctrl-Cで終了する
-vim.keymap.set('n', '<C-f>', '<cmd>Telescope file_browser<cr>', { noremap = true })
-vim.keymap.set('n', '<leader>f', telescope_builtin.find_files, {})
-vim.keymap.set('n', '<C-g>', telescope_builtin.live_grep, {})
+vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+-- vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+vim.keymap.set('n', '<leader>ff', '<cmd>Telescope file_browser<cr>', { noremap = true })
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>fk', builtin.keymaps, {})
+vim.keymap.set('n', '<leader>fo', builtin.vim_options, {})
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+vim.keymap.set('n', '<leader>gl', builtin.git_commits, {})
 
 
 -------------------------------------------------------------------------------------------
