@@ -1,8 +1,6 @@
 ----------------------------------------------------------------------------------------------------------------------------
 -- neovim/nvim-lspconfig の設定
 
-local lspconfig = require('lspconfig')
-
 function on_attach(on_attach)
     vim.api.nvim_create_autocmd('LspAttach', {
         callback = function(args)
