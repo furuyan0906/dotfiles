@@ -8,7 +8,13 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_perl_provider = 0
-vim.g.python3_host_prog = "/usr/bin/python3"
+if vim.fn.has('linux') == 1 then
+    vim.g.python3_host_prog = "/usr/bin/python3"
+elseif vim.fn.has('win64') == 1 then
+    vim.g.python3_host_prog = "C:\\Users\\yanfu\\AppData\\Local\\Programs\\Python\\Python312\\python.exe"
+else
+    print('Not supported environment')
+end
 
 -- encoding
 vim.opt.encoding      = 'utf-8'
