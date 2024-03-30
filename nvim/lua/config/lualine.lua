@@ -2,6 +2,17 @@
 -- nvim-lualine/lualine.nvim の設定
 
 require('lualine').setup({
-    options = { theme = 'auto' },
+    sections = {
+        lualine_c = {
+            {
+                'filename',
+                file_status = true,
+                path = 2,
+            }
+        },
+    },
+    options = {
+        theme = 'auto'
+    },
 })
 
