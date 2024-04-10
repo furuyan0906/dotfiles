@@ -101,6 +101,9 @@ return {
     },
     --- DAP ---
     {
+        "nvim-neotest/nvim-nio"
+    },
+    {
         'mfussenegger/nvim-dap',
         event = {
             'VimEnter',
@@ -115,7 +118,8 @@ return {
             'VimEnter',
         },
         dependencies = {
-            'mfussenegger/nvim-dap'
+            'mfussenegger/nvim-dap',
+            'nvim-neotest/nvim-nio'
         },
         config = function()
             require('config/nvim-dap-ui')
