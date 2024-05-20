@@ -48,14 +48,11 @@ add_apt_repositories () {
     echo "*  Add apt repositories"
     echo "*"
 
+    # for Docker
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
     sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
 
-    # for Cuda
-    wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-wsl-ubuntu.pin
-    sudo mv cuda-wsl-ubuntu.pin /etc/apt/preferences.d/cuda-repository-pin-600
-    sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/3bf863cc.pub
-    sudo add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/ /"
+    # for Go-Lang
     sudo add-apt-repository ppa:longsleep/golang-backports
 
     # for LLVM
@@ -146,8 +143,6 @@ install_packages () {
         libglu1-mesa-dev \
         mesa-common-dev \
         freeglut3-dev \
-        cuda \
-        cuda-drivers \
         clinfo \
         libgtk2.0-dev \
         libavcodec-dev \
@@ -436,6 +431,7 @@ setup_neovim () {
     ln -sf $DOTFILES_TOP_DIR/nvim ~/.config/nvim
     pip3 install --upgrade pynvim
     pip3 install --upgrade msgpack
+
     cargo install tree-sitter-cli
 
     sudo apt install nodejs npm
@@ -487,7 +483,16 @@ setup_cuda () {
     echo "*  Setup CUDA"
     echo "*"
 
-    sudo apt install cuda
+    wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-wsl-ubuntu.pin
+    sudo mv cuda-wsl-ubuntu.pin /etc/apt/preferences.d/cuda-repository-pin-600
+    sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/3bf863cc.pub
+    sudo add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/ /"
+
+    sudo apt update
+
+    sudo apt install cuda \
+                     cuda-drivers \
+
 
     echo "export PATH=$PATH:/usr/local/cuda/bin" >> $LOCAL_DITFILE
     echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64" >> $LOCAL_DITFILE
@@ -542,7 +547,6 @@ then
     setup_zsh
     setup_ssh
     setup_docker
-    setup_cuda
     setup_lsp
     switch2zsh
     set_terminal_multiplexer
