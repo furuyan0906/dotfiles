@@ -161,7 +161,7 @@ install_packages () {
         xvfb \
         cpu-checker \
         qemu-kvm \
-        dotnet-sdk-7.0 \
+        dotnet-sdk-8.0 \
         aspnetcore-runtime-7.0 \
         gettext \
 
