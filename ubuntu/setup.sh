@@ -50,6 +50,7 @@ add_apt_repositories () {
     echo "*"
 
     # for docker
+    # ref: https://qiita.com/haveAbook/items/0d0ae20a19214f65e7cd
     for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt remove $pkg; done
     sudo install -m 0755 -d /etc/apt/keyrings
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
