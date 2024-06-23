@@ -40,6 +40,7 @@ install_basic_packages () {
         ca-certificates \
         curl \
         cmake \
+        gnupg \
 
 }
 
@@ -48,9 +49,15 @@ add_apt_repositories () {
     echo "*  Add apt repositories"
     echo "*"
 
-    # for Docker
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-    sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+    # for docker
+    for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt remove $pkg; done
+    sudo install -m 0755 -d /etc/apt/keyrings
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+    sudo chmod a+r /etc/apt/keyrings/docker.gpg
+    echo \
+        "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+        "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+        sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
     # for Go-Lang
     sudo add-apt-repository ppa:longsleep/golang-backports
@@ -69,8 +76,6 @@ install_packages () {
     sudo apt update
     sudo apt upgrade -y
 
-    apt-cache policy docker-ce
-
     sudo apt install -y \
         git \
         zip \
@@ -84,6 +89,11 @@ install_packages () {
         lld-15 \
         lldb-15 \
         linux-tools-generic \
+        docker-ce \
+        docker-ce-cli \
+        containerd.io \
+        docker-buildx-plugin \
+        docker-compose-plugin \
         hwdata \
         nodejs \
         tree \
@@ -475,7 +485,13 @@ setup_docker () {
     echo "*  Setup Docker"
     echo "*"
 
-    sudo systemctl status docker
+    sudo usermod -aG docker $User
+    sudo systemctl start docker
+
+    # `systemctl start docker`が失敗した場合,
+    # `systemctl status docker`, `docker info`, `dockerd --debug`を確認し, iptablesが使えない場合,
+    # update-alternativesでiptables-legacyを選択してみるといい
+    # `sudo update-alternatives --config iptables`
 }
 
 setup_cuda () {
