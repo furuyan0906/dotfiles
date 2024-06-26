@@ -164,7 +164,6 @@ install_packages () {
         libavformat-dev \
         libavutil-dev \
         libswscale-dev \
-        libavresample-dev \
         powerline \
         fonts-powerline \
         ripgrep \
