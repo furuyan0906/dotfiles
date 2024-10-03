@@ -2,14 +2,14 @@
 
 
 User=`whoami`
-DOTFILES_TOP_DIR=$(cd $(dirname $0)/..; pwd)
+DOTFILES_TOP_DIR=$(cd $(dirname ${BASH_SOURCE:-$0})/..; pwd)
 
 NEOVIM_INSTALL_VERSION="stable"
 GOOGLE_TEST_INSTALL_VERSION="v1.11.0"
 OPENCV_INSTALL_VERSION="4.8.1"
 FMT_INSTALL_VERSION="9.1.0"
 LZ4_INSTALL_VERSION="v1.9.4"
-LUAROCKS_INSTALL_VERSION="3.9.2"
+LUAROCKS_INSTALL_VERSION="3.11.1"
 BEAR_INSTALL_VERSION="3.1.3"
 
 LOCAL_DITFILE="~/.zshrc.local"
@@ -103,8 +103,6 @@ install_packages () {
         libssl-dev \
         libelf-dev \
         libncurses-dev \
-        libncurses5-dev \
-        libncursesw5-dev \
         autoconf \
         libudev-dev \
         libtool \
@@ -124,7 +122,6 @@ install_packages () {
         iputils-ping \
         net-tools \
         dwarves \
-        libopenblas-base \
         libopenblas-dev \
         libeigen3-dev \
         libatlas3-base \
@@ -141,11 +138,13 @@ install_packages () {
         golang-go \
         liblua5.3-dev \
         lua5.3 \
+        libreadline-dev \
         libx11-dev \
         xorg-dev \
+        libgl1 \
+        libglx-mesa0 \
         libglu1-mesa \
         libglu1-mesa-dev \
-        libgl1-mesa-glx \
         libgl1-mesa-dev \
         libglfw3 \
         libglfw3-dev \
@@ -170,9 +169,8 @@ install_packages () {
         fd-find \
         xvfb \
         cpu-checker \
-        qemu-kvm \
         dotnet-sdk-8.0 \
-        aspnetcore-runtime-7.0 \
+        aspnetcore-runtime-8.0 \
         gettext \
 
 }
@@ -287,7 +285,7 @@ install_rust () {
     echo "*  Install Rust"
     echo "*"
 
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+    curl --proto '=https' --tlsv1.3 -sSf https://sh.rustup.rs | sh
 }
 
 install_lz4 () {
@@ -324,7 +322,7 @@ install_luarocks () {
     wget https://luarocks.org/releases/luarocks-${LUAROCKS_INSTALL_VERSION}.tar.gz
     tar -xzvpf luarocks-${LUAROCKS_INSTALL_VERSION}.tar.gz
     cd luarocks-${LUAROCKS_INSTALL_VERSION}
-    ./configure
+    ./configure --with-lua-include=/usr/include
     sudo make install
     sudo luarocks install luasocket
 }
@@ -351,7 +349,7 @@ install_deno () {
 
     cd ~/installer
 
-    curl -fsSL https://deno.land/x/install/install.sh | sh
+    cargo install deno --locked
 }
 
 install_glslViewer () {
@@ -439,8 +437,8 @@ setup_neovim () {
 
     mkdir -p ~/.config
     ln -sf $DOTFILES_TOP_DIR/nvim ~/.config/nvim
-    pip3 install --upgrade pynvim
-    pip3 install --upgrade msgpack
+    python3 -m pip install --upgrade pynvim
+    python3 -m pip install --upgrade msgpack
 
     cargo install tree-sitter-cli
 
