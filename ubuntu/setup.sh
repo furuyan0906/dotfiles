@@ -138,7 +138,6 @@ install_packages () {
         gv \
         xdvik-ja \
         evince \
-        docker-ce \
         golang-go \
         liblua5.3-dev \
         lua5.3 \
