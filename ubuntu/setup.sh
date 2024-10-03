@@ -65,6 +65,7 @@ function install_basic_packages () {
     sudo apt install -y \
         lsb-release \
         software-properties-common \
+        ubuntu-drivers-common \
         apt-transport-https \
         ca-certificates \
         curl \
