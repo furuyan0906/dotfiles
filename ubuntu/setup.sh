@@ -138,6 +138,8 @@ install_packages () {
         golang-go \
         liblua5.3-dev \
         lua5.3 \
+        liblua5.1-dev \
+        lua5.1 \
         libreadline-dev \
         libx11-dev \
         xorg-dev \
