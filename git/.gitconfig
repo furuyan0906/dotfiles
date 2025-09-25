@@ -4,6 +4,8 @@
 [core]
 	editor = vim
 	filemode = true
+	symlinks = true
+	commentChar = ";"
 [safe]
 	directory = *
 #[url "git@github.com:"]
