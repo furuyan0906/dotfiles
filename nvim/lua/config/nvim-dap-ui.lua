@@ -3,7 +3,6 @@
 
 require('dapui').setup {
   icons = { expanded = '', collapsed = '' },
-
   layouts = {
     {
       elements = {

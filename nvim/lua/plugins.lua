@@ -103,28 +103,28 @@ return {
     {
         "nvim-neotest/nvim-nio"
     },
-    {
-        'mfussenegger/nvim-dap',
-        event = {
-            'VimEnter',
-        },
-        config = function()
-            require('config/nvim-dap')
-        end,
-    },
-    {
-        'rcarriga/nvim-dap-ui',
-        event = {
-            'VimEnter',
-        },
-        dependencies = {
-            'mfussenegger/nvim-dap',
-            'nvim-neotest/nvim-nio'
-        },
-        config = function()
-            require('config/nvim-dap-ui')
-        end,
-    },
+    -- {
+    --     'mfussenegger/nvim-dap',
+    --     event = {
+    --         'VimEnter',
+    --     },
+    --     config = function()
+    --         require('config/nvim-dap')
+    --     end,
+    -- },
+    -- {
+    --     'rcarriga/nvim-dap-ui',
+    --     event = {
+    --         'VimEnter',
+    --     },
+    --     dependencies = {
+    --         'mfussenegger/nvim-dap',
+    --         'nvim-neotest/nvim-nio'
+    --     },
+    --     config = function()
+    --         require('config/nvim-dap-ui')
+    --     end,
+    -- },
     --- Code Snippet ---
     {
         'hrsh7th/vim-vsnip',
