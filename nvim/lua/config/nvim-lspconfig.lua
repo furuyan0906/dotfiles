@@ -11,5 +11,21 @@ function on_attach(on_attach)
     })
 end
 
--- 各Language ServerのSetupはmason-lspconfigで行う
+vim.diagnostic.config({
+    virtual_text = {
+        border = 'single',
+        current_line = true,
+        header = {},
+        suffix = {},
+        title = 'Diagnostics',
+        format = function(diagnostic)
+            if diagnostic.code then
+                return string.format("%s (%s: %s)", diagnostic.message, diagnostic.source, diagnostic.code)
+            else
+                return string.format("%s (%s)", diagnostic.message, diagnostic.source)
+            end
+        end,
+    },
+})
+
 

@@ -53,6 +53,7 @@ vim.keymap.set('n', '<leader>e', '<cmd>NvimTreeToggle<cr>', { silent = true, nor
 -------------------------------------------------------------------------------------------
 -- nvim-lspconfig
 
+vim.keymap.set('n', '<Leader>d', vim.diagnostic.open_float, opt)
 
 -------------------------------------------------------------------------------------------
 -- Mason
