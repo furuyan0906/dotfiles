@@ -165,6 +165,7 @@ function install_packages () {
         xdvik-ja \
         evince \
         golang-go \
+        luarocks \
         liblua5.1-dev \
         lua5.1 \
         liblua5.3-dev \
@@ -266,33 +267,6 @@ function install_fmt () {
 
 function install_rust () {
     curl --proto '=https' --tlsv1.3 -sSf https://sh.rustup.rs | sh
-}
-
-function install_luarocks () {
-    LUAROCKS_INSTALL_VERSION="3.11.1"
-    LUAROCKS_WGET_URL="https://luarocks.org/releases/luarocks-${LUAROCKS_INSTALL_VERSION}.tar.gz"
-
-    local work_dir=$1
-
-    if [ -e "${work_dir}/luarocks-${LUAROCKS_INSTALL_VERSION}.tar.gz" ];
-    then
-        sudo rm -r -- "${work_dir}/luarocks-${LUAROCKS_INSTALL_VERSION}"
-        sudo rm -rvf -- "luarocks-${LUAROCKS_INSTALL_VERSION}.tar.gz"
-    fi
-
-    pushd "${work_dir}"
-    if wget "${LUAROCKS_WGET_URL}";
-    then
-        tar -xzvpf "luarocks-${LUAROCKS_INSTALL_VERSION}.tar.gz"
-        cd "luarocks-${LUAROCKS_INSTALL_VERSION}"
- 
-        if ./configure "--with-lua-include=/usr/include";
-        then
-            sudo make install
-            sudo luarocks install luasocket
-        fi
-    fi
-    popd
 }
 
 function install_deno () {
@@ -483,7 +457,6 @@ function main() {
         install_gtest
         install_fmt
         install_rust
-        install_luarocks
         install_deno
         install_neovim
         setup_neovim
@@ -500,10 +473,6 @@ function main() {
             if [ $2 = "rust" ];
             then
                 install_rust
-            fi
-            if [ $2 = "luarocks" ];
-            then
-                install_luarocks "${WORK_DIR}"
             fi
             if [ $2 = "deno" ];
             then
