@@ -126,7 +126,6 @@ function install_packages () {
         docker-buildx-plugin \
         docker-compose-plugin \
         hwdata \
-        nodejs \
         tree \
         flex \
         bison \
@@ -147,7 +146,6 @@ function install_packages () {
         x11-apps \
         python3-dev \
         python3-venv \
-        python3-pybind11 \
         iputils-ping \
         net-tools \
         dwarves \
@@ -155,21 +153,10 @@ function install_packages () {
         libeigen3-dev \
         libatlas3-base \
         libatlas-base-dev \
-        texlive-latex-extra \
-        texlive-fonts-recommended \
-        texlive-fonts-extra \
-        texlive-lang-japanese \
-        texlive-lang-cjk \
-        texlive-science \
         gv \
         xdvik-ja \
         evince \
         golang-go \
-        luarocks \
-        liblua5.1-dev \
-        lua5.1 \
-        liblua5.3-dev \
-        lua5.3 \
         libreadline-dev \
         libx11-dev \
         xorg-dev \
@@ -197,12 +184,9 @@ function install_packages () {
         libyaml-cpp-dev \
         powerline \
         fonts-powerline \
-        ripgrep \
         fd-find \
         xvfb \
         cpu-checker \
-        dotnet-sdk-8.0 \
-        aspnetcore-runtime-8.0 \
         gettext \
 
 }
@@ -269,10 +253,6 @@ function install_rust () {
     curl --proto '=https' --tlsv1.3 -sSf https://sh.rustup.rs | sh
 }
 
-function install_deno () {
-    cargo install deno --locked
-}
-
 function install_bear () {
     BEAR_INSTALL_VERSION="3.1.3"
     BEAR_REPO_URL="https://github.com/rizsotto/Bear.git"
@@ -305,12 +285,26 @@ function install_bear () {
     popd
 }
 
-function setup_symbolic_links () {
-    sudo update-alternatives --install /usr/bin/clang clang $(which clang-15) 1
-    sudo update-alternatives --install /usr/bin/clang++ clang++ $(which clang++-15) 1
-    sudo update-alternatives --install /usr/bin/lldb lldb $(which lldb-15) 1
-    sudo update-alternatives --install /usr/bin/lld lld $(which lld-15) 1
-    sudo update-alternatives --install /usr/local/bin/usbip usbip /usr/lib/linux-tools/*-generic 20
+function install_tex () {
+    sudo apt update
+    sudo apt install \
+        texlive-latex-extra \
+        texlive-fonts-recommended \
+        texlive-fonts-extra \
+        texlive-lang-japanese \
+        texlive-lang-cjk \
+        texlive-science \
+
+}
+
+function install_dotnet () {
+    local DOTNET_VERSION=9.0
+
+    sudo apt update
+    sudo apt install \
+        dotnet-sdk-${DOTNET_VERSION} \
+        aspnetcore-runtime-${DOTNET_VERSION} \
+
 }
 
 function install_neovim () {
@@ -338,15 +332,24 @@ function install_neovim () {
 }
 
 function setup_neovim () {
+    sudo apt update
+    sudo apt install \
+        luarocks \
+        liblua5.1-dev \
+        lua5.1 \
+        ripgrep \
+
+
     python3 -m pip install --upgrade pynvim
     python3 -m pip install --upgrade msgpack
 
+    cargo install deno --locked
     cargo install tree-sitter-cli
 
     sudo apt install nodejs npm
     sudo npm -g install n
     sudo n stable
-    sudo apt purge nodejs npm
+    sudo apt remove --purge nodejs npm
     sudo apt autoremove
     sudo npm install -g neovim
 }
@@ -453,11 +456,9 @@ function main() {
         install_basic_packages
         add_apt_repositories
         install_packages
-        setup_symbolic_links
         install_gtest
         install_fmt
         install_rust
-        install_deno
         install_neovim
         setup_neovim
         setup_ssh
@@ -473,10 +474,6 @@ function main() {
             if [ $2 = "rust" ];
             then
                 install_rust
-            fi
-            if [ $2 = "deno" ];
-            then
-                install_deno
             fi
             if [ $2 = "neovim" ];
             then
@@ -498,16 +495,20 @@ function main() {
             then
                 install_opencv "${WORK_DIR}"
             fi
+            if [ $2 = "tex" ];
+            then
+                install_tex
+            fi
+            if [ $2 = "dotnet" ];
+            then
+                install_dotnet
+            fi
             if [ $2 = "glslViewer" ];
             then
                 install_glslViewer "${WORK_DIR}"
             fi
         elif [ $1 = "setup" ];
         then
-            if [ $2 = "link" ];
-            then
-                setup_symbolic_links
-            fi
             if [ $2 = "ssh" ];
             then
                 setup_ssh
