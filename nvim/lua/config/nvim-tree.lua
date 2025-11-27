@@ -31,6 +31,12 @@ require('nvim-tree').setup({
             },
         }
     },
+    filters = {
+        git_ignored = true,
+        custom = {
+            "^\\.git",
+        },
+    },
     on_attach = function(bufnr)
         require('nvim-tree.api').config.mappings.default_on_attach(bufnr)
     end,
