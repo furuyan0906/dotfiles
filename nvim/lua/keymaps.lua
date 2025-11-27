@@ -22,7 +22,7 @@ vim.keymap.set('n', '<leader>sl', '<C-w>l')
 vim.keymap.set('n', '<leader>sh', '<C-w>h')
 vim.keymap.set('n', '<leader>ss', ':<C-u>sp<CR><C-w>j')
 vim.keymap.set('n', '<leader>sv', ':<C-u>vs<CR><C-w>l')
-vim.keymap.set('n', '<leader>sq', ':q<Enter><ESC>')
+vim.keymap.set('n', '<leader>sq', ':close<Enter>')
 
 -- 分割したウィンドウ間を移動する
 vim.keymap.set('n', '<silent><Leader><C-]>', '<C-w><C-]><C-w>T')
