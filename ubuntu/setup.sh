@@ -37,13 +37,13 @@ function setup_config () {
 
     local DOTFILES_TOP_DIR=$(cd $(dirname ${BASH_SOURCE:-$0})/..; pwd)
 
-    ln -sf -- "${DOTFILES_TOP_DIR}/git/.gitconfig ${HOME}/.gitconfig"
-    ln -sf -- "${DOTFILES_TOP_DIR}/tmux/.tmux.conf ${HOME}/.tmux.conf"
+    ln -sf -- "${DOTFILES_TOP_DIR}/git/.gitconfig" "${HOME}/.gitconfig"
+    ln -sf -- "${DOTFILES_TOP_DIR}/tmux/.tmux.conf" "${HOME}/.tmux.conf"
 
     local ZSH_LOCAL_DITFILE="${HOME}/.zshrc.local"
-    ln -sf -- "${DOTFILES_TOP_DIR}/zsh/.zprofile ${HOME}/.zprofile"
-    ln -sf -- "${DOTFILES_TOP_DIR}/zsh/.zshenv ${HOME}/.zshenv"
-    ln -sf -- "${DOTFILES_TOP_DIR}/zsh/.zshrc ${HOME}/.zshrc"
+    ln -sf -- "${DOTFILES_TOP_DIR}/zsh/.zprofile" "${HOME}/.zprofile"
+    ln -sf -- "${DOTFILES_TOP_DIR}/zsh/.zshenv" "${HOME}/.zshenv"
+    ln -sf -- "${DOTFILES_TOP_DIR}/zsh/.zshrc" "${HOME}/.zshrc"
     echo "export LD_LIBRARY_PATH=${HOME}/.local/lib:${LD_LIBRARY_PATH}" >> "${ZSH_LOCAL_DITFILE}"
 
     #local BASH_LOCAL_DITFILE="${HOME}/.bashrc_aliases"
@@ -51,8 +51,8 @@ function setup_config () {
     #ln -sf -- "${DOTFILES_TOP_DIR}/bashrc/.bashrc ${HOME}/.bashrc"
     #echo "export LD_LIBRARY_PATH=${HOME}/.local/lib:${LD_LIBRARY_PATH}" >> "${BASH_LOCAL_DITFILE}"
 
-    ln -sf -- "${DOTFILES_TOP_DIR}/nvim ${HOME}/.config/nvim"
-    ln -sf -- "${DOTFILES_TOP_DIR}/clangd ${HOME}/.config/clangd"
+    ln -sf -- "${DOTFILES_TOP_DIR}/nvim" "${HOME}/.config/nvim"
+    ln -sf -- "${DOTFILES_TOP_DIR}/clangd" "${HOME}/.config/clangd"
 }
 
 function install_basic_packages () {
@@ -456,10 +456,10 @@ function main() {
         install_basic_packages
         add_apt_repositories
         install_packages
-        install_gtest
-        install_fmt
-        install_rust
-        install_neovim
+        install_gtest "${WORK_DIR}"
+        install_fmt "${WORK_DIR}"
+        install_rust "${WORK_DIR}"
+        install_neovim "${WORK_DIR}"
         setup_neovim
         setup_ssh
         switch2zsh
