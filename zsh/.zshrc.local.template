@@ -1,0 +1,25 @@
+# ~/.zshrc.local
+
+# ----------------------------------------------------------------------------------------------------------
+
+#export PS1="%F{034}%n@%M:%~%f
+#%F{033}>%f "
+
+export PATH="${HOME}/.local/bin:${PATH}"
+export PATH="${PATH}:${HOME}/.cargo/bin"
+export PATH="${PATH}:/usr/local/cuda/bin"
+export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/local/lib:/usr/local/cuda/lib64"
+export PKG_CONFIG_PATH="${HOME}/.local/lib/pkgconfig:${PKG_CONFIG_PATH}"
+export LIBGL_ALWAYS_INDIRECT=0
+
+# ----------------------------------------------------------------------------------------------------------
+
+alias clean_nvim_packages='rm -rf ~/.local/share/nvim/lazy/ ~/.local/state/nvim/lazy ~/.config/nvim/lazy_lock.json'
+alias activate='source ~/.venv/bin/activate'
+alias sandbox='cd ~/work/sandbox'
+
+# ----------------------------------------------------------------------------------------------------------
+
+source ${HOME}/.cargo/env
+source ${HOME}/.venv/bin/activate
+

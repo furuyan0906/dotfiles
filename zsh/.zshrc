@@ -16,7 +16,7 @@ export TERM='tmux-256color'
 # -----------------------------------------------------------------------------------------------------------------------------------
 # History
 
-HISTFILE=$HOME/.zsh_history  # 履歴を保存するファイル
+HISTFILE=${HOME}/.zsh_history  # 履歴を保存するファイル
 HISTSIZE=1000                # メモリ上に保存する履歴のサイズ
 HISTFILESIZE=2000            # 上述のファイルに保存する履歴のサイズ
 
@@ -53,8 +53,8 @@ zstyle ':completion:*:default' menu select=2
 # ユーザ名@ホスト名:カレントディレクトリ [yy-mm-dd hh:mm:ss]
 #export PS1='%F{050}%n@%M:%~%f %F{033}[%W %*]%f
 #$ '
-export PS1='%F{033}%n@%M:%~%f
-%F{050}>>%f '
+export PS1="%F{033}%n@%M:%~%f
+%F{050}>%f "
 
 # ディレクトリ名を入力したら自動でディレクトリを変更する
 # setopt auto_cd
@@ -70,17 +70,10 @@ alias l='ls -CF --color=auto'
 
 # -----------------------------------------------------------------------------------------------------------------------------------
 
-export XDG_CONFIG_HOME=$HOME/.config
-export XDG_CACHE_HOME=$HOME/.cache
+export XDG_CONFIG_HOME=${HOME}/.config
+export XDG_CACHE_HOME=${HOME}/.cache
 
-export LIBGL_ALWAYS_INDIRECT=0
-
-export CARGO_ENV_TOP=$HOME
-source $CARGO_ENV_TOP/.cargo/env
-
-export SCREENDIR=$HOME/.screen
-
-if [ -f $ZDOTDIR/.zshrc.local ]; then
-    source $ZDOTDIR/.zshrc.local
+if [ -f ${ZDOTDIR}/.zshrc.local ]; then
+    source ${ZDOTDIR}/.zshrc.local
 fi
 
