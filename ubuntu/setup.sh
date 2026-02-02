@@ -11,14 +11,7 @@ function Err() {
     printf "[ERROR] line=%s cmd=%s\n" "$1" "${2:-}" 1>&2
 }
 
-function CleanUp() {
-    if [[ -n "${WORK_DIR}" && -d "${WORK_DIR}" ]]; then
-        rm -rf -- "${WORK_DIR}"
-    fi
-}
-
 trap 'Err "${LINENO}" "${BASH_COMMAND}"' ERR
-trap CleanUp EXIT
 
 ### ----- HELPERS -----
 
@@ -33,7 +26,7 @@ function is_running_on_wsl () {
 ### ----- COREs -----
 
 function setup_config () {
-    export LD_LIBRARY_PATH=${HOME}/.local/lib:${LD_LIBRARY_PATH}
+    export LD_LIBRARY_PATH=${HOME}/.local/lib:${LD_LIBRARY_PATH:-}
 
     local DOTFILES_TOP_DIR=$(cd $(dirname ${BASH_SOURCE:-$0})/..; pwd)
 
@@ -424,12 +417,12 @@ function install_glslViewer () {
 ### ----- MAIN -----
 
 function main() {
-    mkdir -p ${HOME}/.config
-    mkdir -p ${HOME}/.local
-
-    mkdir -p ${HOME}/.local/installer
     WORK_DIR="${HOME}/.local/installer"
     readonly WORK_DIR
+
+    mkdir -p ${HOME}/.config
+    mkdir -p ${HOME}/.local
+    mkdir -p "${WORK_DIR}"
 
     if [ $# -eq 0 ];
     then
