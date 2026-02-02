@@ -254,35 +254,16 @@ function install_rust () {
 }
 
 function install_bear () {
-    BEAR_INSTALL_VERSION="3.1.3"
+    BEAR_INSTALL_VERSION="4.0.2"
     BEAR_REPO_URL="https://github.com/rizsotto/Bear.git"
 
-    local work_dir=$1
+    cargo install \
+        --git "${BEAR_REPO_URL}" \
+        --tag "${BEAR_INSTALL_VERSION}" \
+        bear
 
-    if [ -e "${work_dir}/Bear" ];
-    then
-        pushd "${work_dir}/Bear/build"
-        sudo make uninstall
-        popd
-        sudo rm -r -- "${work_dir}/Bear"
-    fi
-
-    pushd "${work_dir}"    
-    if git clone --depth 1 --branch "${BEAR_INSTALL_VERSION}" "${BEAR_REPO_URL}" Bear;
-    then
-        cd Bear
-        mkdir -p build && cd build
-
-        cmake \
-            -DENABLE_UNIT_TESTS=OFF \
-            -DENABLE_FUNC_TESTS=OFF \
-            ..
-        if make all;
-        then
-            sudo make install
-        fi
-    fi
-    popd
+    # To uninstall, do following.
+    #cargo uninstall bear
 }
 
 function install_tex () {
