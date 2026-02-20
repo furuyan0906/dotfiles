@@ -10,7 +10,7 @@ vim.g.loaded_ruby_provider = 0
 vim.g.loaded_perl_provider = 0
 
 if jit.os == 'Windows' then
-    vim.g.python3_host_prog = vim.fn.expand("$LOCALAPPDATA") .. [[\.venv\Scripts\python.exe]]
+    vim.g.python3_host_prog = vim.fn.expand("$USERPROFILE") .. [[\.venv\Scripts\python.exe]]
 else
     vim.g.python3_host_prog = vim.fs.dirname(vim.fn.system('which python3')) .. '/pynvim-python'
 end
