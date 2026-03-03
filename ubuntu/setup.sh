@@ -325,11 +325,11 @@ function setup_neovim () {
 
     if [ ! -e "${HOME}/.venv" ];
     then
-        python3 -m venv "${HOME}.venv"
+        python3 -m venv "${HOME}/.venv"
         source "${HOME}/.venv/bin/activate"
-        python3 -m pip install --upgrade pip
     fi
 
+    python3 -m pip install --upgrade pip
     python3 -m pip install --upgrade pynvim
     python3 -m pip install --upgrade msgpack
 
