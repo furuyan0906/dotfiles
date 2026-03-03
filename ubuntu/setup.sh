@@ -286,6 +286,15 @@ function install_neovim () {
     NEOVIM_REPO_URL="https://github.com/neovim/neovim.git"
 
     local work_dir=$1
+    local install_dir=$2
+
+    sudo apt update
+    sudo apt install \
+        build-essential \
+        ninja-build \
+        gettext \
+        cmake \
+        curl \
 
     if [ -e "${work_dir}/neovim" ];
     then
@@ -297,7 +306,7 @@ function install_neovim () {
     then
         cd neovim
 
-        if make CMAKE_BUILD_TYPE=RelWithDebInfo -j$(nproc);
+        if make CMAKE_BUILD_TYPE=RelWithDebInfo -j$(nproc) CMAKE_INSTALL_PREFIX="${install_dir}";
         then
             sudo make install
         fi
@@ -308,11 +317,18 @@ function install_neovim () {
 function setup_neovim () {
     sudo apt update
     sudo apt install \
+        python3-venv \
         luarocks \
         liblua5.1-dev \
         lua5.1 \
         ripgrep \
 
+    if [ ! -e "${HOME}/.venv" ];
+    then
+        python3 -m venv "${HOME}.venv"
+        source "${HOME}/.venv/bin/activate"
+        python3 -m pip install --upgrade pip
+    fi
 
     python3 -m pip install --upgrade pynvim
     python3 -m pip install --upgrade msgpack
@@ -420,6 +436,8 @@ function main() {
     WORK_DIR="${HOME}/.local/installer"
     readonly WORK_DIR
 
+    INSTALL_DIR="${HOME}/.local"
+
     mkdir -p ${HOME}/.config
     mkdir -p ${HOME}/.local
     mkdir -p "${WORK_DIR}"
@@ -433,7 +451,7 @@ function main() {
         install_gtest "${WORK_DIR}"
         install_fmt "${WORK_DIR}"
         install_rust "${WORK_DIR}"
-        install_neovim "${WORK_DIR}"
+        install_neovim "${WORK_DIR}" "${INSTALL_DIR}"
         setup_neovim
         setup_ssh
         switch2zsh
@@ -451,7 +469,7 @@ function main() {
             fi
             if [ $2 = "neovim" ];
             then
-                install_neovim "${WORK_DIR}"
+                install_neovim "${WORK_DIR}" "${INSTALL_DIR}"
             fi
             if [ $2 = "bear" ];
             then
