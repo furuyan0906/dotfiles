@@ -317,6 +317,8 @@ function install_neovim () {
 function setup_neovim () {
     sudo apt update
     sudo apt install --no-install-recommends \
+        clang \
+        libclang-dev \
         python3-venv \
         luarocks \
         liblua5.1-dev \
