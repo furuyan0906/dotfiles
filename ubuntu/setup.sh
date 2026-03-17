@@ -55,7 +55,7 @@ function install_basic_packages () {
 
     sudo apt update
 
-    sudo apt install -y \
+    sudo apt install --no-install-recommends -y \
         lsb-release \
         software-properties-common \
         ubuntu-drivers-common \
@@ -100,7 +100,7 @@ function install_packages () {
     sudo apt update
     sudo apt upgrade -y
 
-    sudo apt install -y \
+    sudo apt install --no-install-recommends -y \
         git \
         zip \
         unzip \
@@ -261,7 +261,7 @@ function install_bear () {
 
 function install_tex () {
     sudo apt update
-    sudo apt install \
+    sudo apt install --no-install-recommends \
         texlive-latex-extra \
         texlive-fonts-recommended \
         texlive-fonts-extra \
@@ -275,7 +275,7 @@ function install_dotnet () {
     local DOTNET_VERSION=9.0
 
     sudo apt update
-    sudo apt install \
+    sudo apt install --no-install-recommends \
         dotnet-sdk-${DOTNET_VERSION} \
         aspnetcore-runtime-${DOTNET_VERSION} \
 
@@ -289,7 +289,7 @@ function install_neovim () {
     local install_dir=$2
 
     sudo apt update
-    sudo apt install \
+    sudo apt install --no-install-recommends \
         build-essential \
         ninja-build \
         gettext \
@@ -316,7 +316,7 @@ function install_neovim () {
 
 function setup_neovim () {
     sudo apt update
-    sudo apt install \
+    sudo apt install --no-install-recommends \
         python3-venv \
         luarocks \
         liblua5.1-dev \
@@ -336,7 +336,7 @@ function setup_neovim () {
     cargo install deno --locked
     cargo install tree-sitter-cli
 
-    sudo apt install nodejs npm
+    sudo apt install --no-install-recommends nodejs npm
     sudo npm -g install n
     sudo n stable
     sudo apt remove --purge nodejs npm
